@@ -10,7 +10,9 @@
 </head>
 
 <body>
-    <h1>Dashboard</h1>
+    <x-drawer.drawer>
+        {{ $slot }}
+    </x-drawer.drawer>
 </body>
 
 </html>
