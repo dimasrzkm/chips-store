@@ -24,6 +24,13 @@ class LoginController extends Controller
         ]);
     }
 
+    public function destroy() {
+        Auth::logout();
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+        return to_route('login');
+    }
+
     public function dataValidated()
     {
         return request()->validate([
