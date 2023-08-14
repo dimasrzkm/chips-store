@@ -12,6 +12,7 @@
         <!-- Sidebar content here -->
         <li><a href="{{ url('/') }}" wire:navigate>Dashboard</a></li>
         <li><a href="{{ route('permissions.index') }}" wire:navigate>Permissions</a></li>
+        <li><a href="{{ route('roles.index') }}" wire:navigate>Roles</a></li>
     </ul>
     <div
         class="sticky bottom-0 flex h-20 pointer-events-none from-base-200 bg-gradient-to-t to-transparent" />
