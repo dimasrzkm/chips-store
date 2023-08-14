@@ -1,7 +1,7 @@
 <div class="bg-base-100 drawer lg:drawer-open">
     <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
     <div class="drawer-content">
-        <div class="sticky top-0 shadow-sm navbar bg-base-100 bg-opacity-90 backdrop-blur">
+        <div class="sticky top-0 z-10 shadow-sm navbar bg-base-100 bg-opacity-90 backdrop-blur">
             <div class="navbar-start">
                 <div>
                     <label class="btn btn-ghost lg:hidden" for="my-drawer-2">
@@ -12,7 +12,7 @@
                         </svg>
                     </label>
                 </div>
-                <a class="text-xl normal-case btn btn-ghost">Sistem Pengelolaan Keuangan</a>
+                {{-- <a class="text-xl normal-case btn btn-ghost">Sistem Pengelolaan Keuangan</a> --}}
             </div>
             <div class="navbar-end">
                 <x-drawer.drawer-profile-info :authinfo="auth()->user()"/>
@@ -22,7 +22,7 @@
             {{ $slot }}
         </div>
     </div>
-    <div class="h-screen drawer-side">
+    <div class="z-40 h-screen drawer-side">
         <label for="my-drawer-2" class="drawer-overlay"></label>
         <x-drawer.drawer-navigation />
     </div>
