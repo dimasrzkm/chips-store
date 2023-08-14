@@ -6,6 +6,9 @@ use App\Livewire\Permissions\CreatePermissions;
 use App\Livewire\Permissions\EditPermissions;
 use App\Livewire\Permissions\ShowPermissions;
 use App\Livewire\Profile\ProfileInformation;
+use App\Livewire\Roles\CreateRoles;
+use App\Livewire\Roles\EditRoles;
+use App\Livewire\Roles\ShowRoles;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['guest'])->group(function () {
@@ -23,5 +26,11 @@ Route::middleware(['auth'])->group(function () {
         Route::get('', ShowPermissions::class)->name('permissions.index');
         Route::get('create', CreatePermissions::class)->name('permissions.create');
         Route::get('{permission:name}/edit', EditPermissions::class)->name('permissions.edit');
+    });
+
+    Route::prefix('roles')->group(function () {
+        Route::get('', ShowRoles::class)->name('roles.index');
+        Route::get('create', CreateRoles::class)->name('roles.create');
+        Route::get('{role:name}/edit', EditRoles::class)->name('roles.edit');
     });
 });
