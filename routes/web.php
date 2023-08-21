@@ -10,8 +10,11 @@ use App\Livewire\Roles\CreateRoles;
 use App\Livewire\Roles\EditRoles;
 use App\Livewire\Roles\ShowRoles;
 use App\Livewire\RolesPermissions\ApplyPermissions;
+use App\Livewire\RolesPermissions\ApplyRoles;
 use App\Livewire\RolesPermissions\EditApplyPermissions;
+use App\Livewire\RolesPermissions\EditApplyRoles;
 use App\Livewire\RolesPermissions\ShowApplyPermission;
+use App\Livewire\RolesPermissions\ShowApplyRoles;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['guest'])->group(function () {
@@ -38,8 +41,12 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::prefix('role-and-permission')->group(function () {
-        Route::get('assignable', ShowApplyPermission::class)->name('assignable.index');
-        Route::get('create', ApplyPermissions::class)->name('assignable.create');
-        Route::get('{role:name}/edit', EditApplyPermissions::class)->name('assignable.edit');
+        Route::get('permission/assignable', ShowApplyPermission::class)->name('assignable.index');
+        Route::get('permission/create', ApplyPermissions::class)->name('assignable.create');
+        Route::get('permission/{role:name}/edit', EditApplyPermissions::class)->name('assignable.edit');
+
+        Route::get('role/assign', ShowApplyRoles::class)->name('assign.index');
+        Route::get('role/create', ApplyRoles::class)->name('assign.create');
+        Route::get('role/{user}/edit', EditApplyRoles::class)->name('assign.edit');
     });
 });
