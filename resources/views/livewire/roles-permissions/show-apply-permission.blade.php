@@ -100,6 +100,12 @@
                                                 <a href="{{ route('assignable.edit', $role) }}" wire:navigate
                                                     class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sync</a>
                                             </li>
+                                            @if ($role->getPermissionNames()->count() == 1)
+                                                <li>
+                                                    <a wire:click="revokePermission({{ $role }})"
+                                                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Hapus Izin</a>
+                                                </li>
+                                            @endif
                                         </ul>
                                     </div>
                                 </td>

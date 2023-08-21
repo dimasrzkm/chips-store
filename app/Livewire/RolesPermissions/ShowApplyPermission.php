@@ -19,6 +19,12 @@ class ShowApplyPermission extends Component
         $this->form->showPerPage = $total;
     }
 
+    public function revokePermission(Role $role)
+    {
+        $role->revokePermissionTo(implode(', ', $role->getPermissionNames()->toArray()));
+        session()->flash('status', 'Peran tidak memiliki izin lagi');
+    }
+
     #[Title('Pemberian Izin')]
     public function render()
     {
