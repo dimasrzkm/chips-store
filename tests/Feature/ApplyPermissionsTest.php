@@ -20,7 +20,7 @@ class ApplyPermissionsTest extends TestCase
     {
         $user = User::factory()->create();
         $response = $this->actingAs($user)
-            ->get('role-and-permission/assignable');
+            ->get('role-and-permission/permission/assignable');
         $response->assertOk();
     }
 
