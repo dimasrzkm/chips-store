@@ -6,7 +6,6 @@ use App\Livewire\Forms\ApplyPermissionsForm;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class ShowApplyPermission extends Component
@@ -32,7 +31,6 @@ class ShowApplyPermission extends Component
 
         return view('livewire.roles-permissions.show-apply-permission', [
             'roles' => $roles,
-            'permissions' => Permission::all(),
         ]);
     }
 }
