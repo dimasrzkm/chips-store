@@ -14,6 +14,7 @@
         <li><a href="{{ route('permissions.index') }}" wire:navigate>Permissions</a></li>
         <li><a href="{{ route('roles.index') }}" wire:navigate>Roles</a></li>
         <li><a href="{{ route('assignable.index') }}" wire:navigate>Apply Permissions</a></li>
+        <li><a href="{{ route('assign.index') }}" wire:navigate>Apply Roles</a></li>
     </ul>
     <div
         class="sticky bottom-0 flex h-20 pointer-events-none from-base-200 bg-gradient-to-t to-transparent" />
