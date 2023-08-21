@@ -29,7 +29,7 @@ class EditApplyPermissions extends Component
     public function render()
     {
         return view('livewire.roles-permissions.edit-apply-permissions', [
-            'roles' => Role::all(),
+            'roles' => $this->form->role,
             'permissions' => Permission::all(),
         ]);
     }

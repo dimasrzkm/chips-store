@@ -14,9 +14,13 @@
                     <select class="select border-2 border-[#272343] focus:outline-none border-opacity-80"
                         wire:model="form.role_id" name="role_id">
                         <option selected>Pilih Peran</option>
-                        @foreach ($roles as $role)
-                            <option value="{{ $role->id }}">{{ $role->name }}</option>
-                        @endforeach
+                        @if ($form->modeInput == 'ubah') (Ubah) 
+                            <option value="{{ $roles->id }}">{{ $roles->name }}</option>
+                        @else
+                            @foreach ($roles as $role)
+                                <option value="{{ $role->id }}">{{ $role->name }}</option>
+                            @endforeach
+                        @endif
                     </select>
                     @error('form.role_id')
                         <label class="label">
