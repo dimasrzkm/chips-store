@@ -19,6 +19,7 @@ class EditApplyRoles extends Component
 
     public function submit()
     {
+        $this->validate();
         $this->form->synchronize();
 
         return $this->redirectRoute('assign.index', navigate: true);
@@ -32,4 +33,9 @@ class EditApplyRoles extends Component
             'roles' => Role::all(),
         ]);
     }
+
+    protected $validationAttributes = [
+        'form.user_id' => 'pengguna',
+        'form.roles' => 'peran'
+    ];
 }

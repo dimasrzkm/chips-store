@@ -52,4 +52,11 @@ class ApplyRolesForm extends Form
             return back()->with('status', $e->getMessage());
         }
     }
+
+    public function rules() {
+        return [
+            'user_id' => ['required'],
+            'roles' => ['required']
+        ];
+    }
 }

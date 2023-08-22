@@ -14,6 +14,7 @@ class ApplyRoles extends Component
 
     public function submit()
     {
+        $this->validate();
         $this->form->apply();
 
         return $this->redirectRoute('assign.index', navigate: true);
@@ -27,4 +28,9 @@ class ApplyRoles extends Component
             'roles' => Role::all(),
         ]);
     }
+
+    protected $validationAttributes = [
+        'form.user_id' => 'pengguna',
+        'form.roles' => 'peran'
+    ];
 }
