@@ -16,18 +16,22 @@ class RoleTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function user_can_see_the_roles_page()
+    public function user_with_role_pemilik_can_see_the_roles_page()
     {
+        Role::create(['name' => 'pemilik', 'guard_name' => 'web']);
         $user = User::factory()->create();
+        $user->assignRole('pemilik');
         $response = $this->actingAs($user)
             ->get('roles');
         $response->assertOk();
     }
 
     /** @test */
-    public function user_can_see_form_create_permissions()
+    public function user_with_role_pemilik_can_see_form_create_permissions()
     {
+        Role::create(['name' => 'pemilik', 'guard_name' => 'web']);
         $user = User::factory()->create();
+        $user->assignRole('pemilik');
         $response = $this->actingAs($user)->get('roles/create');
         $response->assertOk();
     }
