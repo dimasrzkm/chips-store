@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
 class PermissionsTest extends TestCase
@@ -16,18 +17,22 @@ class PermissionsTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function user_can_see_the_permissions_page()
+    public function user_with_role_pemilik_can_see_the_permissions_page()
     {
+        Role::create(['name' => 'pemilik', 'guard_name' => 'web']);
         $user = User::factory()->create();
+        $user->assignRole('pemilik');
         $response = $this->actingAs($user)
             ->get('permissions');
         $response->assertOk();
     }
 
     /** @test */
-    public function user_can_see_form_create_permissions()
+    public function user_with_role_pemilik_can_see_form_create_permissions()
     {
+        Role::create(['name' => 'pemilik', 'guard_name' => 'web']);
         $user = User::factory()->create();
+        $user->assignRole('pemilik');
         $response = $this->actingAs($user)->get('permissions/create');
         $response->assertOk();
     }
