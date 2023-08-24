@@ -31,6 +31,6 @@ class ApplyRoles extends Component
 
     protected $validationAttributes = [
         'form.user_id' => 'pengguna',
-        'form.roles' => 'peran'
+        'form.roles' => 'peran',
     ];
 }

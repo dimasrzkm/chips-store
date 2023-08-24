@@ -6,7 +6,6 @@ use App\Livewire\Forms\ApplyPermissionsForm;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
 
 class EditApplyPermissions extends Component
 {

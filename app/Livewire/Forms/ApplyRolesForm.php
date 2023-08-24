@@ -53,10 +53,11 @@ class ApplyRolesForm extends Form
         }
     }
 
-    public function rules() {
+    public function rules()
+    {
         return [
             'user_id' => ['required'],
-            'roles' => ['required']
+            'roles' => ['required'],
         ];
     }
 }
