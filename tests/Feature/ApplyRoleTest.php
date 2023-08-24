@@ -16,9 +16,11 @@ class ApplyRoleTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function user_can_see_apply_role()
+    public function user_with_role_pemilik_can_see_apply_role()
     {
+        Role::create(['name' => 'pemilik', 'guard_name' => 'web']);
         $user = User::factory()->create();
+        $user->assignRole('pemilik');
         $response = $this->actingAs($user)
             ->get('role-and-permission/role/assign');
         $response->assertOk();
