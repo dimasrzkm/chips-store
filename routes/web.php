@@ -15,6 +15,9 @@ use App\Livewire\RolesPermissions\EditApplyPermissions;
 use App\Livewire\RolesPermissions\EditApplyRoles;
 use App\Livewire\RolesPermissions\ShowApplyPermission;
 use App\Livewire\RolesPermissions\ShowApplyRoles;
+use App\Livewire\Suppliers\CreateSupplier;
+use App\Livewire\Suppliers\EditSupplier;
+use App\Livewire\Suppliers\ShowSuppliers;
 use App\Livewire\Users\CreateUsers;
 use App\Livewire\Users\EditUsers;
 use App\Livewire\Users\ShowUsers;
@@ -59,4 +62,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('users/{user}/edit', EditUsers::class)->name('users.edit');
     });
 
+    Route::get('suppliers', ShowSuppliers::class)->name('suppliers.index')->middleware(['role:pemilik|bagian gudang']);
+    Route::group(['middleware' => ['role:pemilik']], function () {
+        Route::get('suppliers/create', CreateSupplier::class)->name('suppliers.create');
+        Route::get('suppliers/{supplier:name}/edit', EditSupplier::class)->name('suppliers.edit');
+    });
 });
