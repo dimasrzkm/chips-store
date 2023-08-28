@@ -131,7 +131,7 @@
             </span>
             <span>Penitip Barang</span>
         </li>
-        <li><a href="{{ route('roles.index') }}" wire:navigate>Konsinyor</a></li>
+        <li><a href="{{ route('konsinyors.index') }}" wire:navigate>Konsinyor</a></li>
     </ul>
     {{-- Produk --}}
     <ul class="px-4 py-0 menu menu-sm lg:menu-md">
