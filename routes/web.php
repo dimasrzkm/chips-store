@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Livewire\Konsinyors\CreateKonsinyors;
+use App\Livewire\Konsinyors\EditKonsinyors;
+use App\Livewire\Konsinyors\ShowKonsinyors;
 use App\Livewire\Pages\Admin;
 use App\Livewire\Permissions\CreatePermissions;
 use App\Livewire\Permissions\EditPermissions;
@@ -62,9 +65,15 @@ Route::middleware(['auth'])->group(function () {
         Route::get('users/{user}/edit', EditUsers::class)->name('users.edit');
     });
 
-    Route::get('suppliers', ShowSuppliers::class)->name('suppliers.index')->middleware(['role:pemilik|bagian gudang']);
-    Route::group(['middleware' => ['role:pemilik']], function () {
+    Route::group(['middleware' => ['role:pemilik|bagian gudang']], function () {
+        Route::get('suppliers', ShowSuppliers::class)->name('suppliers.index');
         Route::get('suppliers/create', CreateSupplier::class)->name('suppliers.create');
         Route::get('suppliers/{supplier:name}/edit', EditSupplier::class)->name('suppliers.edit');
+    });
+
+    Route::get('konsinyors', ShowKonsinyors::class)->name('konsinyors.index')->middleware(['role:pemilik|bagian gudang']);
+    Route::group(['middleware' => ['role:pemilik']], function () {
+        Route::get('konsinyors/create', CreateKonsinyors::class)->name('konsinyors.create');
+        Route::get('konsinyors/{konsinyor:name}/edit', EditKonsinyors::class)->name('konsinyors.edit');
     });
 });
