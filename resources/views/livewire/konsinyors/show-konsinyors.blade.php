@@ -1,6 +1,6 @@
 <div>
     <x-alert />
-    <x-breadcrumbs defaultSegment="Konsinyors"/>
+    <x-breadcrumbs defaultSegment="Konsinyors" />
     <div class="grid grid-cols-1 overflow-hidden">
         <div
             class="relative overflow-hidden bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
@@ -83,7 +83,7 @@
                                 <td class="px-4 py-3">{{ $konsinyor->telephone_number }}</td>
                                 <td class="px-4 py-3">{{ $konsinyor->address }}</td>
                                 <td class="flex items-center justify-end px-4 py-3">
-                                    @can('menghapus konsinyor')
+                                    @canany(['mengubah konsinyor', 'menghapus konsinyor'])
                                         <div class="dropdown dropdown-left dropdown-end">
                                             <button tabindex="0"
                                                 class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100"
@@ -96,20 +96,24 @@
                                             </button>
                                             <ul tabindex="0"
                                                 class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-                                                <li>
-                                                    <a href="{{ route('konsinyors.edit', $konsinyor) }}" wire:navigate
-                                                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
-                                                </li>
-                                                <li>
-                                                    <!-- Open the modal using ID.showModal() method -->
-                                                    <a onclick="my_modal_1.showModal()"
-                                                        wire:click="getDataForDelete({{ $konsinyor }})"
-                                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Hapus
-                                                    </a>
-                                                </li>
+                                                @can('mengubah konsinyor')
+                                                    <li>
+                                                        <a href="{{ route('konsinyors.edit', $konsinyor) }}" wire:navigate
+                                                            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
+                                                    </li>
+                                                @endcan
+                                                @can('menghapus konsinyor')
+                                                    <li>
+                                                        <!-- Open the modal using ID.showModal() method -->
+                                                        <a onclick="my_modal_1.showModal()"
+                                                            wire:click="getDataForDelete({{ $konsinyor }})"
+                                                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Hapus
+                                                        </a>
+                                                    </li>
+                                                @endcan
                                             </ul>
                                         </div>
-                                    @endcan
+                                    @endcanany
                                 </td>
                             </tr>
                         @empty
@@ -126,18 +130,20 @@
     </div>
 
     {{-- Modal Delete --}}
-    <dialog wire:ignore.self id="my_modal_1" class="modal">
-        <form method="dialog" class="modal-box">
-            <h3 class="text-lg font-bold">Menghapus Data Izin!</h3>
-            <p class="py-4">Apakah anda yakin ingin menghapus data
-                <span class="font-medium text-red-600 text">{{ $form->name }}</span>?
-            </p>
-            <div class="modal-action">
-                <button class="btn btn-error" wire:click="deleteKonsinyor()">Hapus
-                </button>
-                <button class="btn btn-active">Tutup</button>
-            </div>
-        </form>
-    </dialog>
+    @can('menghapus konsinyor')
+        <dialog wire:ignore.self id="my_modal_1" class="modal">
+            <form method="dialog" class="modal-box">
+                <h3 class="text-lg font-bold">Menghapus Data Konsinyor!</h3>
+                <p class="py-4">Apakah anda yakin ingin menghapus data
+                    <span class="font-medium text-red-600 text">{{ $form->name }}</span>?
+                </p>
+                <div class="modal-action">
+                    <button class="btn btn-error" wire:click="deleteKonsinyor()">Hapus
+                    </button>
+                    <button class="btn btn-active">Tutup</button>
+                </div>
+            </form>
+        </dialog>
+    @endcan
 
 </div>

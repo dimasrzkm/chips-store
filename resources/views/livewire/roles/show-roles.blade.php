@@ -122,7 +122,7 @@
     {{-- Modal Delete --}}
     <dialog wire:ignore.self id="my_modal_1" class="modal">
         <form method="dialog" class="modal-box">
-            <h3 class="text-lg font-bold">Menghapus Data Izin!</h3>
+            <h3 class="text-lg font-bold">Menghapus Data Peran!</h3>
             <p class="py-4">Apakah anda yakin ingin menghapus data
                 <span class="font-medium text-red-600 text">{{ $form->name }}</span>?
             </p>
