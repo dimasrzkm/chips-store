@@ -150,7 +150,7 @@ class UsersTest extends TestCase
     {
         Role::create(['name' => 'pemilik', 'guard_name' => 'web']);
         Permission::create(['name' => 'menghapus pengguna', 'guard_name' => 'web']);
-        
+
         $role = Role::findById(1);
         $role->givePermissionTo('menghapus pengguna');
 
@@ -166,7 +166,7 @@ class UsersTest extends TestCase
     public function pemilik_can_delete_another_user_data()
     {
         Role::create(['name' => 'pemilik', 'guard_name' => 'web']);
-        
+
         $pemilik = User::factory()->create();
         $pemilik->assignRole('pemilik');
 
@@ -261,7 +261,7 @@ class UsersTest extends TestCase
         $user = User::factory()->create();
         $user->assignRole('kasir');
 
-        $response = $this->actingAs($user)->get("users");
+        $response = $this->actingAs($user)->get('users');
         $response->assertDontSee('Hapus');
         $response->assertDontSee('Menghapus Data Pengguna!');
     }
@@ -307,7 +307,7 @@ class UsersTest extends TestCase
         $user = User::factory()->create();
         $user->assignRole('bagian gudang');
 
-        $response = $this->actingAs($user)->get("users");
+        $response = $this->actingAs($user)->get('users');
         $response->assertDontSee('Hapus');
         $response->assertDontSee('Menghapus Data Pengguna!');
     }

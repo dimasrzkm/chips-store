@@ -69,9 +69,9 @@ class PermissionsTest extends TestCase
         $this->assertCount(1, Permission::all());
     }
 
-     /** @test */
-     public function pemilik_can_see_form_edit_permission()
-     {
+    /** @test */
+    public function pemilik_can_see_form_edit_permission()
+    {
         Role::create(['name' => 'pemilik', 'guard_name' => 'web']);
         $permission = Permission::create(['name' => 'mengubah izin', 'guard_name' => 'web']);
 
@@ -84,10 +84,10 @@ class PermissionsTest extends TestCase
         $this->actingAs($user)
             ->get('permissions')
             ->assertSee('Edit');
-         
+
         $response = $this->actingAs($user)->get("permissions/$permission->name/edit");
         $response->assertOk();
-     }
+    }
 
     /** @test */
     public function pemilik_can_edit_permission_data()
@@ -154,7 +154,7 @@ class PermissionsTest extends TestCase
         Permission::create(['name' => 'melihat izin', 'guard_name' => 'web']);
         Permission::create(['name' => 'melihat peran', 'guard_name' => 'web']);
         Permission::create(['name' => 'menambah peran', 'guard_name' => 'web']);
-        
+
         $this->assertCount(3, Permission::all());
 
         Livewire::withQueryParams(['search' => 'menambah peran'])
@@ -195,12 +195,12 @@ class PermissionsTest extends TestCase
         $permission = Role::create(['name' => 'melihat izin', 'guard_name' => 'web']);
         $user = User::factory()->create();
         $user->assignRole('bagian gudang');
-        
+
         $this->actingAs($user)
             ->get('permissions')
             ->assertDontSee('Edit')
             ->assertStatus(403);
-        
+
         $response = $this->actingAs($user)->get("permissions/$permission->name/edit");
         $response->assertStatus(403);
     }

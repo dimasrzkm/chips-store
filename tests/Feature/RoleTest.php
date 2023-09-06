@@ -68,11 +68,11 @@ class RoleTest extends TestCase
         $this->assertCount(1, Role::all());
     }
 
-     /** @test */
-     public function pemilik_can_see_form_edit_role()
-     {
-         $role = Role::create(['name' => 'pemilik', 'guard_name' => 'web']);
-         Permission::create(['name' => 'mengubah peran', 'guard_name' => 'web']);
+    /** @test */
+    public function pemilik_can_see_form_edit_role()
+    {
+        $role = Role::create(['name' => 'pemilik', 'guard_name' => 'web']);
+        Permission::create(['name' => 'mengubah peran', 'guard_name' => 'web']);
 
         $role = Role::findById(1);
         $role->givePermissionTo('mengubah peran');
@@ -86,7 +86,7 @@ class RoleTest extends TestCase
 
         $response = $this->actingAs($user)->get("roles/$role->name/edit");
         $response->assertOk();
-     }
+    }
 
     /** @test */
     public function pemilik_can_edit_role_data()
@@ -117,7 +117,7 @@ class RoleTest extends TestCase
 
         $user = User::factory()->create();
         $user->assignRole('pemilik');
-        
+
         $response = $this->actingAs($user)->get('roles');
         $response->assertSee('Hapus');
         $response->assertSee('Menghapus Data Peran!');
@@ -141,19 +141,19 @@ class RoleTest extends TestCase
         $this->assertCount(0, Role::all());
     }
 
-     /** @test */
-     public function pemilik_can_search_data_roles()
-     {
-         Role::create(['name' => 'pemilik', 'guard_name' => 'web']);
-         Role::create(['name' => 'kasir', 'guard_name' => 'web']);
-         Role::create(['name' => 'bagian gudang', 'guard_name' => 'web']);
-         
-         $this->assertCount(3, Role::all());
- 
-         Livewire::withQueryParams(['search' => 'kasir'])
-             ->test(ShowRoles::class)
-             ->assertSee('kasir');
-     }
+    /** @test */
+    public function pemilik_can_search_data_roles()
+    {
+        Role::create(['name' => 'pemilik', 'guard_name' => 'web']);
+        Role::create(['name' => 'kasir', 'guard_name' => 'web']);
+        Role::create(['name' => 'bagian gudang', 'guard_name' => 'web']);
+
+        $this->assertCount(3, Role::all());
+
+        Livewire::withQueryParams(['search' => 'kasir'])
+            ->test(ShowRoles::class)
+            ->assertSee('kasir');
+    }
 
     /** @test */
     public function user_with_role_other_than_pemilik_cannot_see_roles_page()

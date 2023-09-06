@@ -28,7 +28,7 @@ class KonsinyorTest extends TestCase
 
         $pemilik = User::factory()->create();
         $pemilik->assignRole('pemilik');
-        
+
         $response = $this->actingAs($pemilik)->get('konsinyors');
         $response->assertOk();
     }
@@ -48,7 +48,7 @@ class KonsinyorTest extends TestCase
         $this->actingAs($pemilik)
             ->get('konsinyors')
             ->assertSee('Tambah Konsinyor');
-        
+
         $response = $this->actingAs($pemilik)->get('konsinyors/create');
         $response->assertOk();
     }
@@ -86,7 +86,7 @@ class KonsinyorTest extends TestCase
 
         $pemilik = User::factory()->create();
         $pemilik->assignRole('pemilik');
-        
+
         Livewire::actingAs($pemilik)
             ->test(CreateKonsinyors::class)
             ->set('form.name', 'ali')
@@ -143,8 +143,8 @@ class KonsinyorTest extends TestCase
     public function pemilik_can_see_hapus_button_to_delete_data_konsinyor()
     {
         Role::create(['name' => 'pemilik', 'guard_name' => 'web']);
-        Permission::create(['name' => 'menghapus konsinyor', 
-        'guard_name' => 'web']);
+        Permission::create(['name' => 'menghapus konsinyor',
+            'guard_name' => 'web']);
 
         $role = Role::findById(1);
         $role->givePermissionTo('menghapus konsinyor');
@@ -211,10 +211,10 @@ class KonsinyorTest extends TestCase
 
         $role = Role::findById(1);
         $role->givePermissionTo('melihat konsinyor');
-        
+
         $user = User::factory()->create();
         $user->assignRole('bagian gudang');
-        
+
         $response = $this->actingAs($user)->get('konsinyors');
         $response->assertOk();
     }
@@ -242,7 +242,7 @@ class KonsinyorTest extends TestCase
         Role::create(['name' => 'bagian gudang', 'guard_name' => 'web']);
         $user = User::factory()->create();
         $user->assignRole('bagian gudang');
-        
+
         $this->actingAs($user)
             ->get('konsinyors')
             ->assertDontSee('Edit')

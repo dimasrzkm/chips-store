@@ -2,15 +2,15 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
-use App\Models\User;
-use Livewire\Livewire;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 use App\Livewire\RolesPermissions\ApplyRoles;
 use App\Livewire\RolesPermissions\EditApplyRoles;
 use App\Livewire\RolesPermissions\ShowApplyRoles;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Livewire\Livewire;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
+use Tests\TestCase;
 
 class ApplyRoleTest extends TestCase
 {
@@ -27,7 +27,7 @@ class ApplyRoleTest extends TestCase
 
         $user = User::factory()->create();
         $user->assignRole('pemilik');
-        
+
         $response = $this->actingAs($user)
             ->get('role-and-permission/role/assign');
         $response->assertOk();
@@ -49,7 +49,7 @@ class ApplyRoleTest extends TestCase
             ->get('role-and-permission/role/assign')
             ->assertSee('Izinkan')
             ->assertOk();
-        
+
         $response = $this->actingAs($user)->get('role-and-permission/role/create');
         $response->assertOk();
     }
@@ -86,7 +86,7 @@ class ApplyRoleTest extends TestCase
             ->get('role-and-permission/role/assign')
             ->assertSee('Sync')
             ->assertOk();
-        
+
         $response = $this->actingAs($user)->get("role-and-permission/role/$user->username/edit");
         $response->assertOk();
     }
@@ -146,7 +146,7 @@ class ApplyRoleTest extends TestCase
     public function pemilik_can_searh_data_role_from_user()
     {
         User::factory(3)->create();
-         
+
         $this->assertCount(3, User::all());
 
         Livewire::withQueryParams(['search' => User::find(2)->name])
@@ -176,7 +176,7 @@ class ApplyRoleTest extends TestCase
             ->get('role-and-permission/role/assign')
             ->assertDontSee('Izinkan')
             ->assertStatus(403);
-        
+
         $response = $this->actingAs($user)->get('role-and-permission/role/create');
         $response->assertSee(403);
     }
@@ -192,7 +192,7 @@ class ApplyRoleTest extends TestCase
             ->get('role-and-permission/role/assign')
             ->assertDontSee('Sync')
             ->assertStatus(403);
-        
+
         $response = $this->actingAs($user)->get("role-and-permission/role/$user->username/edit");
         $response->assertSee(403);
     }
@@ -208,7 +208,7 @@ class ApplyRoleTest extends TestCase
         $response->assertDontSee('Hapus Peran');
         $response->assertSee(403);
     }
-    
+
     /** @test */
     public function user_with_role_kasir_cannot_apply_role_to_user()
     {
@@ -220,7 +220,7 @@ class ApplyRoleTest extends TestCase
             ->get('role-and-permission/role/assign')
             ->assertDontSee('Izinkan')
             ->assertStatus(403);
-        
+
         $response = $this->actingAs($user)->get('role-and-permission/role/create');
         $response->assertSee(403);
     }
@@ -236,7 +236,7 @@ class ApplyRoleTest extends TestCase
             ->get('role-and-permission/role/assign')
             ->assertDontSee('Sync')
             ->assertStatus(403);
-        
+
         $response = $this->actingAs($user)->get("role-and-permission/role/$user->username/edit");
         $response->assertSee(403);
     }

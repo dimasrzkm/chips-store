@@ -196,7 +196,7 @@ class SupplierTest extends TestCase
         Permission::create(['name' => 'melihat supplier', 'guard_name' => 'web']);
 
         $role = Role::findById(1);
-        $role->givePermissionTo('melihat supplier');        
+        $role->givePermissionTo('melihat supplier');
 
         $user = User::factory()->create();
         $user->assignRole('pemilik');
@@ -380,7 +380,7 @@ class SupplierTest extends TestCase
         Role::create(['name' => 'kasir', 'guard_name' => 'web']);
         $user = User::factory()->create();
         $user->assignRole('kasir');
-        
+
         $this->actingAs($user)
             ->get('suppliers')
             ->assertDontSee('Edit')
