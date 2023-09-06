@@ -71,7 +71,7 @@
         </ul>
     @endcan
     {{-- Supplier --}}
-    @can('melihat supplier')
+    @canany(['melihat bahan baku', 'melihat supplier'])
         <ul class="px-4 py-0 menu menu-sm lg:menu-md">
             <li></li>
             <li class="flex flex-row items-center gap-4 menu-title">
@@ -101,10 +101,14 @@
                 </span>
                 <span>Data Supplier</span>
             </li>
+            @can('melihat supplier')
             <li><a href="{{ route('suppliers.index') }}" wire:navigate>Supplier</a></li>
-            <li><a href="{{ route('roles.index') }}" wire:navigate>Bahan Baku</a></li>
+            @endcan
+            @can('melihat bahan baku')
+                <li><a href="{{ route('stocks.index') }}" wire:navigate>Bahan Baku</a></li>
+            @endcan
         </ul>
-    @endcan
+    @endcanany
     {{-- Konsinyor atau penitip barang --}}
     @can('melihat konsinyor')
         <ul class="px-4 py-0 menu menu-sm lg:menu-md">
@@ -185,7 +189,9 @@
             </span>
             <span>Transaksi</span>
         </li>
-        <li><a href="{{ route('roles.index') }}" wire:navigate>Pengadaan Bahan Baku</a></li>
+        @can('menambah bahan baku')
+            <li><a href="{{ route('stocks.create') }}" wire:navigate>Pengadaan Bahan Baku</a></li>
+        @endcan
         <li><a href="{{ route('roles.index') }}" wire:navigate>Pengeluaran Bahan Baku</a></li>
         <li><a href="{{ route('roles.index') }}" wire:navigate>Penitipan Produk</a></li>
         <li><a href="{{ route('roles.index') }}" wire:navigate>Penjualan Produk</a></li>

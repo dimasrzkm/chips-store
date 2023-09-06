@@ -18,6 +18,9 @@ use App\Livewire\RolesPermissions\EditApplyPermissions;
 use App\Livewire\RolesPermissions\EditApplyRoles;
 use App\Livewire\RolesPermissions\ShowApplyPermission;
 use App\Livewire\RolesPermissions\ShowApplyRoles;
+use App\Livewire\Stocks\CreateStocks;
+use App\Livewire\Stocks\EditStocks;
+use App\Livewire\Stocks\ShowStocks;
 use App\Livewire\Suppliers\CreateSupplier;
 use App\Livewire\Suppliers\EditSupplier;
 use App\Livewire\Suppliers\ShowSuppliers;
@@ -75,5 +78,11 @@ Route::middleware(['auth'])->group(function () {
     Route::group(['middleware' => ['role:pemilik']], function () {
         Route::get('konsinyors/create', CreateKonsinyors::class)->name('konsinyors.create');
         Route::get('konsinyors/{konsinyor:name}/edit', EditKonsinyors::class)->name('konsinyors.edit');
+    });
+
+    Route::group(['middleware' => ['role:pemilik|bagian gudang']], function () {
+        Route::get('stocks', ShowStocks::class)->name('stocks.index');
+        Route::get('stocks/create', CreateStocks::class)->name('stocks.create');
+        Route::get('stocks/{stock:id}/edit', EditStocks::class)->name('stocks.edit');
     });
 });
