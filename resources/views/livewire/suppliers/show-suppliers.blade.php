@@ -83,7 +83,7 @@
                                 <td class="px-4 py-3">{{ $supplier->telephone_number }}</td>
                                 <td class="px-4 py-3">{{ $supplier->address }}</td>
                                 <td class="flex items-center justify-end px-4 py-3">
-                                    {{-- @can('menghapus supplier') --}}
+                                    @canany(['mengubah supplier', 'menghapus supplier'])
                                         <div class="dropdown dropdown-left dropdown-end">
                                             <button tabindex="0"
                                                 class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100"
@@ -113,7 +113,7 @@
                                                 @endcan
                                             </ul>
                                         </div>
-                                    {{-- @endcan --}}
+                                    @endcanany
                                 </td>
                             </tr>
                         @empty
