@@ -14,7 +14,7 @@ use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
-class BahanbakuTest extends TestCase
+class StockTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -68,10 +68,10 @@ class BahanbakuTest extends TestCase
         Livewire::actingAs($user)
             ->test(CreateStocks::class)
             ->set('form.supplier_id', Supplier::first()->id)
-            ->set('form.nama', 'pisang')
-            ->set('form.tanggal_pengadaan', '12/1/2001')
-            ->set('form.harga', 12000)
-            ->set('form.jumlah', 2)
+            ->set('form.name', 'pisang')
+            ->set('form.purchase_date', '12/1/2001')
+            ->set('form.price', 12000)
+            ->set('form.total', 2)
             ->call('submit')
             ->assertRedirect('stocks');
 
@@ -94,10 +94,10 @@ class BahanbakuTest extends TestCase
         Livewire::actingAs($user)
             ->test(CreateStocks::class)
             ->set('form.supplier_id', Supplier::first()->id)
-            ->set('form.nama', 'pisang')
-            ->set('form.tanggal_pengadaan', '12/1/2001')
-            ->set('form.harga', 12000)
-            ->set('form.jumlah', 2)
+            ->set('form.name', 'pisang')
+            ->set('form.purchase_date', '12/1/2001')
+            ->set('form.price', 12000)
+            ->set('form.total', 2)
             ->call('submit');
 
         $stock = Stock::first();
@@ -130,10 +130,10 @@ class BahanbakuTest extends TestCase
         Livewire::actingAs($user)
             ->test(EditStocks::class, ['stock' => $stock])
             ->set('form.supplier_id', Supplier::first()->id)
-            ->set('form.nama', 'pisang -edited')
-            ->set('form.tanggal_pengadaan', '12/1/2001')
-            ->set('form.harga', 12000)
-            ->set('form.jumlah', 2)
+            ->set('form.name', 'pisang -edited')
+            ->set('form.purchase_date', '12/1/2001')
+            ->set('form.price', 12000)
+            ->set('form.total', 2)
             ->call('submit')
             ->assertRedirect('stocks');
 
@@ -248,10 +248,10 @@ class BahanbakuTest extends TestCase
         Livewire::actingAs($user)
             ->test(CreateStocks::class)
             ->set('form.supplier_id', Supplier::first()->id)
-            ->set('form.nama', 'pisang')
-            ->set('form.tanggal_pengadaan', '12/1/2001')
-            ->set('form.harga', 12000)
-            ->set('form.jumlah', 2)
+            ->set('form.name', 'pisang')
+            ->set('form.purchase_date', '12/1/2001')
+            ->set('form.price', 12000)
+            ->set('form.total', 2)
             ->call('submit')
             ->assertRedirect('stocks');
 
@@ -274,10 +274,10 @@ class BahanbakuTest extends TestCase
         Livewire::actingAs($user)
             ->test(CreateStocks::class)
             ->set('form.supplier_id', Supplier::first()->id)
-            ->set('form.nama', 'pisang')
-            ->set('form.tanggal_pengadaan', '12/1/2001')
-            ->set('form.harga', 12000)
-            ->set('form.jumlah', 2)
+            ->set('form.name', 'pisang')
+            ->set('form.purchase_date', '12/1/2001')
+            ->set('form.price', 12000)
+            ->set('form.total', 2)
             ->call('submit');
 
         $stock = Stock::first();
@@ -310,10 +310,10 @@ class BahanbakuTest extends TestCase
         Livewire::actingAs($user)
             ->test(EditStocks::class, ['stock' => $stock])
             ->set('form.supplier_id', Supplier::first()->id)
-            ->set('form.nama', 'pisang -edited')
-            ->set('form.tanggal_pengadaan', '12/1/2001')
-            ->set('form.harga', 12000)
-            ->set('form.jumlah', 2)
+            ->set('form.name', 'pisang -edited')
+            ->set('form.purchase_date', '12/1/2001')
+            ->set('form.price', 12000)
+            ->set('form.total', 2)
             ->call('submit')
             ->assertRedirect('stocks');
 
