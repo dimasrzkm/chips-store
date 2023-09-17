@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('stocks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('supplier_id')->constrained();
-            $table->string('nama');
-            $table->date('tanggal_pengadaan');
-            $table->float('harga', 8, 2);
-            $table->float('jumlah');
+            $table->string('name');
+            $table->date('purchase_date');
+            $table->float('price', 8, 2);
+            $table->float('total');
             $table->timestamps();
         });
     }

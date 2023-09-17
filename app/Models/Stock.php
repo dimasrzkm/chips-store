@@ -11,10 +11,10 @@ class Stock extends Model
 
     protected $fillable = [
         'supplier_id',
-        'nama',
-        'tanggal_pengadaan',
-        'harga',
-        'jumlah',
+        'name',
+        'purchase_date',
+        'price',
+        'total',
     ];
 
     public function supplier()

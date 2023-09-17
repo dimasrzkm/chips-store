@@ -19,10 +19,10 @@ class StockFactory extends Factory
     {
         return [
             'supplier_id' => Supplier::factory(),
-            'nama' => fake()->name(),
-            'tanggal_pengadaan' => fake()->date(),
-            'harga' => fake()->randomNumber(5),
-            'jumlah' => fake()->numberBetween(1, 4),
+            'name' => fake()->name(),
+            'purchase_date' => fake()->date(),
+            'price' => fake()->randomNumber(5),
+            'total' => fake()->numberBetween(1, 4),
         ];
     }
 }
