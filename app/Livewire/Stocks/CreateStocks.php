@@ -29,9 +29,9 @@ class CreateStocks extends Component
 
     protected $validationAttributes = [
         'form.supplier_id' => 'supplier',
-        'form.nama' => 'nama',
-        'form.tanggal_pengadaan' => 'tanggal_pengadaan',
-        'form.harga' => 'harga',
-        'form.jumlah' => 'jumlah',
+        'form.name' => 'nama',
+        'form.purchase_date' => 'tanggal_pengadaan',
+        'form.price' => 'harga',
+        'form.total' => 'jumlah',
     ];
 }

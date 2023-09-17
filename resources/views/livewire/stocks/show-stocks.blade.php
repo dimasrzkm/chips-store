@@ -70,11 +70,11 @@
                         @forelse ($stocks as $index => $stock)
                             <tr class="border-b dark:border-gray-700">
                                 <td class="px-4 py-3">{{ $index + 1 }}</td>
-                                <td class="px-4 py-3">{{ $stock->nama }}</td>
+                                <td class="px-4 py-3">{{ $stock->name }}</td>
                                 <td class="px-4 py-3">{{ $stock->supplier->name }}</td>
-                                <td class="px-4 py-3">{{ $stock->tanggal_pengadaan }}</td>
-                                <td class="px-4 py-3">{{ $stock->harga }}</td>
-                                <td class="px-4 py-3">{{ $stock->jumlah }}</td>
+                                <td class="px-4 py-3">{{ $stock->purchase_date }}</td>
+                                <td class="px-4 py-3">{{ $stock->price }}</td>
+                                <td class="px-4 py-3">{{ $stock->total }}</td>
                                 <td class="flex items-center justify-end px-4 py-3">
                                     @canany(['mengubah bahan baku', 'menghapus bahan baku'])
                                         <div class="dropdown dropdown-left dropdown-end">
@@ -128,7 +128,7 @@
             <form method="dialog" class="modal-box">
                 <h3 class="text-lg font-bold">Menghapus Data Stock!</h3>
                 <p class="py-4">Apakah anda yakin ingin menghapus data
-                    <span class="font-medium text-red-600 text">{{ $form->nama }}</span>?
+                    <span class="font-medium text-red-600 text">{{ $form->name }}</span>?
                 </p>
                 <div class="modal-action">
                     <button class="btn btn-error" wire:click="deleteStock()">Hapus

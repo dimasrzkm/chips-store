@@ -19,29 +19,29 @@ class StocksForm extends Form
 
     public $supplier_id;
 
-    public $nama;
+    public $name;
 
-    public $tanggal_pengadaan;
+    public $purchase_date;
 
-    public $harga;
+    public $price;
 
-    public $jumlah;
+    public $total;
 
     public function setPost(Stock $stock)
     {
         $this->stock = $stock;
         $this->supplier_id = $stock->supplier_id;
-        $this->nama = $stock->nama;
-        $this->tanggal_pengadaan = $stock->tanggal_pengadaan;
-        $this->harga = $stock->harga;
-        $this->jumlah = $stock->jumlah;
+        $this->name = $stock->name;
+        $this->purchase_date = $stock->purchase_date;
+        $this->price = $stock->price;
+        $this->total = $stock->total;
         $this->modeInput = 'ubah';
     }
 
     public function create()
     {
         try {
-            Stock::create($this->only(['supplier_id', 'nama', 'tanggal_pengadaan', 'harga', 'jumlah']));
+            Stock::create($this->only(['supplier_id', 'name', 'purchase_date', 'price', 'total']));
             session()->flash('status', 'Bahan baku berhasil di tambah');
         } catch (\Exception $e) {
             return back()->with('status', $e->getMessage());
@@ -51,7 +51,7 @@ class StocksForm extends Form
     public function update()
     {
         try {
-            $this->stock->update($this->only(['supplier_id', 'nama', 'tanggal_pengadaan', 'harga', 'jumlah']));
+            $this->stock->update($this->only(['supplier_id', 'name', 'purchase_date', 'price', 'total']));
             $this->resetField();
             session()->flash('status', 'Bahan baku berhasil di ubah');
         } catch (\Exception $e) {
@@ -74,15 +74,15 @@ class StocksForm extends Form
     {
         return [
             'supplier_id' => ['required'],
-            'nama' => ['required'],
-            'tanggal_pengadaan' => ['required', 'date'],
-            'harga' => ['required', 'numeric'],
-            'jumlah' => ['required', 'numeric'],
+            'name' => ['required'],
+            'purchase_date' => ['required', 'date'],
+            'price' => ['required', 'numeric'],
+            'total' => ['required', 'numeric'],
         ];
     }
 
     protected function resetField()
     {
-        return $this->reset('supplier_id', 'nama', 'tanggal_pengadaan', 'harga', 'jumlah', 'stock', 'modeInput');
+        return $this->reset('supplier_id', 'name', 'purchase_date', 'price', 'total', 'stock', 'modeInput');
     }
 }

@@ -15,10 +15,10 @@
                 <label class="label">
                     <span class="label-text">Tanggal Pengadaan</span>
                 </label>
-                <input type="date" wire:model="form.tanggal_pengadaan" name="tanggal_pengadaan"
+                <input type="date" wire:model="form.purchase_date" name="purchase_date"
                     class="input w-full border-opacity-80 border-2 border-[#272343] focus:outline-none">
                 <label class="label">
-                    @error('form.tanggal_pengadaan')
+                    @error('form.purchase_date')
                         <span class="text-sm label-text-alt text-rose-600">{{ $message }}</span>
                     @enderror
                 </label>
@@ -44,10 +44,10 @@
                 <label class="label">
                     <span class="label-text">Bahan Baku</span>
                 </label>
-                <input type="text" wire:model="form.nama" name="nama_bahan"
+                <input type="text" wire:model="form.name" name="nama_bahan"
                     class="input w-full border-opacity-80 border-2 border-[#272343] focus:outline-none">
                 <label class="label">
-                    @error('form.nama')
+                    @error('form.name')
                         <span class="text-sm label-text-alt text-rose-600">{{ $message }}</span>
                     @enderror
                 </label>
@@ -56,10 +56,10 @@
                 <label class="label">
                     <span class="label-text">Harga</span>
                 </label>
-                <input type="number" wire:model="form.harga" name="harga"
+                <input type="number" wire:model="form.price" name="price"
                     class="input w-full border-opacity-80 border-2 border-[#272343] focus:outline-none">
                 <label class="label">
-                    @error('form.harga')
+                    @error('form.price')
                         <span class="text-sm label-text-alt text-rose-600">{{ $message }}</span>
                     @enderror
                 </label>
@@ -68,10 +68,10 @@
                 <label class="label">
                     <span class="label-text">Jumlah Beli</span>
                 </label>
-                <input type="number" wire:model="form.jumlah" name="jumlah"
+                <input type="number" wire:model="form.total" name="total"
                     class="input w-full border-opacity-80 border-2 border-[#272343] focus:outline-none">
                 <label class="label">
-                    @error('form.jumlah')
+                    @error('form.total')
                         <span class="text-sm label-text-alt text-rose-600">{{ $message }}</span>
                     @enderror
                 </label>
