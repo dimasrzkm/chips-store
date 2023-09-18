@@ -8,6 +8,9 @@ use App\Livewire\Pages\Admin;
 use App\Livewire\Permissions\CreatePermissions;
 use App\Livewire\Permissions\EditPermissions;
 use App\Livewire\Permissions\ShowPermissions;
+use App\Livewire\Products\CreateProducts;
+use App\Livewire\Products\EditProducts;
+use App\Livewire\Products\ShowProducts;
 use App\Livewire\Profile\ProfileInformation;
 use App\Livewire\Roles\CreateRoles;
 use App\Livewire\Roles\EditRoles;
@@ -84,5 +87,11 @@ Route::middleware(['auth'])->group(function () {
         Route::get('stocks', ShowStocks::class)->name('stocks.index');
         Route::get('stocks/create', CreateStocks::class)->name('stocks.create');
         Route::get('stocks/{stock:id}/edit', EditStocks::class)->name('stocks.edit');
+    });
+
+    Route::get('products', ShowProducts::class)->name('products.index')->middleware(['role:pemilik|bagian gudang|kasir']);
+    Route::group(['middleware' => ['role:pemilik|bagian gudang']], function () {
+        Route::get('products/create', CreateProducts::class)->name('products.create');
+        Route::get('products/{product:name}/edit', EditProducts::class)->name('products.edit');
     });
 });
