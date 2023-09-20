@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Livewire\Expenses\CreateExpenses;
+use App\Livewire\Expenses\ShowExpenses;
 use App\Livewire\Konsinyors\CreateKonsinyors;
 use App\Livewire\Konsinyors\EditKonsinyors;
 use App\Livewire\Konsinyors\ShowKonsinyors;
@@ -93,5 +95,10 @@ Route::middleware(['auth'])->group(function () {
     Route::group(['middleware' => ['role:pemilik|bagian gudang']], function () {
         Route::get('products/create', CreateProducts::class)->name('products.create');
         Route::get('products/{product:name}/edit', EditProducts::class)->name('products.edit');
+    });
+
+    Route::group(['middleware' => ['role:pemilik|bagian gudang']], function () {
+        Route::get('expenses', ShowExpenses::class)->name('expenses.index');
+        Route::get('expenses/create', CreateExpenses::class)->name('expenses.create');
     });
 });
