@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             AssignRoleSeeder::class,
             KonsinyorSeeder::class,
-            StockSeeder::class,
+            // StockSeeder::class,
         ]);
     }
 }
