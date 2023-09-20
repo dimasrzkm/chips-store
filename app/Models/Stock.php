@@ -21,4 +21,9 @@ class Stock extends Model
     {
         return $this->belongsTo(Supplier::class);
     }
+
+    public function expenses()
+    {
+        return $this->belongsToMany(Expense::class, 'expenses_detail', 'stock_id', 'expense_id')->withPivot('product_name', 'stock_name', 'total_used');
+    }
 }

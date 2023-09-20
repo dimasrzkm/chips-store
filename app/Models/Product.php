@@ -16,4 +16,9 @@ class Product extends Model
         'sale_price',
         'stock',
     ];
+
+    public function expenses()
+    {
+        return $this->belongsToMany(Expense::class, 'expenses_detail', 'product_id', 'expense_id')->withPivot('product_name', 'stock_name', 'total_used');
+    }
 }
