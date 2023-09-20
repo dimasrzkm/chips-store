@@ -49,8 +49,7 @@
                                     <path clip-rule="evenodd" fill-rule="evenodd"
                                         d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
                                 </svg>
-                                10</label>
-                            {{-- {{ $form->showPerPage }}</label> --}}
+                            {{ $form->showPerPage }}</label>
                             <ul tabindex="0"
                                 class="dropdown-content top-12 z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
                                 <li><a wire:click="setHowMuchPageShow(10)">10</a></li>
@@ -123,7 +122,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="5" class="px-4 py-3 text-center">Tidak ada data di temukan</td>
+                                <td colspan="7" class="px-4 py-3 text-center">Tidak ada data di temukan</td>
                             </tr>
                         @endforelse
                     </tbody>
