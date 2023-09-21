@@ -4,6 +4,7 @@ namespace App\Livewire\Products;
 
 use App\Livewire\Forms\ProductForm;
 use App\Models\Product;
+use Illuminate\Database\Eloquent\Builder;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -34,9 +35,12 @@ class ShowProducts extends Component
     #[Title('Data Produk')]
     public function render()
     {
-        $products = Product::orderBy('name')->paginate($this->form->showPerPage, pageName: 'product-page');
+        $products = Product::with('konsinyor')->orderBy('name')->paginate($this->form->showPerPage, pageName: 'product-page');
         if ($this->form->search != '') {
             $products = Product::where('name', 'like', '%'.$this->form->search.'%')
+                ->orWhereHas('konsinyor', function (Builder $query) {
+                    return $query->where('name', 'like', '%'.$this->form->search.'%');
+                })
                 ->paginate($this->form->showPerPage, pageName: 'product-page');
         }
 

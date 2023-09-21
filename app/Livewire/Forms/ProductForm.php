@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Forms;
 
+use App\Models\Konsinyor;
 use App\Models\Product;
 use Livewire\Attributes\Url;
 use Livewire\Form;
@@ -20,12 +21,18 @@ class ProductForm extends Form
 
     public $stock = 0;
 
+    public $konsinyor_id;
+
     #[Url(as: 'search', history: true)]
     public $search = '';
 
     public $showPerPage = 10;
 
     public $modeInput = 'tambah';
+
+    public $categoryProduct;
+
+    public $allKonsinyors;
 
     public function setPost(Product $product)
     {
@@ -36,12 +43,19 @@ class ProductForm extends Form
         $this->sale_price = $product->sale_price;
         $this->stock = $product->stock;
         $this->modeInput = 'ubah';
+
+        $this->categoryProduct = 0;
+        if (! is_null($this->product->konsinyor)) {
+            $this->categoryProduct = 1;
+            $this->allKonsinyors = Konsinyor::all();
+            $this->konsinyor_id = $this->product->konsinyor->id;
+        }
     }
 
     public function create()
     {
         try {
-            Product::create($this->only(['name', 'initial_price', 'percentage_profit', 'sale_price', 'stock']));
+            Product::create($this->only($this->attributes()));
             session()->flash('status', 'Berhasil menambah data produk');
         } catch (\Exception $e) {
             return back()->with('status', $e->getMessage());
@@ -51,7 +65,7 @@ class ProductForm extends Form
     public function update()
     {
         try {
-            $this->product->update($this->only(['name', 'initial_price', 'percentage_profit', 'sale_price', 'stock']));
+            $this->product->update($this->only($this->attributes()));
             $this->resetField();
             session()->flash('status', 'Berhasil mengubah data produk');
         } catch (\Exception $e) {
@@ -75,6 +89,11 @@ class ProductForm extends Form
         $this->sale_price = ($this->initial_price) + ($this->initial_price / 100) * $this->percentage_profit;
     }
 
+    public function attributes()
+    {
+        return ['name', 'initial_price', 'percentage_profit', 'sale_price', 'stock', 'konsinyor_id'];
+    }
+
     protected function resetField()
     {
         return $this->reset('name', 'initial_price', 'percentage_profit', 'sale_price', 'stock', 'product', 'modeInput');
@@ -88,6 +107,7 @@ class ProductForm extends Form
             'percentage_profit' => ['required', 'numeric'],
             'sale_price' => ['required', 'numeric'],
             'stock' => ['required', 'numeric'],
+            'categoryProduct' => ['required'],
         ];
 
     }

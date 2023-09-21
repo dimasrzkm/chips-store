@@ -6,7 +6,7 @@
             @if ($form->modeInput !== 'ubah')
                 Tambah Produk
             @else
-                Ubah Data Supplier
+                Ubah Data Produk
             @endif
         </h5>
         <form method="post" wire:submit="submit">
@@ -61,6 +61,41 @@
             </div>
             <p wire:dirty wire:target="form.initial_price" class="text-xs">Menghitung...</p>
             <p wire:dirty wire:target="form.percentage_profit" class="text-xs">Menghitung...</p>
+            <div class="w-full form-control">
+                <label class="label">
+                    <span class="label-text">Kategori Produk</span>
+                </label>
+                <select class="select border-2 border-[#272343] focus:outline-none border-opacity-80"
+                    wire:model.live.debounce.500ms="form.categoryProduct">
+                    <option selected>Pilih Kategori</option>
+                    <option value="0">Milik sendiri</option>
+                    <option value="1">Titipan</option>
+                </select>
+                @error('form.categoryProduct')
+                    <label class="label">
+                        <span class="text-sm label-text-alt text-rose-600">{{ $message }}</span>
+                    </label>
+                @enderror
+            </div>
+            @if ($form->categoryProduct)
+                <div class="w-full form-control">
+                    <label class="label">
+                        <span class="label-text">Kategori Produk</span>
+                    </label>
+                    <select class="select border-2 border-[#272343] focus:outline-none border-opacity-80"
+                    wire:model="form.konsinyor_id">
+                        <option selected>Pilih Kategori</option>
+                        @foreach ($form->allKonsinyors as $konsinyor)
+                            <option value="{{ $konsinyor->id }}">{{ $konsinyor->name }}</option>
+                        @endforeach
+                    </select>
+                    @error('form.categoryProduct')
+                        <label class="label">
+                            <span class="text-sm label-text-alt text-rose-600">{{ $message }}</span>
+                        </label>
+                    @enderror
+                </div>
+            @endif
             <div class="flex items-center justify-end mt-3">
                 <button type="submit"
                     class="px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">

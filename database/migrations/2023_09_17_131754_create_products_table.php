@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('konsinyor_id')->nullable()->constrained();
             $table->string('name');
             $table->float('initial_price', 8, 2);
             $table->float('percentage_profit', 8, 2);

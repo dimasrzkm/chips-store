@@ -15,7 +15,13 @@ class Product extends Model
         'percentage_profit',
         'sale_price',
         'stock',
+        'konsinyor_id',
     ];
+
+    public function konsinyor()
+    {
+        return $this->belongsTo(Konsinyor::class);
+    }
 
     public function expenses()
     {

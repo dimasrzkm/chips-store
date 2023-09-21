@@ -49,7 +49,7 @@
                                     <path clip-rule="evenodd" fill-rule="evenodd"
                                         d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
                                 </svg>
-                            {{ $form->showPerPage }}</label>
+                                {{ $form->showPerPage }}</label>
                             <ul tabindex="0"
                                 class="dropdown-content top-12 z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
                                 <li><a wire:click="setHowMuchPageShow(10)">10</a></li>
@@ -72,6 +72,8 @@
                             <th scope="col" class="px-4 py-3">Persentase Keuntungan</th>
                             <th scope="col" class="px-4 py-3">Harga Jual</th>
                             <th scope="col" class="px-4 py-3">Stok</th>
+                            <th scope="col" class="px-4 py-3">Kategori</th>
+                            <th scope="col" class="px-4 py-3">Penitip Barang</th>
                             <th scope="col" class="px-4 py-3">
                                 <span class="sr-only">Actions</span>
                             </th>
@@ -86,6 +88,10 @@
                                 <td class="px-4 py-3">{{ $product->percentage_profit }}</td>
                                 <td class="px-4 py-3">{{ $product->sale_price }}</td>
                                 <td class="px-4 py-3">{{ $product->stock }}</td>
+                                <td class="px-4 py-3">{{ is_null($product->konsinyor) ? 'Milik sendiri' : 'Titipan' }}
+                                </td>
+                                <td class="px-4 py-3">
+                                    {{ is_null($product->konsinyor) ? '-' : $product->konsinyor->name }}</td>
                                 <td class="flex items-center justify-end px-4 py-3">
                                     @canany(['mengubah produk', 'menghapus produk'])
                                         <div class="dropdown dropdown-left dropdown-end">
@@ -122,7 +128,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="7" class="px-4 py-3 text-center">Tidak ada data di temukan</td>
+                                <td colspan="9" class="px-4 py-3 text-center">Tidak ada data di temukan</td>
                             </tr>
                         @endforelse
                     </tbody>

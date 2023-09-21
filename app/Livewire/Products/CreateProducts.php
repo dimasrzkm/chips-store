@@ -3,6 +3,7 @@
 namespace App\Livewire\Products;
 
 use App\Livewire\Forms\ProductForm;
+use App\Models\Konsinyor;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
@@ -22,6 +23,17 @@ class CreateProducts extends Component
     public function render()
     {
         return view('livewire.products.edit-products');
+    }
+
+    public function updatedFormCategoryProduct($data)
+    {
+        if ($data == '1') {
+            $this->form->categoryProduct = 1;
+            $this->form->allKonsinyors = Konsinyor::all();
+        } else {
+            $this->form->categoryProduct = 0;
+            $this->form->konsinyor_id = null;
+        }
     }
 
     public function updatedFormInitialPrice($data)
@@ -50,5 +62,6 @@ class CreateProducts extends Component
         'form.percentage_profit' => 'persentase keuntungan',
         'form.sale_price' => 'harga jual',
         'form.stock' => 'stok',
+        'form.categoryProduct' => 'kategori produk',
     ];
 }

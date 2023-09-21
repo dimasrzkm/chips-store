@@ -3,6 +3,7 @@
 namespace App\Livewire\Products;
 
 use App\Livewire\Forms\ProductForm;
+use App\Models\Konsinyor;
 use App\Models\Product;
 use Livewire\Component;
 
@@ -45,6 +46,17 @@ class EditProducts extends Component
             $this->form->calculatePrice();
         } else {
             $this->form->sale_price = $this->form->initial_price;
+        }
+    }
+
+    public function updatedFormCategoryProduct($data)
+    {
+        if ($data == '1') {
+            $this->form->categoryProduct = 1;
+            $this->form->allKonsinyors = Konsinyor::all();
+        } else {
+            $this->form->categoryProduct = 0;
+            $this->form->konsinyor_id = null;
         }
     }
 
