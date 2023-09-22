@@ -94,4 +94,12 @@ class ExpenseForm extends Form
             DB::rollBack();
         }
     }
+
+    public function rules()
+    {
+        return [
+            'expense_date' => ['required'],
+            'product_id' => ['required'],
+        ];
+    }
 }

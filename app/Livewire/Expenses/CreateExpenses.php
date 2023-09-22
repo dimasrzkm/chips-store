@@ -20,7 +20,7 @@ class CreateExpenses extends Component
 
         $this->form->user_id = auth()->user()->id;
 
-        $this->form->allProducts = Product::all();
+        $this->form->allProducts = Product::whereDoesntHave('konsinyor')->get();
         $this->form->allStocks = Stock::where('total', '>', 0)->get();
         $this->form->selectedStocks = [
             ['product_id' => '', 'quantity' => 1],
@@ -29,6 +29,7 @@ class CreateExpenses extends Component
 
     public function submit()
     {
+        $this->validate();
         $this->form->create();
 
         return $this->redirectRoute('expenses.index', navigate: true);
@@ -50,4 +51,9 @@ class CreateExpenses extends Component
         unset($this->form->selectedStocks[$index]);
         $this->form->selectedStocks = array_values($this->form->selectedStocks);
     }
+
+    protected $validationAttributes = [
+        'form.expense_date' => 'tanggal pengeluaran',
+        'form.product_id' => 'produk',
+    ];
 }
