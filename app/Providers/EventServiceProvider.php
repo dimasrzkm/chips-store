@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Events\ConsigmentHistory;
 use App\Events\StockHistory;
+use App\Listeners\updateStockProduct;
 use App\Listeners\updateTotalStock;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -22,6 +24,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         StockHistory::class => [
             updateTotalStock::class,
+        ],
+        ConsigmentHistory::class => [
+            updateStockProduct::class,
         ],
     ];
 
