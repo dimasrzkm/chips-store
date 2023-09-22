@@ -14,4 +14,9 @@ class Konsinyor extends Model
         'address',
         'telephone_number',
     ];
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }
