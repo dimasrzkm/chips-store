@@ -110,7 +110,7 @@
         </ul>
     @endcanany
     {{-- Konsinyor atau penitip barang --}}
-    @can('melihat konsinyor')
+    @can('melihat konsinyor', 'melihat catatan penitipan')
         <ul class="px-4 py-0 menu menu-sm lg:menu-md">
             <li></li>
             <li class="flex flex-row items-center gap-4 menu-title">
@@ -136,7 +136,12 @@
                 </span>
                 <span>Penitip Barang</span>
             </li>
-            <li><a href="{{ route('konsinyors.index') }}" wire:navigate>Konsinyor</a></li>
+            @can('melihat konsinyor')
+                <li><a href="{{ route('konsinyors.index') }}" wire:navigate>Konsinyor</a></li>
+            @endcan
+            @can('melihat catatan penitipan')
+                <li><a href="{{ route('consigments.index') }}" wire:navigate>Catatan Penitipan Barang</a></li>
+            @endcan
         </ul>
     @endcan
     {{-- Produk --}}
@@ -202,7 +207,7 @@
         @can('menambah catatan pengeluaran')
             <li><a href="{{ route('expenses.create') }}" wire:navigate>Pengeluaran Bahan Baku</a></li>
         @endcan
-        <li><a href="{{ route('roles.index') }}" wire:navigate>Penitipan Produk</a></li>
+        <li><a href="{{ route('consigments.create') }}" wire:navigate>Penitipan Produk</a></li>
         <li><a href="{{ route('roles.index') }}" wire:navigate>Penjualan Produk</a></li>
     </ul>
     {{-- Laporan --}}
