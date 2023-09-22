@@ -27,4 +27,9 @@ class Product extends Model
     {
         return $this->belongsToMany(Expense::class, 'expenses_detail', 'product_id', 'expense_id')->withPivot('product_name', 'stock_name', 'total_used');
     }
+
+    public function consigments()
+    {
+        return $this->belongsToMany(Consigment::class, 'consigments_detail', 'product_id', 'consigment_id')->withPivot('product_name', 'konsinyor_name', 'total_consigment');
+    }
 }
