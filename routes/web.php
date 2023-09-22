@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Livewire\Consigments\CreateConsigments;
+use App\Livewire\Consigments\ShowConsigments;
 use App\Livewire\Expenses\CreateExpenses;
 use App\Livewire\Expenses\ShowExpenses;
 use App\Livewire\Konsinyors\CreateKonsinyors;
@@ -100,5 +102,9 @@ Route::middleware(['auth'])->group(function () {
     Route::group(['middleware' => ['role:pemilik|bagian gudang']], function () {
         Route::get('expenses', ShowExpenses::class)->name('expenses.index');
         Route::get('expenses/create', CreateExpenses::class)->name('expenses.create');
+
+        Route::get('consigments', ShowConsigments::class)->name('consigments.index');
+        Route::get('consigments/create', CreateConsigments::class)->name('consigments.create');
     });
+
 });
