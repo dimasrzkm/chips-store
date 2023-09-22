@@ -14,7 +14,9 @@ class AssignPermissionSeeder extends Seeder
     {
         Role::findByName('bagian gudang')
             ->givePermissionTo('melihat supplier', 'menambah supplier', 'mengubah supplier', 'menghapus supplier', 'melihat bahan baku', 'menambah bahan baku', 'mengubah bahan baku', 'menghapus bahan baku',
-                'melihat konsinyor', 'melihat produk', 'menambah produk', 'mengubah produk', 'menghapus produk');
+                'melihat konsinyor', 'melihat produk', 'menambah produk', 'mengubah produk', 'menghapus produk',
+                'melihat catatan pengeluaran', 'menambah catatan pengeluaran', 'menghapus catatan pengeluaran',
+                'melihat catatan penitipan', 'menambah catatan penitipan', 'menghapus catatan penitipan');
 
         Role::findByName('kasir')
             ->givePermissionTo('melihat produk');
