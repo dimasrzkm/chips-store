@@ -127,7 +127,7 @@
         </div>
     </div>
 
-    {{-- @can('menghapus bahan baku') --}}
+    @can('menghapus catatan pengeluaran')
     {{-- Modal Delete --}}
     <dialog wire:ignore.self id="my_modal_1" class="modal">
         <form method="dialog" class="modal-box">
@@ -142,6 +142,6 @@
             </div>
         </form>
     </dialog>
-    {{-- @endcan --}}
+    @endcan
 
 </div>
