@@ -80,11 +80,11 @@
             @if ($form->categoryProduct)
                 <div class="w-full form-control">
                     <label class="label">
-                        <span class="label-text">Kategori Produk</span>
+                        <span class="label-text">Penitip Produk</span>
                     </label>
                     <select class="select border-2 border-[#272343] focus:outline-none border-opacity-80"
                     wire:model="form.konsinyor_id">
-                        <option selected>Pilih Kategori</option>
+                        <option selected>Pilih Konsinyor</option>
                         @foreach ($form->allKonsinyors as $konsinyor)
                             <option value="{{ $konsinyor->id }}">{{ $konsinyor->name }}</option>
                         @endforeach
