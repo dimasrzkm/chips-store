@@ -56,4 +56,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Consigment::class);
     }
+
+    public function sellings()
+    {
+        return $this->hasMany(Selling::class);
+    }
 }
