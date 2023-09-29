@@ -62,6 +62,7 @@
                             <th scope="col" class="px-4 py-3">Nama Produk</th>
                             <th scope="col" class="px-4 py-3">Nama Stock</th>
                             <th scope="col" class="px-4 py-3">Total Terpakai</th>
+                            <th scope="col" class="px-4 py-3">Satuan</th>
                             <th scope="col" class="px-4 py-3">
                                 <span class="sr-only">Actions</span>
                             </th>
@@ -85,6 +86,7 @@
                                     @endif
                                     <td class="px-4 py-3">{{ $item->pivot->stock_name }}</td>
                                     <td class="px-4 py-3">{{ $item->pivot->total_used }}</td>
+                                    <td class="px-4 py-3">{{ $item->pivot->unit }}</td>
                                     @if ($i < 1)
                                         <td rowspan="{{ $expense->stocks->count() }}" class="px-4 py-3 ">
                                             @can('menghapus catatan pengeluaran')
@@ -116,7 +118,7 @@
                             @endforeach
                         @empty
                             <tr>
-                                <td colspan="8" class="px-4 py-3 text-center">Tidak ada data di temukan</td>
+                                <td colspan="9" class="px-4 py-3 text-center">Tidak ada data di temukan</td>
                             </tr>
                         @endforelse
                     </tbody>

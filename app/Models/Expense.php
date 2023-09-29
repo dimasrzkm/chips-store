@@ -27,11 +27,11 @@ class Expense extends Model
 
     public function stocks()
     {
-        return $this->belongsToMany(Stock::class, 'expenses_detail', 'expense_id', 'stock_id')->withPivot('product_name', 'stock_name', 'total_used');
+        return $this->belongsToMany(Stock::class, 'expenses_detail', 'expense_id', 'stock_id')->withPivot('product_name', 'stock_name', 'total_used', 'unit');
     }
 
     public function products()
     {
-        return $this->belongsToMany(Product::class, 'expenses_detail', 'expense_id', 'product_id')->withPivot('product_name', 'stock_name', 'total_used');
+        return $this->belongsToMany(Product::class, 'expenses_detail', 'expense_id', 'product_id')->withPivot('product_name', 'stock_name', 'total_used', 'unit');
     }
 }

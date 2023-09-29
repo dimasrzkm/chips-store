@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('product_name');
             $table->string('stock_name');
             $table->float('total_used', 8, 2);
+            $table->string('unit');
         });
     }
 

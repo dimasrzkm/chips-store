@@ -65,6 +65,7 @@ class ExpenseForm extends Form
                         'product_name' => $product->name,
                         'stock_name' => $stock->name,
                         'total_used' => ($stock->total >= $selected['quantity']) ? $selected['quantity'] : '',
+                        'unit' => $stock->unit->name,
                     ],
                 ]);
 
