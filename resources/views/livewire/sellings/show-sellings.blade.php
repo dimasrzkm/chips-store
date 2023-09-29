@@ -80,7 +80,7 @@
                                         <td rowspan="{{ $selling->products->count() }}" class="px-4 py-3">
                                             {{ $selling->user->name }}</td>
                                         <td rowspan="{{ $selling->products->count() }}" class="px-4 py-3">
-                                            {{ $selling->selling_date }}</td>
+                                            {{ $selling->selling_date->format('d/m/Y') }}</td>
                                         <td rowspan="{{ $selling->products->count() }}" class="px-4 py-3">
                                             {{ $selling->transaction_code }}</td>
                                         <td rowspan="{{ $selling->products->count() }}" class="px-4 py-3">

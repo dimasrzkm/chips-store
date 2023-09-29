@@ -19,6 +19,10 @@ class Selling extends Model
         'nominal_return',
     ];
 
+    protected $casts = [
+        'selling_date' => 'date',
+    ];
+
     public function products()
     {
         return $this->belongsToMany(Product::class, 'sellings_detail', 'selling_id', 'product_id')->withPivot('product_name', 'quantity', 'sub_total', 'purchase_unit');

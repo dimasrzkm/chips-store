@@ -77,7 +77,7 @@
                                         <td rowspan="{{ $expense->stocks->count() }}" class="px-4 py-3">
                                             {{ $expense->user->name }}</td>
                                         <td rowspan="{{ $expense->stocks->count() }}" class="px-4 py-3">
-                                            {{ $expense->expense_date }}</td>
+                                            {{ $expense->expense_date->format('d/m/Y') }}</td>
                                         <td rowspan="{{ $expense->stocks->count() }}" class="px-4 py-3">
                                             {{ $expense->transaction_code }}</td>
                                         <td rowspan="{{ $expense->stocks->count() }}" class="px-4 py-3">

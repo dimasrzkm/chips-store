@@ -73,7 +73,7 @@
                                 <td class="px-4 py-3">{{ $index + 1 }}</td>
                                 <td class="px-4 py-3">{{ $stock->name }}</td>
                                 <td class="px-4 py-3">{{ $stock->supplier->name }}</td>
-                                <td class="px-4 py-3">{{ $stock->purchase_date }}</td>
+                                <td class="px-4 py-3">{{ $stock->purchase_date->format('d/m/Y') }}</td>
                                 <td class="px-4 py-3">{{ $stock->price }}</td>
                                 <td class="px-4 py-3">{{ $stock->total }}</td>
                                 <td class="px-4 py-3">{{ $stock->unit->name }}</td>

@@ -77,7 +77,7 @@
                                         <td rowspan="{{ $consigment->products->count() }}" class="px-4 py-3">
                                             {{ $consigment->user->name }}</td>
                                         <td rowspan="{{ $consigment->products->count() }}" class="px-4 py-3">
-                                            {{ $consigment->consigment_date }}</td>
+                                            {{ $consigment->consigment_date->format('d/m/Y') }}</td>
                                         <td rowspan="{{ $consigment->products->count() }}" class="px-4 py-3">
                                             {{ $consigment->transaction_code }}</td>
                                     @endif

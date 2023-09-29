@@ -16,6 +16,7 @@ class EditStocks extends Component
     public function mount(Stock $stock)
     {
         $this->form->setPost($stock);
+        // dd($this->form->purchase_date);
     }
 
     public function submit()

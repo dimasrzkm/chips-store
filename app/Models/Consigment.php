@@ -16,6 +16,10 @@ class Consigment extends Model
         'consigment_date',
     ];
 
+    protected $casts = [
+        'consigment_date' => 'date',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);

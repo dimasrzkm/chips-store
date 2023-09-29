@@ -35,7 +35,7 @@ class StocksForm extends Form
         $this->supplier_id = $stock->supplier_id;
         $this->unit_id = $stock->unit_id;
         $this->name = $stock->name;
-        $this->purchase_date = $stock->purchase_date;
+        $this->purchase_date = $stock->purchase_date->format('Y-m-d');
         $this->price = $stock->price;
         $this->total = $stock->total;
         $this->modeInput = 'ubah';

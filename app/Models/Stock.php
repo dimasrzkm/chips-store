@@ -18,6 +18,10 @@ class Stock extends Model
         'total',
     ];
 
+    protected $casts = [
+        'purchase_date' => 'date',
+    ];
+
     public function unit()
     {
         return $this->belongsTo(Unit::class);
