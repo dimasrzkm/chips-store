@@ -101,6 +101,34 @@ class PermissionSeeder extends Seeder
                 'name' => 'menghapus catatan penitipan',
                 'guard_name' => 'web',
             ],
+            [
+                'name' => 'melihat unit',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'menambah unit',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'mengubah unit',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'menghapus unit',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'melihat penjualan',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'menambah penjualan',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'menghapus penjualan',
+                'guard_name' => 'web',
+            ],
         ];
         foreach ($permissions as $permission) {
             Permission::create([
