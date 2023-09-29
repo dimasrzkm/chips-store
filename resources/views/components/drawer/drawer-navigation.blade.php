@@ -180,6 +180,39 @@
                 @endcan
         </ul>
     @endcanany
+    {{-- Penjualan --}}
+    @can('melihat penjualan')
+        <ul class="px-4 py-0 menu menu-sm lg:menu-md">
+            <li></li>
+                <li class="flex flex-row items-center gap-4 menu-title">
+                    <span class="text-base-content">
+                        <svg width="24" height="24" viewBox="0 0 512 512" version="1.1"
+                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000">
+
+                            <g id="SVGRepo_bgCarrier" stroke-width="0" />
+
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+
+                            <g id="SVGRepo_iconCarrier">
+                                <title>product</title>
+                                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <g id="icon" fill="#000000" transform="translate(64.000000, 34.346667)">
+                                        <path
+                                            d="M192,7.10542736e-15 L384,110.851252 L384,332.553755 L192,443.405007 L1.42108547e-14,332.553755 L1.42108547e-14,110.851252 L192,7.10542736e-15 Z M127.999,206.918 L128,357.189 L170.666667,381.824 L170.666667,231.552 L127.999,206.918 Z M42.6666667,157.653333 L42.6666667,307.920144 L85.333,332.555 L85.333,182.286 L42.6666667,157.653333 Z M275.991,97.759 L150.413,170.595 L192,194.605531 L317.866667,121.936377 L275.991,97.759 Z M192,49.267223 L66.1333333,121.936377 L107.795,145.989 L233.374,73.154 L192,49.267223 Z"
+                                            id="Combined-Shape"> </path>
+                                    </g>
+                                </g>
+                            </g>
+
+                        </svg>
+                    </span>
+                    <span>Data Penjualan</span>
+                </li>
+                {{-- @can('melihat catatan pengeluaran') --}}
+                    <li><a href="{{ route('sellings.index') }}" wire:navigate>Penjualan</a></li>
+                {{-- @endcan --}}
+        </ul>
+    @endcan
     {{-- Transaksi --}}
     <ul class="px-4 py-0 menu menu-sm lg:menu-md">
         <li></li>
@@ -207,8 +240,12 @@
         @can('menambah catatan pengeluaran')
             <li><a href="{{ route('expenses.create') }}" wire:navigate>Pengeluaran Bahan Baku</a></li>
         @endcan
-        <li><a href="{{ route('consigments.create') }}" wire:navigate>Penitipan Produk</a></li>
-        <li><a href="{{ route('roles.index') }}" wire:navigate>Penjualan Produk</a></li>
+        @can('menambah catatan penitipan')
+            <li><a href="{{ route('consigments.create') }}" wire:navigate>Penitipan Produk</a></li>
+        @endcan
+        @can('menambah penjualan')
+            <li><a href="{{ route('sellings.create') }}" wire:navigate>Penjualan Produk</a></li>
+        @endcan
     </ul>
     {{-- Laporan --}}
     <ul class="px-4 py-0 menu menu-sm lg:menu-md">
@@ -237,5 +274,32 @@
         <li><a href="{{ route('roles.index') }}" wire:navigate>Stok Bahan Baku</a></li>
         <li><a href="{{ route('roles.index') }}" wire:navigate>Cetakan Pelunasan Produk Titipan</a></li>
     </ul>
+    {{-- Lainnya --}}
+    @can('melihat unit')
+        <ul class="px-4 py-0 menu menu-sm lg:menu-md">
+            <li></li>
+            <li class="flex flex-row items-center gap-4 menu-title">
+                <span class="text-base-content">
+                    <svg fill="#000000" width="23" height="23" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+
+                        <g id="SVGRepo_bgCarrier" stroke-width="0" />
+
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+
+                        <g id="SVGRepo_iconCarrier">
+
+                            <path
+                                d="m20 8-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM9 19H7v-9h2v9zm4 0h-2v-6h2v6zm4 0h-2v-3h2v3zM14 9h-1V4l5 5h-4z" />
+
+                        </g>
+
+                    </svg>
+                </span>
+                <span>Lainnya</span>
+            </li>
+            <li><a href="{{ route('units.index') }}" wire:navigate>Satuan</a></li>
+        </ul>
+    @endcan
     <div class="sticky bottom-0 flex h-20 pointer-events-none from-base-200 bg-gradient-to-t to-transparent" />
 </aside>
