@@ -76,6 +76,23 @@
                     @enderror
                 </label>
             </div>
+            <div class="w-full form-control">
+                <label class="label">
+                    <span class="label-text">Satuan</span>
+                </label>
+                <select class="select border-2 border-[#272343] focus:outline-none border-opacity-80"
+                    wire:model="form.unit_id">
+                    <option selected>Pilih Satuan</option>
+                    @foreach ($units as $unit)
+                        <option value="{{ $unit->id }}">{{ $unit->name }}</option>
+                    @endforeach
+                </select>
+                @error('form.unit_id')
+                    <label class="label">
+                        <span class="text-sm label-text-alt text-rose-600">{{ $message }}</span>
+                    </label>
+                @enderror
+            </div>
             <div class="flex items-center justify-end mt-3">
                 <button type="submit"
                     class="px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">

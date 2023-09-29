@@ -35,9 +35,9 @@ class ShowStocks extends Component
     #[Title('Data Bahan Baku')]
     public function render()
     {
-        $stocks = Stock::with('supplier')->orderby('purchase_date', 'desc')->paginate($this->form->showPerPage, pageName: 'stock-page');
+        $stocks = Stock::with(['supplier', 'unit'])->orderby('purchase_date', 'desc')->paginate($this->form->showPerPage, pageName: 'stock-page');
         if ($this->form->search !== '') {
-            $stocks = Stock::with('supplier')
+            $stocks = Stock::with(['supplier', 'unit'])
                 ->whereHas('supplier', function (Builder $query) {
                     return $query->where('name', 'like', '%'.$this->form->search.'%');
                 })

@@ -19,6 +19,8 @@ class StocksForm extends Form
 
     public $supplier_id;
 
+    public $unit_id;
+
     public $name;
 
     public $purchase_date;
@@ -31,6 +33,7 @@ class StocksForm extends Form
     {
         $this->stock = $stock;
         $this->supplier_id = $stock->supplier_id;
+        $this->unit_id = $stock->unit_id;
         $this->name = $stock->name;
         $this->purchase_date = $stock->purchase_date;
         $this->price = $stock->price;
@@ -41,7 +44,7 @@ class StocksForm extends Form
     public function create()
     {
         try {
-            Stock::create($this->only(['supplier_id', 'name', 'purchase_date', 'price', 'total']));
+            Stock::create($this->only(['supplier_id', 'unit_id', 'name', 'purchase_date', 'price', 'total']));
             session()->flash('status', 'Bahan baku berhasil di tambah');
         } catch (\Exception $e) {
             return back()->with('status', $e->getMessage());
@@ -51,7 +54,7 @@ class StocksForm extends Form
     public function update()
     {
         try {
-            $this->stock->update($this->only(['supplier_id', 'name', 'purchase_date', 'price', 'total']));
+            $this->stock->update($this->only(['supplier_id', 'unit_id', 'name', 'purchase_date', 'price', 'total']));
             $this->resetField();
             session()->flash('status', 'Bahan baku berhasil di ubah');
         } catch (\Exception $e) {
@@ -74,6 +77,7 @@ class StocksForm extends Form
     {
         return [
             'supplier_id' => ['required'],
+            'unit_id' => ['required'],
             'name' => ['required'],
             'purchase_date' => ['required', 'date'],
             'price' => ['required', 'numeric'],
@@ -83,6 +87,6 @@ class StocksForm extends Form
 
     protected function resetField()
     {
-        return $this->reset('supplier_id', 'name', 'purchase_date', 'price', 'total', 'stock', 'modeInput');
+        return $this->reset('supplier_id', 'unit_id', 'name', 'purchase_date', 'price', 'total', 'stock', 'modeInput');
     }
 }

@@ -61,6 +61,7 @@
                             <th scope="col" class="px-4 py-3">Tanggal Pengadaan</th>
                             <th scope="col" class="px-4 py-3">Harga</th>
                             <th scope="col" class="px-4 py-3">Jumlah</th>
+                            <th scope="col" class="px-4 py-3">Satuan</th>
                             <th scope="col" class="px-4 py-3">
                                 <span class="sr-only">Actions</span>
                             </th>
@@ -75,6 +76,7 @@
                                 <td class="px-4 py-3">{{ $stock->purchase_date }}</td>
                                 <td class="px-4 py-3">{{ $stock->price }}</td>
                                 <td class="px-4 py-3">{{ $stock->total }}</td>
+                                <td class="px-4 py-3">{{ $stock->unit->name }}</td>
                                 <td class="flex items-center justify-end px-4 py-3">
                                     @canany(['mengubah bahan baku', 'menghapus bahan baku'])
                                         <div class="dropdown dropdown-left dropdown-end">
@@ -111,7 +113,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="7" class="px-4 py-3 text-center">Tidak ada data di temukan</td>
+                                <td colspan="8" class="px-4 py-3 text-center">Tidak ada data di temukan</td>
                             </tr>
                         @endforelse
                     </tbody>

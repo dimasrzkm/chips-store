@@ -11,11 +11,17 @@ class Stock extends Model
 
     protected $fillable = [
         'supplier_id',
+        'unit_id',
         'name',
         'purchase_date',
         'price',
         'total',
     ];
+
+    public function unit()
+    {
+        return $this->belongsTo(Unit::class);
+    }
 
     public function supplier()
     {

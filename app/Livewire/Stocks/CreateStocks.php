@@ -4,6 +4,7 @@ namespace App\Livewire\Stocks;
 
 use App\Livewire\Forms\StocksForm;
 use App\Models\Supplier;
+use App\Models\Unit;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
@@ -24,11 +25,13 @@ class CreateStocks extends Component
     {
         return view('livewire.stocks.edit-stocks', [
             'suppliers' => Supplier::all(),
+            'units' => Unit::all(),
         ]);
     }
 
     protected $validationAttributes = [
         'form.supplier_id' => 'supplier',
+        'form.unit_id' => 'satuan',
         'form.name' => 'nama',
         'form.purchase_date' => 'tanggal_pengadaan',
         'form.price' => 'harga',
