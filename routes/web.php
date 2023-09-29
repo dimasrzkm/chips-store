@@ -25,12 +25,17 @@ use App\Livewire\RolesPermissions\EditApplyPermissions;
 use App\Livewire\RolesPermissions\EditApplyRoles;
 use App\Livewire\RolesPermissions\ShowApplyPermission;
 use App\Livewire\RolesPermissions\ShowApplyRoles;
+use App\Livewire\Sellings\CreateSellings;
+use App\Livewire\Sellings\ShowSellings;
 use App\Livewire\Stocks\CreateStocks;
 use App\Livewire\Stocks\EditStocks;
 use App\Livewire\Stocks\ShowStocks;
 use App\Livewire\Suppliers\CreateSupplier;
 use App\Livewire\Suppliers\EditSupplier;
 use App\Livewire\Suppliers\ShowSuppliers;
+use App\Livewire\Units\CreateUnits;
+use App\Livewire\Units\EditUnits;
+use App\Livewire\Units\ShowUnits;
 use App\Livewire\Users\CreateUsers;
 use App\Livewire\Users\EditUsers;
 use App\Livewire\Users\ShowUsers;
@@ -105,6 +110,14 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('consigments', ShowConsigments::class)->name('consigments.index');
         Route::get('consigments/create', CreateConsigments::class)->name('consigments.create');
+
+        Route::get('units', ShowUnits::class)->name('units.index');
+        Route::get('units/create', CreateUnits::class)->name('units.create');
+        Route::get('units/{unit:name}/edit', EditUnits::class)->name('units.edit');
     });
 
+    Route::group(['middleware' => ['role:pemilik|kasir']], function () {
+        Route::get('sellings', ShowSellings::class)->name('sellings.index');
+        Route::get('sellings/create', CreateSellings::class)->name('sellings.create');
+    });
 });
