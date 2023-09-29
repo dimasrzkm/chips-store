@@ -69,7 +69,7 @@
                             <option selected>Pilih Bahan</option>
                             @foreach ($form->allStocks as $stock)
                                 <option value="{{ $stock->id }}">
-                                    {{ "$stock->name - ($stock->total kg / $stock->purchase_date)" }}
+                                    {{ "$stock->name - ($stock->total ". $stock->unit->name ."/ $stock->purchase_date)" }}
                                 </option>
                             @endforeach
                         </select>
