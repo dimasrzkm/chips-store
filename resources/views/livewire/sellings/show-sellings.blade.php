@@ -84,11 +84,11 @@
                                         <td rowspan="{{ $selling->products->count() }}" class="px-4 py-3">
                                             {{ $selling->transaction_code }}</td>
                                         <td rowspan="{{ $selling->products->count() }}" class="px-4 py-3">
-                                            {{ $selling->total }}</td>
+                                            Rp. {{ number_format($selling->total, 0, ',', '.') }}</td>
                                         <td rowspan="{{ $selling->products->count() }}" class="px-4 py-3">
-                                            {{ $selling->nominal_payment }}</td>
+                                            Rp. {{ number_format($selling->nominal_payment, 0, ',', '.') }}</td>
                                         <td rowspan="{{ $selling->products->count() }}" class="px-4 py-3">
-                                            {{ $selling->nominal_return }}</td>
+                                            Rp. {{ number_format($selling->nominal_return, 0, ',', '.') }}</td>
                                     @endif
                                     <td class="px-4 py-3">{{ $item->pivot->product_name }}</td>
                                     <td class="px-4 py-3">{{ $item->pivot->quantity }}</td>

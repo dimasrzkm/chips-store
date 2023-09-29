@@ -85,9 +85,9 @@
                             <tr class="border-b dark:border-gray-700">
                                 <td class="px-4 py-3">{{ $index + 1 }}</td>
                                 <td class="px-4 py-3">{{ $product->name }}</td>
-                                <td class="px-4 py-3">{{ $product->initial_price }}</td>
-                                <td class="px-4 py-3">{{ $product->percentage_profit }}</td>
-                                <td class="px-4 py-3">{{ $product->sale_price }}</td>
+                                <td class="px-4 py-3">Rp. {{ number_format($product->initial_price, 0, ',', '.') }}</td>
+                                <td class="px-4 py-3">{{ "$product->percentage_profit%" }}</td>
+                                <td class="px-4 py-3">Rp. {{ number_format($product->sale_price, 0, ',', '.') }}</td>
                                 <td class="px-4 py-3">{{ $product->stock }}</td>
                                 <td class="px-4 py-3">{{ $product->unit->name }}</td>
                                 <td class="px-4 py-3">{{ is_null($product->konsinyor) ? 'Milik sendiri' : 'Titipan' }}
