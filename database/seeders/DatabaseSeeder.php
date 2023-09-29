@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             AssignRoleSeeder::class,
             KonsinyorSeeder::class,
+            UnitSeeder::class,
             // StockSeeder::class,
         ]);
     }
