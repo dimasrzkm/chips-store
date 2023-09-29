@@ -16,7 +16,13 @@ class Product extends Model
         'sale_price',
         'stock',
         'konsinyor_id',
+        'unit_id',
     ];
+
+    public function unit()
+    {
+        return $this->belongsTo(Unit::class);
+    }
 
     public function konsinyor()
     {
@@ -31,5 +37,10 @@ class Product extends Model
     public function consigments()
     {
         return $this->belongsToMany(Consigment::class, 'consigments_detail', 'product_id', 'consigment_id')->withPivot('product_name', 'konsinyor_name', 'total_consigment');
+    }
+
+    public function sellings()
+    {
+        return $this->belongsToMany(Selling::class, 'sellings_detail', 'product_id', 'selling_id')->withPivot('product_name', 'quantity', 'sub_total', 'purchase_unit');
     }
 }

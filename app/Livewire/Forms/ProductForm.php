@@ -23,6 +23,8 @@ class ProductForm extends Form
 
     public $konsinyor_id;
 
+    public $unit_id;
+
     #[Url(as: 'search', history: true)]
     public $search = '';
 
@@ -42,6 +44,7 @@ class ProductForm extends Form
         $this->percentage_profit = $product->percentage_profit;
         $this->sale_price = $product->sale_price;
         $this->stock = $product->stock;
+        $this->unit_id = $product->unit_id;
         $this->modeInput = 'ubah';
 
         $this->categoryProduct = 0;
@@ -91,7 +94,7 @@ class ProductForm extends Form
 
     public function attributes()
     {
-        return ['name', 'initial_price', 'percentage_profit', 'sale_price', 'stock', 'konsinyor_id'];
+        return ['name', 'initial_price', 'percentage_profit', 'sale_price', 'stock', 'konsinyor_id', 'unit_id'];
     }
 
     protected function resetField()
@@ -108,6 +111,7 @@ class ProductForm extends Form
             'sale_price' => ['required', 'numeric'],
             'stock' => ['required', 'numeric'],
             'categoryProduct' => ['required'],
+            'unit_id' => ['required'],
         ];
 
     }

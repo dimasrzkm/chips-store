@@ -35,7 +35,7 @@ class ShowProducts extends Component
     #[Title('Data Produk')]
     public function render()
     {
-        $products = Product::with('konsinyor')->orderBy('name')->paginate($this->form->showPerPage, pageName: 'product-page');
+        $products = Product::with(['konsinyor', 'unit'])->orderBy('name')->paginate($this->form->showPerPage, pageName: 'product-page');
         if ($this->form->search != '') {
             $products = Product::where('name', 'like', '%'.$this->form->search.'%')
                 ->orWhereHas('konsinyor', function (Builder $query) {

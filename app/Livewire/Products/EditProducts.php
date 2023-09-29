@@ -5,6 +5,7 @@ namespace App\Livewire\Products;
 use App\Livewire\Forms\ProductForm;
 use App\Models\Konsinyor;
 use App\Models\Product;
+use App\Models\Unit;
 use Livewire\Component;
 
 class EditProducts extends Component
@@ -26,7 +27,7 @@ class EditProducts extends Component
 
     public function render()
     {
-        return view('livewire.products.edit-products');
+        return view('livewire.products.edit-products', ['units' => Unit::all()]);
     }
 
     public function updatedFormInitialPrice($data)
@@ -66,5 +67,7 @@ class EditProducts extends Component
         'form.percentage_profit' => 'persentase keuntungan',
         'form.sale_price' => 'harga jual',
         'form.stock' => 'stok',
+        'form.categoryProduct' => 'kategori produk',
+        'form.unit_id' => 'satuan produk',
     ];
 }

@@ -4,6 +4,7 @@ namespace App\Livewire\Products;
 
 use App\Livewire\Forms\ProductForm;
 use App\Models\Konsinyor;
+use App\Models\Unit;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
@@ -22,7 +23,7 @@ class CreateProducts extends Component
     #[Title('Tambah Data Produk')]
     public function render()
     {
-        return view('livewire.products.edit-products');
+        return view('livewire.products.edit-products', ['units' => Unit::all()]);
     }
 
     public function updatedFormCategoryProduct($data)
@@ -63,5 +64,6 @@ class CreateProducts extends Component
         'form.sale_price' => 'harga jual',
         'form.stock' => 'stok',
         'form.categoryProduct' => 'kategori produk',
+        'form.unit_id' => 'satuan produk',
     ];
 }

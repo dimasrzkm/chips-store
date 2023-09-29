@@ -61,6 +61,23 @@
             </div>
             <p wire:dirty wire:target="form.initial_price" class="text-xs">Menghitung...</p>
             <p wire:dirty wire:target="form.percentage_profit" class="text-xs">Menghitung...</p>
+            <div class="form-control">
+                <label class="label">
+                    <span class="label-text">Satuan Produk</span>
+                </label>
+                <select class="select border-2 border-[#272343] focus:outline-none border-opacity-80"
+                    wire:model="form.unit_id">
+                    <option selected>Pilih Satuan</option>
+                    @foreach ($units as $unit)
+                        <option value="{{ $unit->id }}">{{ $unit->name }}</option>
+                    @endforeach
+                </select>
+                <label class="label">
+                    @error('form.unit_id')
+                        <span class="text-sm label-text-alt text-rose-600">{{ $message }}</span>
+                    @enderror
+                </label>
+            </div>
             <div class="w-full form-control">
                 <label class="label">
                     <span class="label-text">Kategori Produk</span>

@@ -72,6 +72,7 @@
                             <th scope="col" class="px-4 py-3">Persentase Keuntungan</th>
                             <th scope="col" class="px-4 py-3">Harga Jual</th>
                             <th scope="col" class="px-4 py-3">Stok</th>
+                            <th scope="col" class="px-4 py-3">Satuan</th>
                             <th scope="col" class="px-4 py-3">Kategori</th>
                             <th scope="col" class="px-4 py-3">Penitip Barang</th>
                             <th scope="col" class="px-4 py-3">
@@ -88,6 +89,7 @@
                                 <td class="px-4 py-3">{{ $product->percentage_profit }}</td>
                                 <td class="px-4 py-3">{{ $product->sale_price }}</td>
                                 <td class="px-4 py-3">{{ $product->stock }}</td>
+                                <td class="px-4 py-3">{{ $product->unit->name }}</td>
                                 <td class="px-4 py-3">{{ is_null($product->konsinyor) ? 'Milik sendiri' : 'Titipan' }}
                                 </td>
                                 <td class="px-4 py-3">
@@ -128,7 +130,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="9" class="px-4 py-3 text-center">Tidak ada data di temukan</td>
+                                <td colspan="10" class="px-4 py-3 text-center">Tidak ada data di temukan</td>
                             </tr>
                         @endforelse
                     </tbody>
