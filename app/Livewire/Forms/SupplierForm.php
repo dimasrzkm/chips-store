@@ -68,7 +68,7 @@ class SupplierForm extends Form
     {
         return [
             'name' => ['required'],
-            'address' => ['required', 'regex:/^[a-zA-Z0-9\s]*$/'],
+            'address' => ['required', 'regex:/^[.,a-zA-Z0-9\s]*$/'],
             'telephone_number' => ['required', 'numeric', 'min_digits:12', 'max_digits:14'],
         ];
     }
