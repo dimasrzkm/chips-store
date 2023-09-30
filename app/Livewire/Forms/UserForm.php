@@ -96,7 +96,7 @@ class UserForm extends Form
             'username' => ['sometimes'],
             'password' => ['sometimes'],
             'address' => ['regex:/^[a-zA-Z0-9\s]*$/'],
-            'telephone_number' => ['required', 'numeric'],
+            'telephone_number' => ['required', 'numeric', 'min_digits:12', 'max_digits:14'],
         ];
     }
 }
