@@ -1,45 +1,48 @@
 <?php
 
-use App\Http\Controllers\LoginController;
-use App\Livewire\Consigments\CreateConsigments;
-use App\Livewire\Consigments\ShowConsigments;
-use App\Livewire\Expenses\CreateExpenses;
-use App\Livewire\Expenses\ShowExpenses;
-use App\Livewire\Konsinyors\CreateKonsinyors;
-use App\Livewire\Konsinyors\EditKonsinyors;
-use App\Livewire\Konsinyors\ShowKonsinyors;
 use App\Livewire\Pages\Admin;
-use App\Livewire\Permissions\CreatePermissions;
-use App\Livewire\Permissions\EditPermissions;
-use App\Livewire\Permissions\ShowPermissions;
-use App\Livewire\Products\CreateProducts;
-use App\Livewire\Products\EditProducts;
-use App\Livewire\Products\ShowProducts;
-use App\Livewire\Profile\ProfileInformation;
-use App\Livewire\Roles\CreateRoles;
 use App\Livewire\Roles\EditRoles;
 use App\Livewire\Roles\ShowRoles;
-use App\Livewire\RolesPermissions\ApplyPermissions;
-use App\Livewire\RolesPermissions\ApplyRoles;
-use App\Livewire\RolesPermissions\EditApplyPermissions;
-use App\Livewire\RolesPermissions\EditApplyRoles;
-use App\Livewire\RolesPermissions\ShowApplyPermission;
-use App\Livewire\RolesPermissions\ShowApplyRoles;
-use App\Livewire\Sellings\CreateSellings;
-use App\Livewire\Sellings\ShowSellings;
-use App\Livewire\Stocks\CreateStocks;
-use App\Livewire\Stocks\EditStocks;
-use App\Livewire\Stocks\ShowStocks;
-use App\Livewire\Suppliers\CreateSupplier;
-use App\Livewire\Suppliers\EditSupplier;
-use App\Livewire\Suppliers\ShowSuppliers;
-use App\Livewire\Units\CreateUnits;
 use App\Livewire\Units\EditUnits;
 use App\Livewire\Units\ShowUnits;
-use App\Livewire\Users\CreateUsers;
 use App\Livewire\Users\EditUsers;
 use App\Livewire\Users\ShowUsers;
+use App\Livewire\Roles\CreateRoles;
+use App\Livewire\Stocks\EditStocks;
+use App\Livewire\Stocks\ShowStocks;
+use App\Livewire\Units\CreateUnits;
+use App\Livewire\Users\CreateUsers;
+use App\Livewire\Stocks\CreateStocks;
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Expenses\ShowExpenses;
+use App\Livewire\Products\EditProducts;
+use App\Livewire\Products\ShowProducts;
+use App\Livewire\Sellings\ShowSellings;
+use App\Livewire\Suppliers\EditSupplier;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ReportController;
+use App\Livewire\Expenses\CreateExpenses;
+use App\Livewire\Products\CreateProducts;
+use App\Livewire\Sellings\CreateSellings;
+use App\Livewire\Suppliers\ShowSuppliers;
+use App\Livewire\Suppliers\CreateSupplier;
+use App\Livewire\Konsinyors\EditKonsinyors;
+use App\Livewire\Konsinyors\ShowKonsinyors;
+use App\Livewire\Profile\ProfileInformation;
+use App\Livewire\Consigments\ShowConsigments;
+use App\Livewire\Konsinyors\CreateKonsinyors;
+use App\Livewire\Permissions\EditPermissions;
+use App\Livewire\Permissions\ShowPermissions;
+use App\Livewire\ReportsSellingsShowSellings;
+use App\Livewire\RolesPermissions\ApplyRoles;
+use App\Livewire\Consigments\CreateConsigments;
+use App\Livewire\Permissions\CreatePermissions;
+use App\Livewire\RolesPermissions\EditApplyRoles;
+use App\Livewire\RolesPermissions\ShowApplyRoles;
+use App\Livewire\RolesPermissions\ApplyPermissions;
+use App\Livewire\Reports\Sellings\ShowReportSellings;
+use App\Livewire\RolesPermissions\ShowApplyPermission;
+use App\Livewire\RolesPermissions\EditApplyPermissions;
 
 Route::middleware(['guest'])->group(function () {
     Route::get('login', [LoginController::class, 'index'])->name('login');
@@ -119,5 +122,9 @@ Route::middleware(['auth'])->group(function () {
     Route::group(['middleware' => ['role:pemilik|kasir']], function () {
         Route::get('sellings', ShowSellings::class)->name('sellings.index');
         Route::get('sellings/create', CreateSellings::class)->name('sellings.create');
+    });
+
+    Route::prefix('reports')->group(function () {
+        Route::get('sellings', ShowReportSellings::class)->name('reports.sellings.index');
     });
 });
