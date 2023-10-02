@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('name');
             $table->date('purchase_date');
             $table->float('price', 8, 2);
-            $table->float('total');
+            $table->float('initial_stock', 8, 2);
+            $table->float('remaining_stock', 8, 2);
             $table->timestamps();
         });
     }

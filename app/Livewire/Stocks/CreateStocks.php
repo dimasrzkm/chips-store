@@ -35,6 +35,6 @@ class CreateStocks extends Component
         'form.name' => 'nama',
         'form.purchase_date' => 'tanggal_pengadaan',
         'form.price' => 'harga',
-        'form.total' => 'jumlah',
+        'form.initial_stock' => 'jumlah',
     ];
 }

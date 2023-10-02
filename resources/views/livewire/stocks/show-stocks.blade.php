@@ -59,8 +59,9 @@
                             <th scope="col" class="px-4 py-3">Bahan Baku</th>
                             <th scope="col" class="px-4 py-3">Supplier</th>
                             <th scope="col" class="px-4 py-3">Tanggal Pengadaan</th>
+                            <th scope="col" class="px-4 py-3">Stok Awal</th>
                             <th scope="col" class="px-4 py-3">Harga</th>
-                            <th scope="col" class="px-4 py-3">Jumlah</th>
+                            <th scope="col" class="px-4 py-3">Stock Tersisa</th>
                             <th scope="col" class="px-4 py-3">Satuan</th>
                             <th scope="col" class="px-4 py-3">
                                 <span class="sr-only">Actions</span>
@@ -74,8 +75,9 @@
                                 <td class="px-4 py-3">{{ $stock->name }}</td>
                                 <td class="px-4 py-3">{{ $stock->supplier->name }}</td>
                                 <td class="px-4 py-3">{{ $stock->purchase_date->format('d/m/Y') }}</td>
+                                <td class="px-4 py-3">{{ $stock->initial_stock }}</td>
                                 <td class="px-4 py-3">Rp. {{ number_format($stock->price, 0, ',', '.') }}</td>
-                                <td class="px-4 py-3">{{ $stock->total }}</td>
+                                <td class="px-4 py-3">{{ $stock->remaining_stock }}</td>
                                 <td class="px-4 py-3">{{ $stock->unit->name }}</td>
                                 <td class="flex items-center justify-end px-4 py-3">
                                     @canany(['mengubah bahan baku', 'menghapus bahan baku'])
@@ -113,7 +115,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="8" class="px-4 py-3 text-center">Tidak ada data di temukan</td>
+                                <td colspan="9" class="px-4 py-3 text-center">Tidak ada data di temukan</td>
                             </tr>
                         @endforelse
                     </tbody>

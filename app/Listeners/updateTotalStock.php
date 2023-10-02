@@ -30,8 +30,8 @@ class updateTotalStock implements ShouldQueue
             if (strtolower($stock->name) == 'pisang') {
                 $this->quantityForProduct += $data['quantity'];
             }
-            $stock->total = ($event->modeEventStock == 'hapus') ? $stock->total + $data['quantity'] : $stock->total - $data['quantity'];
-            $stock->update(['total']);
+            $stock->remaining_stock = ($event->modeEventStock == 'hapus') ? $stock->remaining_stock + $data['quantity'] : $stock->remaining_stock - $data['quantity'];
+            $stock->update(['remaining_stock']);
         }
 
         $product = Product::find($event->productId);

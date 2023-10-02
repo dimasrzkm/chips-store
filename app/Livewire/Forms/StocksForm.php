@@ -27,7 +27,11 @@ class StocksForm extends Form
 
     public $price;
 
-    public $total;
+    // public $total;
+
+    public $initial_stock;
+
+    public $remaining_stock;
 
     public function setPost(Stock $stock)
     {
@@ -37,14 +41,20 @@ class StocksForm extends Form
         $this->name = $stock->name;
         $this->purchase_date = $stock->purchase_date->format('Y-m-d');
         $this->price = $stock->price;
-        $this->total = $stock->total;
+
+        // $this->total = $stock->total;
+
+        $this->initial_stock = $stock->initial_stock;
+        $this->remaining_stock = $stock->remaining_stock;
+
         $this->modeInput = 'ubah';
     }
 
     public function create()
     {
         try {
-            Stock::create($this->only(['supplier_id', 'unit_id', 'name', 'purchase_date', 'price', 'total']));
+            $this->remaining_stock = $this->initial_stock;
+            Stock::create($this->only(['supplier_id', 'unit_id', 'name', 'purchase_date', 'price', 'initial_stock', 'remaining_stock']));
             session()->flash('status', 'Bahan baku berhasil di tambah');
         } catch (\Exception $e) {
             return back()->with('status', $e->getMessage());
@@ -54,7 +64,7 @@ class StocksForm extends Form
     public function update()
     {
         try {
-            $this->stock->update($this->only(['supplier_id', 'unit_id', 'name', 'purchase_date', 'price', 'total']));
+            $this->stock->update($this->only(['supplier_id', 'unit_id', 'name', 'purchase_date', 'price', 'initial_stock', 'remaining_stock']));
             $this->resetField();
             session()->flash('status', 'Bahan baku berhasil di ubah');
         } catch (\Exception $e) {
@@ -81,12 +91,12 @@ class StocksForm extends Form
             'name' => ['required'],
             'purchase_date' => ['required', 'date'],
             'price' => ['required', 'numeric'],
-            'total' => ['required', 'numeric'],
+            'initial_stock' => ['required', 'numeric'],
         ];
     }
 
     protected function resetField()
     {
-        return $this->reset('supplier_id', 'unit_id', 'name', 'purchase_date', 'price', 'total', 'stock', 'modeInput');
+        return $this->reset('supplier_id', 'unit_id', 'name', 'purchase_date', 'price', 'initial_stock', 'stock', 'modeInput');
     }
 }

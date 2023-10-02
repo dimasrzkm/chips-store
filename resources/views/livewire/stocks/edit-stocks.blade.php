@@ -68,10 +68,10 @@
                 <label class="label">
                     <span class="label-text">Jumlah Beli</span>
                 </label>
-                <input type="number" wire:model="form.total" name="total"
+                <input type="number" wire:model="form.initial_stock" name="initial_stock"
                     class="input w-full border-opacity-80 border-2 border-[#272343] focus:outline-none">
                 <label class="label">
-                    @error('form.total')
+                    @error('form.initial_stock')
                         <span class="text-sm label-text-alt text-rose-600">{{ $message }}</span>
                     @enderror
                 </label>

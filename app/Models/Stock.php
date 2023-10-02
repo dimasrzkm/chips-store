@@ -15,7 +15,8 @@ class Stock extends Model
         'name',
         'purchase_date',
         'price',
-        'total',
+        'initial_stock',
+        'remaining_stock',
     ];
 
     protected $casts = [
