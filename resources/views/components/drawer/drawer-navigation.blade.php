@@ -271,7 +271,7 @@
             <span>Laporan</span>
         </li>
         <li><a href="{{ route('reports.sellings.index') }}" wire:navigate>Penjualan </a></li>
-        <li><a href="{{ route('roles.index') }}" wire:navigate>Stok Bahan Baku</a></li>
+        <li><a href="{{ route('reports.stocks.index') }}" wire:navigate>Stok Bahan Baku</a></li>
         <li><a href="{{ route('roles.index') }}" wire:navigate>Cetakan Pelunasan Produk Titipan</a></li>
     </ul>
     {{-- Lainnya --}}
