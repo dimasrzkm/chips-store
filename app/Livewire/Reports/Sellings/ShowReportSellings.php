@@ -3,20 +3,18 @@
 namespace App\Livewire\Reports\Sellings;
 
 use App\Models\Product;
-use App\Models\Selling;
-use Livewire\Component;
-use Illuminate\Http\Response;
-use Illuminate\Support\Carbon;
-use Livewire\Attributes\Title;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\File;
+use Livewire\Attributes\Title;
+use Livewire\Component;
 
 class ShowReportSellings extends Component
 {
     public $tanggal_awal;
+
     public $tanggal_akhir;
-    
+
     #[Title('Laporan Penjualan')]
     public function render()
     {
@@ -60,33 +58,32 @@ class ShowReportSellings extends Component
 
         foreach ($sortProductByNameAndUnit as $i => $data) {
             $total = 0;
-            foreach ($data as  $index => $item) {
+            foreach ($data as $index => $item) {
                 $temp = $data[$index];
                 $total += $item->quantity;
             }
-            if (!empty($sortProductByNameAndUnit[$i][0]) ) {
+            if (! empty($sortProductByNameAndUnit[$i][0])) {
                 // info('jalan ke iterasi-'.$i);
-                if($temp->purchase_unit == 'seperempat')
-                {
+                if ($temp->purchase_unit == 'seperempat') {
                     $margin = $total * $temp->initial_price;
-                } else if ($temp->purchase_unit == 'setengah') {
+                } elseif ($temp->purchase_unit == 'setengah') {
                     $margin = $total * $temp->initial_price * 2;
                 } else {
                     $margin = $total * $temp->initial_price * 4;
-                };
+                }
                 $productsForExport[] = [
                     'product_name' => $temp->product_name,
                     'initial_price' => $temp->initial_price,
                     'sale_price' => $temp->sale_price,
                     'quantity' => $total,
                     'purchase_unit' => $temp->purchase_unit,
-                    'total' =>  $total * $temp->sub_total,
+                    'total' => $total * $temp->sub_total,
                     'margin' => $total * $temp->sub_total - $margin,
                 ];
             }
             $total = 0;
         }
-        
+
         // dd($productsForExport);
         // dd($this->tanggal_akhir->format('d F Y'));
         $this->validate();
@@ -95,9 +92,10 @@ class ShowReportSellings extends Component
             'tanggal_awal' => Carbon::parse($this->tanggal_awal)->format('d F Y'),
             'tanggal_akhir' => Carbon::parse($this->tanggal_akhir)->format('d F Y'),
         ])->setPaper('a4', 'landscape')->output();
+
         return response()->streamDownload(
             fn () => print($pdf),
-            "laporan_penjualan.pdf"
+            'laporan_penjualan.pdf'
         );
     }
 
