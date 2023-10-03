@@ -16,6 +16,7 @@ use App\Livewire\Products\CreateProducts;
 use App\Livewire\Products\EditProducts;
 use App\Livewire\Products\ShowProducts;
 use App\Livewire\Profile\ProfileInformation;
+use App\Livewire\Reports\Consigments\ShowReportConsigments;
 use App\Livewire\Reports\Sellings\ShowReportSellings;
 use App\Livewire\Reports\Stocks\ShowReportStocks;
 use App\Livewire\Roles\CreateRoles;
@@ -124,7 +125,10 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::prefix('reports')->group(function () {
-        Route::get('sellings', ShowReportSellings::class)->name('reports.sellings.index');
-        Route::get('stocks', ShowReportStocks::class)->name('reports.stocks.index');
+        Route::get('sellings', ShowReportSellings::class)->name('reports.sellings.index')->middleware(['role:pemilik|kasir']);
+        Route::group(['middleware' => 'role:pemilik|bagian gudang'], function () {
+            Route::get('stocks', ShowReportStocks::class)->name('reports.stocks.index')->middleware(['role:pemilik|bagian gudang']);
+            Route::get('consigments', ShowReportConsigments::class)->name('reports.consigments.index');
+        });
     });
 });
