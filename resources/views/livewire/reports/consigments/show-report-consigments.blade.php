@@ -24,8 +24,8 @@
                     @enderror
                 </div>
                 <div
-                    class="relative p-4 mb-4 overflow-hidden bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
-                    <label class="inline-block mb-3">Produk Dibeli</label>
+                    class="relative p-4 mt-4 overflow-hidden bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
+                    <label class="inline-block mb-3">Produk</label>
                     <hr />
                     <div class="overflow-x-auto overflow-y-hidden">
                         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">

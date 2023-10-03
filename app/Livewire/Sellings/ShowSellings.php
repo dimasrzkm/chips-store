@@ -2,9 +2,11 @@
 
 namespace App\Livewire\Sellings;
 
+use App\Events\GenerateReceipt;
 use App\Livewire\Forms\SellingForm;
 use App\Models\Selling;
 use Illuminate\Database\Eloquent\Builder;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -16,6 +18,7 @@ class ShowSellings extends Component
     public SellingForm $form;
 
     #[Title('Data Penjualan')]
+    #[On('refreshSellings')]
     public function render()
     {
         $sellings = Selling::with(['products', 'user'])->orderBy('transaction_code', 'desc')->paginate($this->form->showPerPage, pageName: 'selling-page');
@@ -49,5 +52,16 @@ class ShowSellings extends Component
     public function setHowMuchPageShow($total)
     {
         $this->form->showPerPage = $total;
+    }
+
+    public function printReceipt($selling)
+    {
+        // dd($selling['products']);
+        GenerateReceipt::dispatch($selling);
+    }
+
+    public function getDataForQr($data)
+    {
+        $this->form->receiptName = $data['receipt']['name'];
     }
 }

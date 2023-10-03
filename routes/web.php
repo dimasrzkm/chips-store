@@ -42,7 +42,9 @@ use App\Livewire\Units\ShowUnits;
 use App\Livewire\Users\CreateUsers;
 use App\Livewire\Users\EditUsers;
 use App\Livewire\Users\ShowUsers;
+use App\Models\Receipt;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 Route::middleware(['guest'])->group(function () {
     Route::get('login', [LoginController::class, 'index'])->name('login');
@@ -131,4 +133,9 @@ Route::middleware(['auth'])->group(function () {
             Route::get('consigments', ShowReportConsigments::class)->name('reports.consigments.index');
         });
     });
+
+});
+
+Route::get('/receipts/{receipt:name}', function (Receipt $receipt) {
+    return Storage::response('public/receipts/'.$receipt->name);
 });

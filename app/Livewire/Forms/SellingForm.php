@@ -50,6 +50,8 @@ class SellingForm extends Form
 
     public $showPerPage = 10;
 
+    public $receiptName;
+
     public function setPost(Selling $selling)
     {
         $this->selling = $selling;

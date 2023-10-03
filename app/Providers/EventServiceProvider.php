@@ -3,9 +3,11 @@
 namespace App\Providers;
 
 use App\Events\ConsigmentHistory;
+use App\Events\GenerateReceipt;
 use App\Events\PaidOffConsigment;
 use App\Events\SellingHistory;
 use App\Events\StockHistory;
+use App\Listeners\saveReceiptToStorage;
 use App\Listeners\updateProductStock;
 use App\Listeners\updateStockInProduct;
 use App\Listeners\updateStockProduct;
@@ -37,6 +39,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         PaidOffConsigment::class => [
             updateStockInProduct::class,
+        ],
+        GenerateReceipt::class => [
+            saveReceiptToStorage::class,
         ],
     ];
 
