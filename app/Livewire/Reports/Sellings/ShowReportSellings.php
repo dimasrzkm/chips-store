@@ -23,6 +23,7 @@ class ShowReportSellings extends Component
 
     public function exportAs($export)
     {
+        $this->validate();
         $products = DB::table('sellings_detail as pivot')
             ->leftJoin('sellings', 'pivot.selling_id', '=', 'sellings.id')
             ->leftJoin('products', 'pivot.product_id', '=', 'products.id')
@@ -86,7 +87,6 @@ class ShowReportSellings extends Component
 
         // dd($productsForExport);
         // dd($this->tanggal_akhir->format('d F Y'));
-        $this->validate();
         $pdf = Pdf::loadView('pdf.sellings', [
             'datas' => $productsForExport,
             'tanggal_awal' => Carbon::parse($this->tanggal_awal)->format('d F Y'),
