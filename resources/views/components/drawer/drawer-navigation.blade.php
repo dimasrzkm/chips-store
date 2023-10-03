@@ -270,9 +270,15 @@
             </span>
             <span>Laporan</span>
         </li>
-        <li><a href="{{ route('reports.sellings.index') }}" wire:navigate>Penjualan </a></li>
-        <li><a href="{{ route('reports.stocks.index') }}" wire:navigate>Stok Bahan Baku</a></li>
-        <li><a href="{{ route('roles.index') }}" wire:navigate>Cetakan Pelunasan Produk Titipan</a></li>
+        @can('cetak laporan penjualan')
+            <li><a href="{{ route('reports.sellings.index') }}" wire:navigate>Penjualan </a></li>
+        @endcan
+        @can('cetak laporan bahan baku')
+            <li><a href="{{ route('reports.stocks.index') }}" wire:navigate>Stok Bahan Baku</a></li>
+        @endcan
+        @can('cetak pelunasan produk')
+            <li><a href="{{ route('reports.consigments.index') }}" wire:navigate>Cetakan Pelunasan Produk Titipan</a></li>
+        @endcan
     </ul>
     {{-- Lainnya --}}
     @can('melihat unit')
