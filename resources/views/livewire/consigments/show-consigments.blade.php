@@ -62,6 +62,8 @@
                             <th scope="col" class="px-4 py-3">Nama Produk</th>
                             <th scope="col" class="px-4 py-3">Nama Penitip</th>
                             <th scope="col" class="px-4 py-3">Total Penitipan</th>
+                            <th scope="col" class="px-4 py-3">Tanggal Pelunasan</th>
+                            <th scope="col" class="px-4 py-3">Status</th>
                             <th scope="col" class="px-4 py-3">
                                 <span class="sr-only">Actions</span>
                             </th>
@@ -86,29 +88,37 @@
                                     <td class="px-4 py-3">{{ $item->pivot->konsinyor_name }}</td>
                                     <td class="px-4 py-3">{{ $item->pivot->total_consigment }}</td>
                                     @if ($i < 1)
+                                        <td rowspan="{{ $consigment->products->count() }}" class="px-4 py-3">
+                                            {{ $consigment->paid_off_date ? $consigment->paid_off_date->format('d/m/Y') : '-' }}</td>
+                                        <td rowspan="{{ $consigment->products->count() }}" class="px-4 py-3">
+                                            {{ $consigment->is_paid_off ? 'Lunas' : 'Belum Lunas' }}</td>
+                                    @endif
+                                    @if ($i < 1)
                                         <td rowspan="{{ $consigment->products->count() }}" class="px-4 py-3 ">
                                             @can('menghapus catatan penitipan')
-                                                <div class="dropdown dropdown-left dropdown-end">
-                                                    <button tabindex="0"
-                                                        class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100"
-                                                        type="button">
-                                                        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor"
-                                                            viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
-                                                        </svg>
-                                                    </button>
-                                                    <ul tabindex="0"
-                                                        class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-                                                        <li>
-                                                            <!-- Open the modal using ID.showModal() method -->
-                                                            <a onclick="my_modal_1.showModal()"
-                                                                wire:click="getDataForDelete({{ $consigment }})"
-                                                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Hapus
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
+                                                @if (!$consigment->is_paid_off)
+                                                    <div class="dropdown dropdown-left dropdown-end">
+                                                        <button tabindex="0"
+                                                            class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100"
+                                                            type="button">
+                                                            <svg class="w-5 h-5" aria-hidden="true" fill="currentColor"
+                                                                viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+                                                            </svg>
+                                                        </button>
+                                                        <ul tabindex="0"
+                                                            class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                                                            <li>
+                                                                <!-- Open the modal using ID.showModal() method -->
+                                                                <a onclick="my_modal_1.showModal()"
+                                                                    wire:click="getDataForDelete({{ $consigment }})"
+                                                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Hapus
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                @endif
                                             @endcan
                                         </td>
                                     @endif
