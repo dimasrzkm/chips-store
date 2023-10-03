@@ -17,6 +17,8 @@ return new class extends Migration
             $table->integer('number_transaction');
             $table->string('transaction_code');
             $table->date('consigment_date');
+            $table->date('paid_off_date')->nullable();
+            $table->boolean('is_paid_off')->default(false);
             $table->timestamps();
         });
     }

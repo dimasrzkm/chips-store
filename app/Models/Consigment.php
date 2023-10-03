@@ -14,10 +14,13 @@ class Consigment extends Model
         'number_transaction',
         'transaction_code',
         'consigment_date',
+        'paid_off_date',
+        'is_paid_off',
     ];
 
     protected $casts = [
         'consigment_date' => 'date',
+        'paid_off_date' => 'date',
     ];
 
     public function user()
