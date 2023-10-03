@@ -3,9 +3,11 @@
 namespace App\Providers;
 
 use App\Events\ConsigmentHistory;
+use App\Events\PaidOffConsigment;
 use App\Events\SellingHistory;
 use App\Events\StockHistory;
 use App\Listeners\updateProductStock;
+use App\Listeners\updateStockInProduct;
 use App\Listeners\updateStockProduct;
 use App\Listeners\updateTotalStock;
 use Illuminate\Auth\Events\Registered;
@@ -32,6 +34,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         SellingHistory::class => [
             updateProductStock::class,
+        ],
+        PaidOffConsigment::class => [
+            updateStockInProduct::class,
         ],
     ];
 
