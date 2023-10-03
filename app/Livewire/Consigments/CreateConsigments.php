@@ -17,7 +17,7 @@ class CreateConsigments extends Component
     public function mount()
     {
         $this->form->number_transaction = (Consigment::latest()->first()) ? Consigment::latest()->first()->number_transaction + 1 : 1;
-        $this->form->transaction_code = 'CBA-'.str_pad($this->form->number_transaction, 4, '0', STR_PAD_LEFT);
+        $this->form->transaction_code = 'TPK-'.str_pad($this->form->number_transaction, 4, '0', STR_PAD_LEFT);
         $this->form->user_id = auth()->user()->id;
 
         $this->form->allKonsinyors = Konsinyor::all();
