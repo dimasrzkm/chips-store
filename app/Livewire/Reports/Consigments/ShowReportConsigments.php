@@ -37,7 +37,13 @@ class ShowReportConsigments extends Component
             'konsinyorName' => $consigmentsProduct[0]->pivot->konsinyor_name, // nama penitip
             'nameMakingReport' => auth()->user()->name, // nama pembuat laporan
         ])->setPaper('a4', 'landscape')->output();
-        PaidOffConsigment::dispatch($consigments); // menjalankan event untuk pengurangan stok pada produk
+        if (! $consigments->is_paid_off) {
+            PaidOffConsigment::dispatch($consigments); // menjalankan event untuk pengurangan stok
+        } else {
+            $this->reset('selectedConsigment');
+
+            return back()->with('status', 'Produk titipan dengan nomor transaksi '.$consigments->transaction_code.' telah dilunaskan');
+        }
 
         return response()->streamDownload(
             fn () => print($pdf),
