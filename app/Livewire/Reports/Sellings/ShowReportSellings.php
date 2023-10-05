@@ -68,18 +68,19 @@ class ShowReportSellings extends Component
                 if ($temp->purchase_unit == 'seperempat') {
                     $margin = $total * $temp->initial_price;
                 } elseif ($temp->purchase_unit == 'setengah') {
-                    $margin = $total * $temp->initial_price * 2;
+                    $margin = $total * ($temp->initial_price * 2);
                 } else {
-                    $margin = $total * $temp->initial_price * 4;
+                    $margin = $total * ($temp->initial_price * 4);
                 }
+                // dd($temp);
                 $productsForExport[] = [
                     'product_name' => $temp->product_name,
                     'initial_price' => $temp->initial_price,
                     'sale_price' => $temp->sale_price,
                     'quantity' => $total,
                     'purchase_unit' => $temp->purchase_unit,
-                    'total' => $total * $temp->sub_total,
-                    'margin' => $total * $temp->sub_total - $margin,
+                    'total' => $temp->sub_total,
+                    'margin' => $temp->sub_total - $margin,
                 ];
             }
             $total = 0;
