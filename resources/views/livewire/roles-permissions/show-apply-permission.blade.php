@@ -48,8 +48,7 @@
                                     <path clip-rule="evenodd" fill-rule="evenodd"
                                         d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
                                 </svg>
-                                10</label>
-                            {{-- {{ $form->showPerPage }}</label> --}}
+                            {{ $form->showPerPage }}</label>
                             <ul tabindex="0"
                                 class="dropdown-content top-12 z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
                                 <li><a wire:click="setHowMuchPageShow(10)">10</a></li>
@@ -68,7 +67,6 @@
                         <tr>
                             <th scope="col" class="px-4 py-3">No</th>
                             <th scope="col" class="px-4 py-3">Name</th>
-                            <th scope="col" class="px-4 py-3">Guard Name</th>
                             <th scope="col" class="px-4 py-3">The Permissions</th>
                             <th scope="col" class="px-4 py-3">
                                 <span class="sr-only">Actions</span>
@@ -80,7 +78,6 @@
                             <tr class="border-b dark:border-gray-700">
                                 <td class="px-4 py-3">{{ $index + 1 }}</td>
                                 <td class="px-4 py-3">{{ $role->name }}</td>
-                                <td class="px-4 py-3">{{ $role->guard_name }}</td>
                                 <td class="px-4 py-3"> {{ implode(', ', $role->getPermissionNames()->toArray()) }}
                                 </td>
                                 <td class="flex items-center justify-end px-4 py-3">

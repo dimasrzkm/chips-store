@@ -15,7 +15,7 @@ class ApplyPermissionsForm extends Form
     #[Url(as: 'search', history: true)]
     public $search = '';
 
-    public $showPerPage = 5;
+    public $showPerPage = 10;
 
     public $role_id;
 
