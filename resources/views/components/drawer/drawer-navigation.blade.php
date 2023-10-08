@@ -6,7 +6,7 @@
     {{-- responsive --}}
     <div
         class="sticky top-0 z-20 flex items-center justify-center gap-2 px-4 py-2 shadow-sm bg-base-200 bg-opacity-90 backdrop-blur lg:hidden">
-        <a href="#" class="text-2xl text-center">Dashboards</a>
+        <a href="{{ route('dashboard') }}" class="text-2xl text-center">Dashboards</a>
     </div>
     <div class="h-4"></div>
     {{-- Peran dan Perizinan --}}
