@@ -73,21 +73,27 @@ class SellingForm extends Form
         DB::beginTransaction();
         try {
             $selling = Selling::create($this->only(['user_id', 'number_transaction', 'transaction_code', 'selling_date', 'total', 'nominal_payment', 'nominal_return']));
-            foreach ($this->selectedProducts as $select) {
-                $product = Product::where('name', $select['name'])->first();
-                $selling->products()->attach([
-                    $product->id => [
-                        'product_name' => $select['name'],
-                        'quantity' => ($product->stock >= $select['quantity']) ? $select['quantity'] : '',
-                        'sub_total' => $select['sub_total'],
-                        'purchase_unit' => $select['selected_purchase_unit'],
-                    ],
-                ]);
+            // dd($this->selectedProducts);
+            if (!empty($this->selectedProducts)) {
+                foreach ($this->selectedProducts as $select) {
+                    $product = Product::where('name', $select['name'])->first();
+                    $selling->products()->attach([
+                        $product->id => [
+                            'product_name' => $select['name'],
+                            'quantity' => ($product->stock >= $select['quantity']) ? $select['quantity'] : '',
+                            'sub_total' => $select['sub_total'],
+                            'purchase_unit' => $select['selected_purchase_unit'],
+                        ],
+                    ]);
+                }
+                DB::commit();
+                SellingHistory::dispatch($this->selectedProducts);
+                session()->flash('status', 'Pembelian berhasil!');
+                $this->reset('user_id', 'number_transaction', 'transaction_code', 'selling_date', 'total', 'nominal_payment', 'nominal_return');
+            } else {
+                DB::rollBack();
+                session()->flash('status', 'Pembelian gagal!');    
             }
-            DB::commit();
-            SellingHistory::dispatch($this->selectedProducts);
-            session()->flash('status', 'Pembelian berhasil!');
-            $this->reset('user_id', 'number_transaction', 'transaction_code', 'selling_date', 'total', 'nominal_payment', 'nominal_return');
         } catch (\Exception $e) {
             DB::rollBack();
             session()->flash('status', 'Pembelian gagal!');
@@ -113,7 +119,7 @@ class SellingForm extends Form
     public function rules()
     {
         return [
-            'nominal_payment' => ['required'],
+            'nominal_payment' => ['required', 'numeric'],
         ];
     }
 }
