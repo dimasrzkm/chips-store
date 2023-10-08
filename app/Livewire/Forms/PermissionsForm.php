@@ -13,17 +13,20 @@ class PermissionsForm extends Form
     public $name;
 
     public $guardName = 'web';
-
-    public $showPerPage = 10;
-
+    
     #[Url(as: 'search', history: true)]
     public $search = '';
+    
+    public $showPerPage = 10;
+    
+    public $modeInput = 'tambah';
 
     public function setPost(Permission $permission)
     {
         $this->permission = $permission;
         $this->name = $permission->name;
         $this->guardName = $permission->guard_name;
+        $this->modeInput = 'ubah';
     }
 
     public function savePermission()
@@ -41,6 +44,7 @@ class PermissionsForm extends Form
         try {
             $this->permission->update($this->only(['name', 'guardName']));
             session()->flash('status', 'Izin berhasil di ubah');
+            $this->reset('permission', 'name', 'guardName', 'modeInput');
         } catch (\Exception $e) {
             return back()->with('status', $e->getMessage());
         }

@@ -10,7 +10,7 @@ class CreatePermissions extends Component
 {
     public PermissionsForm $form;
 
-    public function createPermission()
+    public function submit()
     {
         $this->validate();
         $this->form->savePermission();
@@ -21,9 +21,7 @@ class CreatePermissions extends Component
     #[Title('Permissions Create')]
     public function render()
     {
-        return view('livewire.permissions.create-permissions', [
-            'guards' => collect(['web', 'api']),
-        ]);
+        return view('livewire.permissions.edit-permissions');
     }
 
     protected $validationAttributes = [

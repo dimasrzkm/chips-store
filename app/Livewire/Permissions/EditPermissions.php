@@ -16,7 +16,7 @@ class EditPermissions extends Component
         $this->form->setPost($permission);
     }
 
-    public function editPermission()
+    public function submit()
     {
         $this->validate();
         $this->form->updatePermission();
@@ -27,9 +27,7 @@ class EditPermissions extends Component
     #[Title('Permissions Edit')]
     public function render()
     {
-        return view('livewire.permissions.edit-permissions', [
-            'guards' => collect(['web', 'api']),
-        ]);
+        return view('livewire.permissions.edit-permissions');
     }
 
     protected $validationAttributes = [
