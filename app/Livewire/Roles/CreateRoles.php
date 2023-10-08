@@ -10,7 +10,7 @@ class CreateRoles extends Component
 {
     public RoleForm $form;
 
-    public function createRole()
+    public function submit()
     {
         $this->validate();
         $this->form->saveRole();

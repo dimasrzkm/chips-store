@@ -8,7 +8,7 @@
                 Ubah Peran
             @endif
         </h5>
-        <form method="post" wire:submit="editRole">
+        <form method="post" wire:submit="submit">
             @csrf
             <div class="form-control">
                 <label class="label">

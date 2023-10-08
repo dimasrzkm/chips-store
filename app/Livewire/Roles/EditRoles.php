@@ -16,7 +16,7 @@ class EditRoles extends Component
         $this->form->setPost($role);
     }
 
-    public function editRole()
+    public function submit()
     {
         $this->validate();
         $this->form->updateRole();
