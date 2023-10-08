@@ -69,9 +69,7 @@
                             <option selected>Pilih Bahan</option>
                             @foreach ($form->allStocks as $stock)
                                 <option value="{{ $stock->id }}">
-                                    {{ 
-                                        "$stock->name - ($stock->remaining_stock ". $stock->unit->name ." / ". $stock->purchase_date->format('d-m-Y') .")" 
-                                    }}
+                                    {{ "$stock->name - ($stock->remaining_stock " . $stock->unit->name . ' / ' . $stock->purchase_date->format('d-m-Y') . ')' }}
                                 </option>
                             @endforeach
                         </select>
@@ -88,6 +86,11 @@
                     @endforeach
                 </div>
             </div>
+            @error('form.selectedStocks')
+                <label class="label">
+                    <span class="text-sm label-text-alt text-rose-600">{{ $message }}</span>
+                </label>
+            @enderror
             <p class="inline-block px-3 py-2 mt-3 text-sm font-medium text-center text-white rounded-lg cursor-pointer bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 wire:click="addStock">Tambah Bahan</p>
             <div class="flex items-center justify-end mt-3">

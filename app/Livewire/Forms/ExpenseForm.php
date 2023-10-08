@@ -57,22 +57,27 @@ class ExpenseForm extends Form
         try {
             $expense = Expense::create($this->only(['user_id', 'number_transaction', 'transaction_code', 'expense_date']));
             $product = Product::find($this->product_id);
-            foreach ($this->selectedStocks as $selected) {
-                $stock = Stock::find($selected['stock_id']);
-                $expense->stocks()->attach([
-                    $selected['stock_id'] => [
-                        'product_id' => $product->id,
-                        'product_name' => $product->name,
-                        'stock_name' => $stock->name,
-                        'total_used' => ($stock->remaining_stock >= $selected['quantity']) ? $selected['quantity'] : '',
-                        'unit' => $stock->unit->name,
-                    ],
-                ]);
-
+            // dd($this->selectedStocks);
+            if (!empty($this->selectedStocks)) {
+                foreach ($this->selectedStocks as $selected) {
+                    $stock = Stock::find($selected['stock_id']);
+                    $expense->stocks()->attach([
+                        $selected['stock_id'] => [
+                            'product_id' => $product->id,
+                            'product_name' => $product->name,
+                            'stock_name' => $stock->name,
+                            'total_used' => ($stock->remaining_stock >= $selected['quantity']) ? $selected['quantity'] : '',
+                            'unit' => $stock->unit->name,
+                        ],
+                    ]);
+                }
+                DB::commit();
+                StockHistory::dispatch($this->selectedStocks, $this->product_id);
+                session()->flash('status', 'berhasil memasukan data pengeluaran stock');
+            } else {
+                session()->flash('status', 'gagal memasukan data pengeluaran stock');
+                DB::rollBack();    
             }
-            DB::commit();
-            StockHistory::dispatch($this->selectedStocks, $this->product_id);
-            session()->flash('status', 'berhasil memasukan data pengeluaran stock');
         } catch (\Exception $e) {
             info($e->getMessage());
             session()->flash('status', 'gagal memasukan data pengeluaran stock');
@@ -101,6 +106,7 @@ class ExpenseForm extends Form
         return [
             'expense_date' => ['required'],
             'product_id' => ['required'],
+            'selectedStocks' => ['required', 'array', 'min:1'],
         ];
     }
 }

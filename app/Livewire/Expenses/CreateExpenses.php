@@ -22,9 +22,9 @@ class CreateExpenses extends Component
 
         $this->form->allProducts = Product::whereDoesntHave('konsinyor')->get();
         $this->form->allStocks = Stock::where('remaining_stock', '>', 0)->get();
-        $this->form->selectedStocks = [
-            ['product_id' => '', 'quantity' => 1],
-        ];
+        // $this->form->selectedStocks = [
+        //     ['stock_id' => '', 'quantity' => 1],
+        // ];
     }
 
     public function submit()
@@ -55,5 +55,6 @@ class CreateExpenses extends Component
     protected $validationAttributes = [
         'form.expense_date' => 'tanggal pengeluaran',
         'form.product_id' => 'produk',
+        'form.selectedStocks' => 'bahan baku'
     ];
 }
