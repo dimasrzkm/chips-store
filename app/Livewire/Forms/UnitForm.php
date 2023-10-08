@@ -61,7 +61,7 @@ class UnitForm extends Form
     public function rules()
     {
         return [
-            'name' => ['required'],
+            'name' => ['required', 'regex:/^[a-zA-Z\s]*$/'],
         ];
     }
 }
