@@ -19,11 +19,14 @@ class RoleForm extends Form
 
     public $showPerPage = 10;
 
+    public $modeInput = 'tambah';
+
     public function setPost(Role $role)
     {
         $this->role = $role;
         $this->name = $role->name;
         $this->guard_name = $role->guard_name;
+        $this->modeInput = 'ubah';
     }
 
     public function saveRole()
@@ -41,6 +44,7 @@ class RoleForm extends Form
         try {
             $this->role->update($this->only(['name', 'guard_name']));
             session()->flash('status', 'Peran berhasil di ubah');
+            $this->reset('role', 'name', 'guard_name', 'modeInput');
         } catch (\Exception $e) {
             return back()->with('status', $e->getMessage());
         }

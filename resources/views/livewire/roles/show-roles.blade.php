@@ -66,7 +66,6 @@
                         <tr>
                             <th scope="col" class="px-4 py-3">No</th>
                             <th scope="col" class="px-4 py-3">Name</th>
-                            <th scope="col" class="px-4 py-3">Guard Name</th>
                             <th scope="col" class="px-4 py-3">
                                 <span class="sr-only">Actions</span>
                             </th>
@@ -77,7 +76,6 @@
                             <tr class="border-b dark:border-gray-700">
                                 <td class="px-4 py-3">{{ $index + 1 }}</td>
                                 <td class="px-4 py-3">{{ $role->name }}</td>
-                                <td class="px-4 py-3">{{ $role->guard_name }}</td>
                                 <td class="flex items-center justify-end px-4 py-3">
                                     <div class="dropdown dropdown-left dropdown-end">
                                         <button tabindex="0"
@@ -108,7 +106,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="4" class="px-4 py-3 text-center">Tidak ada data di temukan</td>
+                                <td colspan="3" class="px-4 py-3 text-center">Tidak ada data di temukan</td>
                             </tr>
                         @endforelse
                     </tbody>

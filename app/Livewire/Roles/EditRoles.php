@@ -27,9 +27,7 @@ class EditRoles extends Component
     #[Title('Edit Roles')]
     public function render()
     {
-        return view('livewire.roles.edit-roles', [
-            'guards' => ['web', 'api'],
-        ]);
+        return view('livewire.roles.edit-roles');
     }
 
     protected $validationAttributes = [

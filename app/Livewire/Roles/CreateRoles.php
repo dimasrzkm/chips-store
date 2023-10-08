@@ -21,13 +21,10 @@ class CreateRoles extends Component
     #[Title('Create Roles')]
     public function render()
     {
-        return view('livewire.roles.create-roles', [
-            'guards' => ['web', 'api'],
-        ]);
+        return view('livewire.roles.edit-roles');
     }
 
     protected $validationAttributes = [
         'form.name' => 'name',
-        'form.guard_name' => 'guard name',
     ];
 }
