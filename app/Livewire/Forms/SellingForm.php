@@ -74,7 +74,7 @@ class SellingForm extends Form
         try {
             $selling = Selling::create($this->only(['user_id', 'number_transaction', 'transaction_code', 'selling_date', 'total', 'nominal_payment', 'nominal_return']));
             // dd($this->selectedProducts);
-            if (!empty($this->selectedProducts)) {
+            if (! empty($this->selectedProducts)) {
                 foreach ($this->selectedProducts as $select) {
                     $product = Product::where('name', $select['name'])->first();
                     $selling->products()->attach([
@@ -92,7 +92,7 @@ class SellingForm extends Form
                 $this->reset('user_id', 'number_transaction', 'transaction_code', 'selling_date', 'total', 'nominal_payment', 'nominal_return');
             } else {
                 DB::rollBack();
-                session()->flash('status', 'Pembelian gagal!');    
+                session()->flash('status', 'Pembelian gagal!');
             }
         } catch (\Exception $e) {
             DB::rollBack();

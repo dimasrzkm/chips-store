@@ -55,6 +55,6 @@ class CreateExpenses extends Component
     protected $validationAttributes = [
         'form.expense_date' => 'tanggal pengeluaran',
         'form.product_id' => 'produk',
-        'form.selectedStocks' => 'bahan baku'
+        'form.selectedStocks' => 'bahan baku',
     ];
 }

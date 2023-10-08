@@ -42,19 +42,20 @@ class ShowReportConsigments extends Component
                 PaidOffConsigment::dispatch($consigments); // menjalankan event untuk pengurangan stok
             } else {
                 $this->reset('selectedConsigment');
-    
+
                 return back()->with('status', 'Produk titipan dengan nomor transaksi '.$consigments->transaction_code.' telah dilunaskan');
             }
-    
+
             return response()->streamDownload(
                 fn () => print($pdf),
                 'bukti_pelunasan.pdf'
             );
         } else {
             $this->reset('consigmentId');
+
             return back()->with('status', 'Pilih No Transaksi Penitipan!');
         }
-        
+
     }
 
     public function rules()

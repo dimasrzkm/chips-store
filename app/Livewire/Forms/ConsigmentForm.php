@@ -56,7 +56,7 @@ class ConsigmentForm extends Form
         try {
             $consigment = Consigment::create($this->only(['user_id', 'number_transaction', 'transaction_code', 'consigment_date']));
             // dd($this->selectedProducts);
-            if (!empty($this->selectedProducts)) {
+            if (! empty($this->selectedProducts)) {
                 foreach ($this->selectedProducts as $selected) {
                     $product = Product::find($selected['product_id']);
                     $consigment->products()->attach([
@@ -103,7 +103,7 @@ class ConsigmentForm extends Form
         return [
             'consigment_date' => ['required'],
             'konsinyor_id' => ['required'],
-            'selectedProducts' => ['required', 'array', 'min:1']
+            'selectedProducts' => ['required', 'array', 'min:1'],
         ];
     }
 }

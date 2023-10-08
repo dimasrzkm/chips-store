@@ -58,7 +58,7 @@ class ExpenseForm extends Form
             $expense = Expense::create($this->only(['user_id', 'number_transaction', 'transaction_code', 'expense_date']));
             $product = Product::find($this->product_id);
             // dd($this->selectedStocks);
-            if (!empty($this->selectedStocks)) {
+            if (! empty($this->selectedStocks)) {
                 foreach ($this->selectedStocks as $selected) {
                     $stock = Stock::find($selected['stock_id']);
                     $expense->stocks()->attach([
@@ -76,7 +76,7 @@ class ExpenseForm extends Form
                 session()->flash('status', 'berhasil memasukan data pengeluaran stock');
             } else {
                 session()->flash('status', 'gagal memasukan data pengeluaran stock');
-                DB::rollBack();    
+                DB::rollBack();
             }
         } catch (\Exception $e) {
             info($e->getMessage());
