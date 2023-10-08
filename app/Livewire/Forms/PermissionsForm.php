@@ -56,8 +56,7 @@ class PermissionsForm extends Form
     public function rules()
     {
         return [
-            'name' => 'required',
-            'guardName' => 'required',
+            'name' => ['required', 'regex:/^[a-zA-Z\s]*$/'],
         ];
     }
 }
