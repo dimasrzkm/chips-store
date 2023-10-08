@@ -10,12 +10,12 @@
 </head>
 
 <body>
-    <div class="flex justify-center items-center h-screen bg-[#bae8e8]">
-        <div class="card bg-[#fffffe] md:w-2/6">
-            <div class="card-header px-5 py-6">
-                <h1 class="text-center font-semibold text-4xl">Sign In</h1>
+    <div class="flex items-center justify-center h-screen">
+        <div class="bg-white border border-gray-200 rounded-lg shadow card md:w-2/6 dark:bg-gray-800 dark:border-gray-700">
+            <div class="px-5 py-6 card-header">
+                <h1 class="text-4xl font-semibold text-center">Sign In</h1>
             </div>
-            <div class="card-bod py-2 px-8">
+            <div class="px-8 py-2 card-bod">
                 <form action="{{ route('login') }}" method="POST">
                     @csrf
                     <div class="form-control">
@@ -27,7 +27,7 @@
                             value="{{ old('email') }}" />
                         <label class="label">
                             @error('email')
-                                <span class="label-text-alt text-rose-600 text-sm">{{ $message }}</span>
+                                <span class="text-sm label-text-alt text-rose-600">{{ $message }}</span>
                             @enderror
                         </label>
                     </div>
@@ -39,13 +39,13 @@
                             class="input w-full border-opacity-80 border-2 border-[#272343] focus:outline-none" />
                         <label class="label">
                             @error('password')
-                                <span class="label-text-alt text-rose-600 text-sm">{{ $message }}</span>
+                                <span class="text-sm label-text-alt text-rose-600">{{ $message }}</span>
                             @enderror
                         </label>
                     </div>
             </div>
-            <div class="card-footer px-8 py-3 flex justify-end">
-                <button class="btn bg-[#bae8e8] hover:bg-[#bae8e8] text-[#272343] font-bold">Login</button>
+            <div class="flex justify-end px-8 py-3 card-footer">
+                <button class="text-white bg-blue-700 rounded-lg btn hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-500 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login</button>
             </div>
             </form>
         </div>
