@@ -55,20 +55,26 @@ class ConsigmentForm extends Form
         DB::beginTransaction();
         try {
             $consigment = Consigment::create($this->only(['user_id', 'number_transaction', 'transaction_code', 'consigment_date']));
-            foreach ($this->selectedProducts as $selected) {
-                $product = Product::find($selected['product_id']);
-                $consigment->products()->attach([
-                    $product->id => [
-                        'product_name' => $product->name,
-                        'konsinyor_name' => $product->konsinyor->name,
-                        'total_consigment' => $selected['quantity'],
-                    ],
-                ]);
+            // dd($this->selectedProducts);
+            if (!empty($this->selectedProducts)) {
+                foreach ($this->selectedProducts as $selected) {
+                    $product = Product::find($selected['product_id']);
+                    $consigment->products()->attach([
+                        $product->id => [
+                            'product_name' => $product->name,
+                            'konsinyor_name' => $product->konsinyor->name,
+                            'total_consigment' => $selected['quantity'],
+                        ],
+                    ]);
+                }
+                DB::commit();
+                ConsigmentHistory::dispatch($this->selectedProducts);
+                session()->flash('status', 'berhasil memasukan data pengeluaran stock');
+                $this->reset('selectedProducts');
+            } else {
+                session()->flash('status', 'gagal memasukan data pengeluaran stock');
+                DB::rollBack();
             }
-            DB::commit();
-            ConsigmentHistory::dispatch($this->selectedProducts);
-            session()->flash('status', 'berhasil memasukan data pengeluaran stock');
-            $this->reset('selectedProducts');
         } catch (\Exception $e) {
             info($e->getMessage());
             session()->flash('status', 'gagal memasukan data pengeluaran stock');
@@ -97,6 +103,7 @@ class ConsigmentForm extends Form
         return [
             'consigment_date' => ['required'],
             'konsinyor_id' => ['required'],
+            'selectedProducts' => ['required', 'array', 'min:1']
         ];
     }
 }

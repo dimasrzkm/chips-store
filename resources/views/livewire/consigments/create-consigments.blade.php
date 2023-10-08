@@ -46,7 +46,7 @@
                     <span class="label-text">Penitip Produk</span>
                 </label>
                 <select class="select border-2 border-[#272343] focus:outline-none border-opacity-80"
-                wire:model.live.debounce.500ms="form.konsinyor_id">
+                    wire:model.live.debounce.500ms="form.konsinyor_id">
                     <option selected>Pilih Konsinyor</option>
                     @foreach ($form->allKonsinyors as $konsinyor)
                         <option value="{{ $konsinyor->id }}">{{ $konsinyor->name }}</option>
@@ -73,11 +73,6 @@
                                 </option>
                             @endforeach
                         </select>
-                        @error('form.selectedProducts')
-                            <label class="label">
-                                <span class="text-sm label-text-alt text-rose-600">{{ $message }}</span>
-                            </label>
-                        @enderror
                         <input type="number" wire:model="form.selectedProducts.{{ $index }}.quantity"
                             class="input w-full border-opacity-80 border-2 border-[#272343] focus:outline-none">
                         <p wire:click="removeProduct({{ $index }})"
@@ -86,6 +81,11 @@
                     @endforeach
                 </div>
             </div>
+            @error('form.selectedProducts')
+                <label class="label">
+                    <span class="text-sm label-text-alt text-rose-600">{{ $message }}</span>
+                </label>
+            @enderror
             <p class="inline-block px-3 py-2 mt-3 text-sm font-medium text-center text-white rounded-lg cursor-pointer bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 wire:click="addProduct">Tambah Produk</p>
             <div class="flex items-center justify-end mt-3">

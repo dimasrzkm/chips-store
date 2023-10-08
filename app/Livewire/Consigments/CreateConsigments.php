@@ -42,6 +42,7 @@ class CreateConsigments extends Component
     protected $validationAttributes = [
         'form.consigment_date' => 'tanggal penitipan',
         'form.konsinyor_id' => 'pentip barang',
+        'form.selectedProducts' => 'produk titipan',
     ];
 
     public function addProduct()
