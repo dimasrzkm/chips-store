@@ -29,7 +29,9 @@
                 <div
                     class="flex flex-col items-stretch justify-end flex-shrink-0 w-full space-y-2 md:w-auto md:flex-row md:space-y-0 md:items-center md:space-x-3">
                     <div class="flex items-stretch justify-end w-full space-x-3 md:w-auto">
-                        <button class="px-3 py-1 text-sm font-medium bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-700 hover:cursor-pointer" wire:click="$dispatch('refreshSellings')">Refresh</button>
+                        <button
+                            class="px-3 py-1 text-sm font-medium bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-700 hover:cursor-pointer"
+                            wire:click="$dispatch('refreshSellings')">Refresh</button>
                         {{-- menambah w-full untuk satu component agar fit dengan card --}}
                         <div class="w-full dropdown sm:dropdown-end">
                             <label tabindex="0"
@@ -94,11 +96,29 @@
                                     @endif
                                     <td class="px-4 py-3">{{ $item->pivot->product_name }}</td>
                                     <td class="px-4 py-3">{{ $item->pivot->quantity }}</td>
-                                    <td class="px-4 py-3">{{ $item->pivot->purchase_unit }}</td>
+                                    <td class="px-4 py-3">
+                                        @switch($item->pivot->purchase_unit)
+                                            @case('seperempat')
+                                                1/4 Kg
+                                            @break
+
+                                            @case('setengah')
+                                                1/2 Kg
+                                            @break
+
+                                            @case('sekilo')
+                                                1 Kg
+                                            @break
+
+                                            @default
+                                                {{ $item->pivot->purchase_unit }}
+                                        @endswitch
+                                    </td>
                                     @if ($i < 1)
                                         <td class="text-center" rowspan="{{ $selling->products->count() }}">
                                             @if (!is_null($selling->receipt))
-                                                <button onclick="my_modal_2.showModal()" wire:click="getDataForQr({{ $selling }})"
+                                                <button onclick="my_modal_2.showModal()"
+                                                    wire:click="getDataForQr({{ $selling }})"
                                                     class="p-2 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                         viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -150,48 +170,48 @@
                                     @endif
                                 </tr>
                             @endforeach
-                        @empty
-                            <tr>
-                                <td colspan="11" class="px-4 py-3 text-center">Tidak ada data di temukan</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
+                            @empty
+                                <tr>
+                                    <td colspan="11" class="px-4 py-3 text-center">Tidak ada data di temukan</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+                {{-- Paginate --}}
+                {{ $sellings->links() }}
             </div>
-            {{-- Paginate --}}
-            {{ $sellings->links() }}
         </div>
-    </div>
 
-    {{-- Modal Delete --}}
-    @can('menghapus penjualan')
-        <dialog wire:ignore.self id="my_modal_1" class="modal">
+        {{-- Modal Delete --}}
+        @can('menghapus penjualan')
+            <dialog wire:ignore.self id="my_modal_1" class="modal">
+                <form method="dialog" class="modal-box">
+                    <h3 class="text-lg font-bold">Menghapus Data Penjualan!</h3>
+                    <p class="py-4">Apakah anda yakin ingin menghapus data
+                        <span class="font-medium text-red-600 text">{{ $form->transaction_code }}</span>?
+                    </p>
+                    <div class="modal-action">
+                        <button class="btn btn-error" wire:click="deleteSelling()">Hapus
+                        </button>
+                        <button class="btn btn-active">Tutup</button>
+                    </div>
+                </form>
+            </dialog>
+        @endcan
+
+        {{-- Modal QR --}}
+        <dialog wire:ignore.self id="my_modal_2" class="modal">
             <form method="dialog" class="modal-box">
-                <h3 class="text-lg font-bold">Menghapus Data Penjualan!</h3>
-                <p class="py-4">Apakah anda yakin ingin menghapus data
-                    <span class="font-medium text-red-600 text">{{ $form->transaction_code }}</span>?
-                </p>
+                <h3 class="mb-2 text-lg font-bold text-center">Silahkan Scan Barcode</h3>
+                <div class="flex items-center justify-center">
+                    {!! QrCode::size(200)->generate(url('receipts/' . $this->form->receiptName)) !!}
+                    {{-- {!! QrCode::size(200)->generate(env('URL_NGROK').'/receipts/'.$this->form->receiptName) !!} --}}
+                </div>
                 <div class="modal-action">
-                    <button class="btn btn-error" wire:click="deleteSelling()">Hapus
-                    </button>
                     <button class="btn btn-active">Tutup</button>
                 </div>
             </form>
         </dialog>
-    @endcan
 
-    {{-- Modal QR --}}
-    <dialog wire:ignore.self id="my_modal_2" class="modal">
-        <form method="dialog" class="modal-box">
-            <h3 class="mb-2 text-lg font-bold text-center">Silahkan Scan Barcode</h3>
-            <div class="flex items-center justify-center">
-                {{-- {!! QrCode::size(200)->generate(url('receipts/'.$this->form->receiptName)) !!} --}}
-                {!! QrCode::size(200)->generate(env('URL_NGROK').'/receipts/'.$this->form->receiptName) !!}
-            </div>
-            <div class="modal-action">
-                <button class="btn btn-active">Tutup</button>
-            </div>
-        </form>
-    </dialog>
-
-</div>
+    </div>
