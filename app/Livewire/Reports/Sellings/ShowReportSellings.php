@@ -59,9 +59,11 @@ class ShowReportSellings extends Component
 
         foreach ($sortProductByNameAndUnit as $i => $data) {
             $total = 0;
+            $subTotal = 0;
             foreach ($data as $index => $item) {
                 $temp = $data[$index];
                 $total += $item->quantity;
+                $subTotal += $item->sub_total;
             }
             if (! empty($sortProductByNameAndUnit[$i][0])) {
                 // info('jalan ke iterasi-'.$i);
@@ -72,18 +74,19 @@ class ShowReportSellings extends Component
                 } else {
                     $margin = $total * ($temp->initial_price * 4);
                 }
-                // dd($temp);
+                // dd($total, $subTotal,  $margin, $temp);
                 $productsForExport[] = [
                     'product_name' => $temp->product_name,
                     'initial_price' => $temp->initial_price,
                     'sale_price' => $temp->sale_price,
                     'quantity' => $total,
                     'purchase_unit' => $temp->purchase_unit,
-                    'total' => $temp->sub_total,
-                    'margin' => $temp->sub_total - $margin,
+                    'total' => $subTotal,
+                    'margin' => $subTotal - $margin,
                 ];
             }
             $total = 0;
+            $subTotal = 0;
         }
 
         // dd($productsForExport);
