@@ -73,14 +73,20 @@ class SellingForm extends Form
         DB::beginTransaction();
         try {
             $selling = Selling::create($this->only(['user_id', 'number_transaction', 'transaction_code', 'selling_date', 'total', 'nominal_payment', 'nominal_return']));
-            // dd($this->selectedProducts);
             if (! empty($this->selectedProducts)) {
                 foreach ($this->selectedProducts as $select) {
                     $product = Product::where('name', $select['name'])->first();
+                    // cek apakah unit yang dijual merupakan sekilo atau pcs
+                    if ($select['selected_purchase_unit'] == 'sekilo' || $select['selected_purchase_unit'] == 'pcs') {
+                        // maka cek terlebih dahulu dengan stock di produk 
+                        $tempQuantity = ($product->stock >= $select['quantity']) ? $select['quantity'] : '';
+                    } else {
+                        $tempQuantity = $select['quantity'];
+                    }
                     $selling->products()->attach([
                         $product->id => [
                             'product_name' => $select['name'],
-                            'quantity' => ($product->stock >= $select['quantity']) ? $select['quantity'] : '',
+                            'quantity' => $tempQuantity,
                             'sub_total' => $select['sub_total'],
                             'purchase_unit' => $select['selected_purchase_unit'],
                         ],
