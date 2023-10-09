@@ -20,13 +20,13 @@
                     @csrf
                     <div class="form-control">
                         <label class="label">
-                            <span class="label-text">Email</span>
+                            <span class="label-text">Username</span>
                         </label>
-                        <input type="email" placeholder="Email" name="email"
+                        <input type="text" placeholder="Username" name="username"
                             class="input w-full border-opacity-80 border-2 border-[#272343] focus:outline-none"
-                            value="{{ old('email') }}" />
+                            value="{{ old('username') }}" />
                         <label class="label">
-                            @error('email')
+                            @error('username')
                                 <span class="text-sm label-text-alt text-rose-600">{{ $message }}</span>
                             @enderror
                         </label>

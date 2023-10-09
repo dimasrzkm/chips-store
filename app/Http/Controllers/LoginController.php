@@ -20,7 +20,7 @@ class LoginController extends Controller
         }
 
         return to_route('login')->withErrors([
-            'email' => 'The provided credentials do not match our records.',
+            'username' => 'The provided credentials do not match our records.',
         ]);
     }
 
@@ -36,7 +36,7 @@ class LoginController extends Controller
     public function dataValidated()
     {
         return request()->validate([
-            'email' => 'required',
+            'username' => 'required',
             'password' => 'required',
         ]);
     }
