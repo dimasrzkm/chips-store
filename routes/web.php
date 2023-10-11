@@ -9,8 +9,6 @@ use App\Livewire\Konsinyors\CreateKonsinyors;
 use App\Livewire\Konsinyors\EditKonsinyors;
 use App\Livewire\Konsinyors\ShowKonsinyors;
 use App\Livewire\Pages\Admin;
-use App\Livewire\Permissions\CreatePermissions;
-use App\Livewire\Permissions\EditPermissions;
 use App\Livewire\Permissions\ShowPermissions;
 use App\Livewire\Products\CreateProducts;
 use App\Livewire\Products\EditProducts;
@@ -56,12 +54,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('profile/{user}', ProfileInformation::class)->name('profile');
 
     Route::group(['middleware' => ['role:pemilik']], function () {
-        Route::prefix('permissions')->group(function () {
-            Route::get('', ShowPermissions::class)->name('permissions.index');
-            Route::get('create', CreatePermissions::class)->name('permissions.create');
-            Route::get('{permission:name}/edit', EditPermissions::class)->name('permissions.edit');
-        });
-
+        Route::get('permissions', ShowPermissions::class)->name('permissions.index');
         Route::get('roles', ShowRoles::class)->name('roles.index');
 
         Route::prefix('role-and-permission')->group(function () {
