@@ -18,9 +18,7 @@ use App\Livewire\Reports\Consigments\ShowReportConsigments;
 use App\Livewire\Reports\Sellings\ShowReportSellings;
 use App\Livewire\Reports\Stocks\ShowReportStocks;
 use App\Livewire\Roles\ShowRoles;
-use App\Livewire\RolesPermissions\ApplyPermissions;
 use App\Livewire\RolesPermissions\ApplyRoles;
-use App\Livewire\RolesPermissions\EditApplyPermissions;
 use App\Livewire\RolesPermissions\EditApplyRoles;
 use App\Livewire\RolesPermissions\ShowApplyPermission;
 use App\Livewire\RolesPermissions\ShowApplyRoles;
@@ -59,8 +57,6 @@ Route::middleware(['auth'])->group(function () {
 
         Route::prefix('role-and-permission')->group(function () {
             Route::get('permission/assignable', ShowApplyPermission::class)->name('assignable.index');
-            Route::get('permission/create', ApplyPermissions::class)->name('assignable.create');
-            Route::get('permission/{role:name}/edit', EditApplyPermissions::class)->name('assignable.edit');
 
             Route::get('role/assign', ShowApplyRoles::class)->name('assign.index');
             Route::get('role/create', ApplyRoles::class)->name('assign.create');
