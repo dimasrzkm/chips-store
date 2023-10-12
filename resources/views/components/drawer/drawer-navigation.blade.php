@@ -1,4 +1,7 @@
-<aside class=" w-80 bg-base-200">
+<aside class="@if (in_array(
+        'kasir',
+        auth()->user()->roles->pluck('name')->toArray()) ||
+        auth()->user()->roles->count() == 0) h-screen @endif w-80 bg-base-200">
     <div
         class="sticky top-0 z-20 items-center justify-center hidden gap-2 px-4 py-5 shadow-sm bg-base-200 bg-opacity-90 backdrop-blur lg:flex">
         <a href="{{ route('dashboard') }}" class="text-2xl font-semibold text-center" wire:navigate>Dashboard</a>
@@ -43,7 +46,7 @@
             @can('melihat peran pengguna')
                 <li><a href="{{ route('assign.index') }}" wire:navigate>Peran Pengguna</a></li>
             @endcan
-        </ul>    
+        </ul>
     @endcan
     {{-- Pengguna --}}
     @can('melihat pengguna')
@@ -102,7 +105,7 @@
                 <span>Data Supplier</span>
             </li>
             @can('melihat supplier')
-            <li><a href="{{ route('suppliers.index') }}" wire:navigate>Supplier</a></li>
+                <li><a href="{{ route('suppliers.index') }}" wire:navigate>Supplier</a></li>
             @endcan
             @can('melihat bahan baku')
                 <li><a href="{{ route('stocks.index') }}" wire:navigate>Bahan Baku</a></li>
@@ -148,69 +151,69 @@
     @canany(['melihat produk', 'melihat catatan pengeluaran'])
         <ul class="px-4 py-0 menu menu-sm lg:menu-md">
             <li></li>
-                <li class="flex flex-row items-center gap-4 menu-title">
-                    <span class="text-base-content">
-                        <svg width="24" height="24" viewBox="0 0 512 512" version="1.1"
-                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000">
+            <li class="flex flex-row items-center gap-4 menu-title">
+                <span class="text-base-content">
+                    <svg width="24" height="24" viewBox="0 0 512 512" version="1.1"
+                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000">
 
-                            <g id="SVGRepo_bgCarrier" stroke-width="0" />
+                        <g id="SVGRepo_bgCarrier" stroke-width="0" />
 
-                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
 
-                            <g id="SVGRepo_iconCarrier">
-                                <title>product</title>
-                                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                    <g id="icon" fill="#000000" transform="translate(64.000000, 34.346667)">
-                                        <path
-                                            d="M192,7.10542736e-15 L384,110.851252 L384,332.553755 L192,443.405007 L1.42108547e-14,332.553755 L1.42108547e-14,110.851252 L192,7.10542736e-15 Z M127.999,206.918 L128,357.189 L170.666667,381.824 L170.666667,231.552 L127.999,206.918 Z M42.6666667,157.653333 L42.6666667,307.920144 L85.333,332.555 L85.333,182.286 L42.6666667,157.653333 Z M275.991,97.759 L150.413,170.595 L192,194.605531 L317.866667,121.936377 L275.991,97.759 Z M192,49.267223 L66.1333333,121.936377 L107.795,145.989 L233.374,73.154 L192,49.267223 Z"
-                                            id="Combined-Shape"> </path>
-                                    </g>
+                        <g id="SVGRepo_iconCarrier">
+                            <title>product</title>
+                            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g id="icon" fill="#000000" transform="translate(64.000000, 34.346667)">
+                                    <path
+                                        d="M192,7.10542736e-15 L384,110.851252 L384,332.553755 L192,443.405007 L1.42108547e-14,332.553755 L1.42108547e-14,110.851252 L192,7.10542736e-15 Z M127.999,206.918 L128,357.189 L170.666667,381.824 L170.666667,231.552 L127.999,206.918 Z M42.6666667,157.653333 L42.6666667,307.920144 L85.333,332.555 L85.333,182.286 L42.6666667,157.653333 Z M275.991,97.759 L150.413,170.595 L192,194.605531 L317.866667,121.936377 L275.991,97.759 Z M192,49.267223 L66.1333333,121.936377 L107.795,145.989 L233.374,73.154 L192,49.267223 Z"
+                                        id="Combined-Shape"> </path>
                                 </g>
                             </g>
+                        </g>
 
-                        </svg>
-                    </span>
-                    <span>Data Produk</span>
-                </li>
-                @can('melihat produk')
-                    <li><a href="{{ route('products.index') }}" wire:navigate>Produk</a></li>
-                @endcan
-                @can('melihat catatan pengeluaran')
-                    <li><a href="{{ route('expenses.index') }}" wire:navigate>Catatan Stock Produk</a></li>
-                @endcan
+                    </svg>
+                </span>
+                <span>Data Produk</span>
+            </li>
+            @can('melihat produk')
+                <li><a href="{{ route('products.index') }}" wire:navigate>Produk</a></li>
+            @endcan
+            @can('melihat catatan pengeluaran')
+                <li><a href="{{ route('expenses.index') }}" wire:navigate>Catatan Stock Produk</a></li>
+            @endcan
         </ul>
     @endcanany
     {{-- Penjualan --}}
     @can('melihat penjualan')
         <ul class="px-4 py-0 menu menu-sm lg:menu-md">
             <li></li>
-                <li class="flex flex-row items-center gap-4 menu-title">
-                    <span class="text-base-content">
-                        <svg width="24" height="24" viewBox="0 0 512 512" version="1.1"
-                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000">
+            <li class="flex flex-row items-center gap-4 menu-title">
+                <span class="text-base-content">
+                    <svg width="24" height="24" viewBox="0 0 512 512" version="1.1"
+                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000">
 
-                            <g id="SVGRepo_bgCarrier" stroke-width="0" />
+                        <g id="SVGRepo_bgCarrier" stroke-width="0" />
 
-                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
 
-                            <g id="SVGRepo_iconCarrier">
-                                <title>product</title>
-                                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                    <g id="icon" fill="#000000" transform="translate(64.000000, 34.346667)">
-                                        <path
-                                            d="M192,7.10542736e-15 L384,110.851252 L384,332.553755 L192,443.405007 L1.42108547e-14,332.553755 L1.42108547e-14,110.851252 L192,7.10542736e-15 Z M127.999,206.918 L128,357.189 L170.666667,381.824 L170.666667,231.552 L127.999,206.918 Z M42.6666667,157.653333 L42.6666667,307.920144 L85.333,332.555 L85.333,182.286 L42.6666667,157.653333 Z M275.991,97.759 L150.413,170.595 L192,194.605531 L317.866667,121.936377 L275.991,97.759 Z M192,49.267223 L66.1333333,121.936377 L107.795,145.989 L233.374,73.154 L192,49.267223 Z"
-                                            id="Combined-Shape"> </path>
-                                    </g>
+                        <g id="SVGRepo_iconCarrier">
+                            <title>product</title>
+                            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g id="icon" fill="#000000" transform="translate(64.000000, 34.346667)">
+                                    <path
+                                        d="M192,7.10542736e-15 L384,110.851252 L384,332.553755 L192,443.405007 L1.42108547e-14,332.553755 L1.42108547e-14,110.851252 L192,7.10542736e-15 Z M127.999,206.918 L128,357.189 L170.666667,381.824 L170.666667,231.552 L127.999,206.918 Z M42.6666667,157.653333 L42.6666667,307.920144 L85.333,332.555 L85.333,182.286 L42.6666667,157.653333 Z M275.991,97.759 L150.413,170.595 L192,194.605531 L317.866667,121.936377 L275.991,97.759 Z M192,49.267223 L66.1333333,121.936377 L107.795,145.989 L233.374,73.154 L192,49.267223 Z"
+                                        id="Combined-Shape"> </path>
                                 </g>
                             </g>
+                        </g>
 
-                        </svg>
-                    </span>
-                    <span>Data Penjualan</span>
-                </li>
-                {{-- @can('melihat catatan pengeluaran') --}}
-                    <li><a href="{{ route('sellings.index') }}" wire:navigate>Penjualan</a></li>
-                {{-- @endcan --}}
+                    </svg>
+                </span>
+                <span>Data Penjualan</span>
+            </li>
+            {{-- @can('melihat catatan pengeluaran') --}}
+            <li><a href="{{ route('sellings.index') }}" wire:navigate>Penjualan</a></li>
+            {{-- @endcan --}}
         </ul>
     @endcan
     {{-- Transaksi --}}
