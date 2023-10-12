@@ -15,7 +15,7 @@
                 <label class="label">
                     <span class="label-text">Nama</span>
                 </label>
-                <input type="text" wire:model="form.name" name="name"
+                <input type="text" wire:model.blur="form.name" name="name"
                     class="input w-full border-opacity-80 border-2 border-[#272343] focus:outline-none">
                 <label class="label">
                     @error('form.name')
@@ -39,13 +39,14 @@
                 <label class="label">
                     <span class="label-text">Username</span>
                 </label>
-                <input type="text" wire:model="form.username" name="username"
-                    class="input w-full border-opacity-80 border-2 border-[#272343] focus:outline-none">
+                <input type="text" wire:model="form.username"
+                    class="input w-full border-opacity-80 border-2 border-[#272343] focus:outline-none" disabled>
                 <label class="label">
                     @error('form.username')
                         <span class="text-sm label-text-alt text-rose-600">{{ $message }}</span>
                     @enderror
                 </label>
+                <div wire:dirty wire:target="form.name" class="text-xs">Membuat username...</div>
             </div>
             <div class="form-control">
                 <label class="label">

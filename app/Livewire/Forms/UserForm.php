@@ -19,7 +19,7 @@ class UserForm extends Form
 
     public $name;
 
-    public $email;
+    public $email = 'dummy@gmail.com';
 
     public $username;
 
@@ -93,7 +93,7 @@ class UserForm extends Form
         return [
             'name' => ['required', 'regex:/^[a-zA-Z\s]*$/'],
             'email' => ['required', 'email'],
-            'username' => ['sometimes', 'regex:/^[.,a-zA-Z\s]*$/'],
+            'username' => ['sometimes'],
             'password' => ['sometimes', 'regex:/^[a-zA-Z0-9\s]*$/'],
             'address' => ['required', 'regex:/^[.,a-zA-Z0-9\s]*$/'],
             'telephone_number' => ['required', 'numeric', 'min_digits:12', 'max_digits:13'],

@@ -2,9 +2,10 @@
 
 namespace App\Livewire\Users;
 
-use App\Livewire\Forms\UserForm;
-use Livewire\Attributes\Title;
 use Livewire\Component;
+use Illuminate\Support\Str;
+use Livewire\Attributes\Title;
+use App\Livewire\Forms\UserForm;
 
 class CreateUsers extends Component
 {
@@ -32,4 +33,9 @@ class CreateUsers extends Component
         'form.address' => 'alamat',
         'form.telephone_number' => 'no telepon',
     ];
+
+    public function updatedFormName($data)
+    {
+        $this->form->username = Str::slug($data, '_');
+    }
 }
