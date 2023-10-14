@@ -12,6 +12,10 @@ class StocksForm extends Form
 
     public $modeInput = 'tambah';
 
+    public $allStocks;
+
+    public $cekStockAlreadyExists = false;
+
     #[Url(as: 'search', history: true)]
     public $search = '';
 
@@ -27,7 +31,7 @@ class StocksForm extends Form
 
     public $price;
 
-    // public $total;
+    public $total_price;
 
     public $initial_stock;
 
@@ -41,9 +45,7 @@ class StocksForm extends Form
         $this->name = $stock->name;
         $this->purchase_date = $stock->purchase_date->format('Y-m-d');
         $this->price = $stock->price;
-
-        // $this->total = $stock->total;
-
+        $this->total_price = $stock->total_price;
         $this->initial_stock = $stock->initial_stock;
         $this->remaining_stock = $stock->remaining_stock;
 
@@ -54,7 +56,7 @@ class StocksForm extends Form
     {
         try {
             $this->remaining_stock = $this->initial_stock;
-            Stock::create($this->only(['supplier_id', 'unit_id', 'name', 'purchase_date', 'price', 'initial_stock', 'remaining_stock']));
+            Stock::create($this->only(['supplier_id', 'unit_id', 'name', 'purchase_date', 'price', 'total_price', 'initial_stock', 'remaining_stock']));
             session()->flash('status', 'Bahan baku berhasil di tambah');
         } catch (\Exception $e) {
             return back()->with('status', $e->getMessage());
@@ -64,7 +66,7 @@ class StocksForm extends Form
     public function update()
     {
         try {
-            $this->stock->update($this->only(['supplier_id', 'unit_id', 'name', 'purchase_date', 'price', 'initial_stock', 'remaining_stock']));
+            $this->stock->update($this->only(['supplier_id', 'unit_id', 'name', 'purchase_date', 'price', 'total_price', 'initial_stock', 'remaining_stock']));
             $this->resetField();
             session()->flash('status', 'Bahan baku berhasil di ubah');
         } catch (\Exception $e) {
@@ -92,11 +94,12 @@ class StocksForm extends Form
             'purchase_date' => ['required', 'date'],
             'price' => ['required', 'numeric'],
             'initial_stock' => ['required', 'numeric'],
+            'total_price' => ['required'],
         ];
     }
 
     protected function resetField()
     {
-        return $this->reset('supplier_id', 'unit_id', 'name', 'purchase_date', 'price', 'initial_stock', 'stock', 'modeInput');
+        return $this->reset('supplier_id', 'unit_id', 'name', 'purchase_date', 'price', 'total_price', 'initial_stock', 'stock', 'modeInput');
     }
 }

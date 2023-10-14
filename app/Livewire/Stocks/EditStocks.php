@@ -2,12 +2,13 @@
 
 namespace App\Livewire\Stocks;
 
-use App\Livewire\Forms\StocksForm;
-use App\Models\Stock;
-use App\Models\Supplier;
 use App\Models\Unit;
-use Livewire\Attributes\Title;
+use App\Models\Stock;
 use Livewire\Component;
+use App\Models\Supplier;
+use Livewire\Attributes\Title;
+use App\Livewire\Forms\StocksForm;
+use Illuminate\Support\Facades\DB;
 
 class EditStocks extends Component
 {
@@ -15,8 +16,8 @@ class EditStocks extends Component
 
     public function mount(Stock $stock)
     {
+        $this->form->allStocks = DB::table('stocks')->distinct()->get(['name']);
         $this->form->setPost($stock);
-        // dd($this->form->purchase_date);
     }
 
     public function submit()
@@ -43,5 +44,36 @@ class EditStocks extends Component
         'form.purchase_date' => 'tanggal_pengadaan',
         'form.price' => 'harga',
         'form.initial_stock' => 'jumlah',
+        'form.total_price' => 'total',
     ];
+
+    public function addNewStock()
+    {
+        $this->form->cekStockAlreadyExists = true;
+    }
+    
+    public function updatedFormPrice()
+    {
+        if ($this->form->price != '') {
+            $this->form->price = str_replace(".", "", $this->form->price);
+            $this->form->price = number_format($this->form->price, 0, ',', '.');
+
+            if ($this->form->initial_stock != '') {
+                $this->form->total_price = str_replace(".", "", $this->form->price) * $this->form->initial_stock;
+                $this->form->total_price = number_format($this->form->total_price, 0, ',', '.');
+            } else {
+                $this->form->total_price = 0;
+            }
+        } 
+    }
+
+    public function updatedFormInitialStock()
+    {
+        if ($this->form->initial_stock != '' && $this->form->price != '') {
+            $this->form->total_price = str_replace(".", "", $this->form->price) * $this->form->initial_stock;
+            $this->form->total_price = number_format($this->form->total_price, 0, ',', '.');
+        } else {
+            $this->form->total_price = 0;
+        }
+    }
 }

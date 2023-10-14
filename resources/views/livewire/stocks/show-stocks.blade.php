@@ -61,6 +61,7 @@
                             <th scope="col" class="px-4 py-3">Tanggal Pengadaan</th>
                             <th scope="col" class="px-4 py-3">Stok Awal</th>
                             <th scope="col" class="px-4 py-3">Harga</th>
+                            <th scope="col" class="px-4 py-3">Total</th>
                             <th scope="col" class="px-4 py-3">Stock Tersisa</th>
                             <th scope="col" class="px-4 py-3">Satuan</th>
                             <th scope="col" class="px-4 py-3">
@@ -76,7 +77,8 @@
                                 <td class="px-4 py-3">{{ $stock->supplier->name }}</td>
                                 <td class="px-4 py-3">{{ $stock->purchase_date->format('d/m/Y') }}</td>
                                 <td class="px-4 py-3">{{ $stock->initial_stock }}</td>
-                                <td class="px-4 py-3">Rp. {{ number_format($stock->price, 0, ',', '.') }}</td>
+                                <td class="px-4 py-3">Rp. {{ $stock->price }}</td>
+                                <td class="px-4 py-3">Rp. {{ $stock->total_price }}</td>
                                 <td class="px-4 py-3">{{ $stock->remaining_stock }}</td>
                                 <td class="px-4 py-3">{{ $stock->unit->name }}</td>
                                 <td class="flex items-center justify-end px-4 py-3">
@@ -115,7 +117,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="9" class="px-4 py-3 text-center">Tidak ada data di temukan</td>
+                                <td colspan="10" class="px-4 py-3 text-center">Tidak ada data di temukan</td>
                             </tr>
                         @endforelse
                     </tbody>
