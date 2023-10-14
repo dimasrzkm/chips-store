@@ -32,22 +32,31 @@ class EditProducts extends Component
 
     public function updatedFormInitialPrice($data)
     {
-        $this->form->initial_price = $data;
-        if ($this->form->percentage_profit != '' && $data != '') {
-            $this->form->calculatePrice();
-        } else {
-            $this->form->sale_price = $data;
-        }
+        $this->form->initial_price = str_replace('.', '', $this->form->initial_price);
+        $this->form->sale_price = str_replace('.', '', $this->form->sale_price);
+
+        $this->changeFormatAndCalculatePrice('percentage_profit', $data);
     }
 
     public function updatedFormPercentageProfit($data)
     {
-        $this->form->percentage_profit = $data;
-        if ($this->form->initial_price != '' && $data != '') {
+        $this->form->initial_price = str_replace('.', '', $this->form->initial_price);
+        $this->form->sale_price = str_replace('.', '', $this->form->sale_price);
+
+        $this->changeFormatAndCalculatePrice('initial_price', $data);
+    }
+
+    public function changeFormatAndCalculatePrice($data1, $data2)
+    {
+        if ($this->form->$data1 != '' && $data2 != '') {
             $this->form->calculatePrice();
+            $this->form->sale_price = number_format($this->form->sale_price, 0, ',', '.');
         } else {
-            $this->form->sale_price = $this->form->initial_price;
+            $this->form->sale_price = ($this->form->initial_price != '') ? $this->form->initial_price : 0;
+            $this->form->sale_price = number_format($this->form->sale_price, 0, ',', '.');
         }
+        $this->form->initial_price = ($this->form->initial_price != '') ? $this->form->initial_price : 0;
+        $this->form->initial_price = number_format($this->form->initial_price, 0, ',', '.');
     }
 
     public function updatedFormCategoryProduct($data)

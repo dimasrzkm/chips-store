@@ -27,7 +27,7 @@
                 <label class="label">
                     <span class="label-text">Harga Dasar Produk</span>
                 </label>
-                <input type="number" wire:model.live.debounce.750ms="form.initial_price" name="initial_price"
+                <input type="text" wire:model.blur="form.initial_price" name="initial_price"
                     class="input w-full border-opacity-80 border-2 border-[#272343] focus:outline-none">
                 <label class="label">
                     @error('form.initial_price')
@@ -39,7 +39,7 @@
                 <label class="label">
                     <span class="label-text">Persentase Keuntungan</span>
                 </label>
-                <input type="number" wire:model.live.debounce.750ms="form.percentage_profit" name="percentage_profit"
+                <input type="number" wire:model.live.blur="form.percentage_profit" name="percentage_profit"
                     class="input w-full border-opacity-80 border-2 border-[#272343] focus:outline-none">
                 <label class="label">
                     @error('form.percentage_profit')
@@ -51,7 +51,7 @@
                 <label class="label">
                     <span class="label-text">Harga Jual</span>
                 </label>
-                <input type="number" wire:model="form.sale_price" name="sale_price"
+                <input type="text" wire:model="form.sale_price" name="sale_price"
                     class="input w-full border-opacity-80 border-2 border-[#272343] focus:outline-none" disabled>
                 <label class="label">
                     @error('form.sale_price')
