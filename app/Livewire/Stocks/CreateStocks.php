@@ -2,12 +2,12 @@
 
 namespace App\Livewire\Stocks;
 
-use App\Models\Unit;
-use Livewire\Component;
-use App\Models\Supplier;
-use Livewire\Attributes\Title;
 use App\Livewire\Forms\StocksForm;
+use App\Models\Supplier;
+use App\Models\Unit;
 use Illuminate\Support\Facades\DB;
+use Livewire\Attributes\Title;
+use Livewire\Component;
 
 class CreateStocks extends Component
 {
@@ -53,22 +53,22 @@ class CreateStocks extends Component
     public function updatedFormPrice()
     {
         if ($this->form->price != '') {
-            $this->form->price = str_replace(".", "", $this->form->price);
+            $this->form->price = str_replace('.', '', $this->form->price);
             $this->form->price = number_format($this->form->price, 0, ',', '.');
 
             if ($this->form->initial_stock != '') {
-                $this->form->total_price = str_replace(".", "", $this->form->price) * $this->form->initial_stock;
+                $this->form->total_price = str_replace('.', '', $this->form->price) * $this->form->initial_stock;
                 $this->form->total_price = number_format($this->form->total_price, 0, ',', '.');
             } else {
                 $this->form->total_price = 0;
             }
-        } 
+        }
     }
 
     public function updatedFormInitialStock()
     {
         if ($this->form->initial_stock != '' && $this->form->price != '') {
-            $this->form->total_price = str_replace(".", "", $this->form->price) * $this->form->initial_stock;
+            $this->form->total_price = str_replace('.', '', $this->form->price) * $this->form->initial_stock;
             $this->form->total_price = number_format($this->form->total_price, 0, ',', '.');
         } else {
             $this->form->total_price = 0;

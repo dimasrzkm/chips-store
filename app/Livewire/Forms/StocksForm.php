@@ -92,7 +92,7 @@ class StocksForm extends Form
             'unit_id' => ['required'],
             'name' => ['required'],
             'purchase_date' => ['required', 'date'],
-            'price' => ['required', 'numeric'],
+            'price' => ['required'],
             'initial_stock' => ['required', 'numeric'],
             'total_price' => ['required'],
         ];
