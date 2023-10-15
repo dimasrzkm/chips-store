@@ -71,36 +71,41 @@ class SellingForm extends Form
     public function create()
     {
         DB::beginTransaction();
-        try {
-            $selling = Selling::create($this->only(['user_id', 'number_transaction', 'transaction_code', 'selling_date', 'total', 'nominal_payment', 'nominal_return']));
-            if (! empty($this->selectedProducts)) {
-                foreach ($this->selectedProducts as $select) {
-                    $product = Product::where('name', $select['name'])->first();
-                    // cek apakah unit yang dijual merupakan sekilo atau pcs
-                    if ($select['selected_purchase_unit'] == 'sekilo' || $select['selected_purchase_unit'] == 'pcs') {
-                        // maka cek terlebih dahulu dengan stock di produk 
-                        $tempQuantity = ($product->stock >= $select['quantity']) ? $select['quantity'] : '';
-                    } else {
-                        $tempQuantity = $select['quantity'];
+        if ($this->nominal_payment >= $this->total) {
+            try {
+                $selling = Selling::create($this->only(['user_id', 'number_transaction', 'transaction_code', 'selling_date', 'total', 'nominal_payment', 'nominal_return']));
+                if (! empty($this->selectedProducts)) {
+                    foreach ($this->selectedProducts as $select) {
+                        $product = Product::where('name', $select['name'])->first();
+                        // cek apakah unit yang dijual merupakan sekilo atau pcs
+                        if ($select['selected_purchase_unit'] == 'sekilo' || $select['selected_purchase_unit'] == 'pcs') {
+                            // maka cek terlebih dahulu dengan stock di produk
+                            $tempQuantity = ($product->stock >= $select['quantity']) ? $select['quantity'] : '';
+                        } else {
+                            $tempQuantity = $select['quantity'];
+                        }
+                        $selling->products()->attach([
+                            $product->id => [
+                                'product_name' => $select['name'],
+                                'quantity' => $tempQuantity,
+                                'sub_total' => $select['sub_total'],
+                                'purchase_unit' => $select['selected_purchase_unit'],
+                            ],
+                        ]);
                     }
-                    $selling->products()->attach([
-                        $product->id => [
-                            'product_name' => $select['name'],
-                            'quantity' => $tempQuantity,
-                            'sub_total' => $select['sub_total'],
-                            'purchase_unit' => $select['selected_purchase_unit'],
-                        ],
-                    ]);
+                    DB::commit();
+                    SellingHistory::dispatch($this->selectedProducts);
+                    session()->flash('status', 'Pembelian berhasil!');
+                    $this->reset('user_id', 'number_transaction', 'transaction_code', 'selling_date', 'total', 'nominal_payment', 'nominal_return');
+                } else {
+                    DB::rollBack();
+                    session()->flash('status', 'Pembelian gagal!');
                 }
-                DB::commit();
-                SellingHistory::dispatch($this->selectedProducts);
-                session()->flash('status', 'Pembelian berhasil!');
-                $this->reset('user_id', 'number_transaction', 'transaction_code', 'selling_date', 'total', 'nominal_payment', 'nominal_return');
-            } else {
+            } catch (\Exception $e) {
                 DB::rollBack();
                 session()->flash('status', 'Pembelian gagal!');
             }
-        } catch (\Exception $e) {
+        } else {
             DB::rollBack();
             session()->flash('status', 'Pembelian gagal!');
         }

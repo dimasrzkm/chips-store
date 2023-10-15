@@ -46,7 +46,7 @@
                         @enderror
                     </div>
                     <div class="md:col-span-2">
-                        <input type="number" wire:model="form.sale_price"
+                        <input type="text" wire:model="form.sale_price"
                             class="input w-full border-opacity-80 border-2 border-[#272343] focus:outline-none"
                             disabled>
                     </div>
@@ -106,8 +106,26 @@
                                         <td class="px-4 py-3">{{ $index + 1 }}</td>
                                         <td class="px-4 py-3">{{ $item['name'] }}</td>
                                         <td class="px-4 py-3">{{ $item['quantity'] }}</td>
-                                        <td class="px-4 py-3">{{ $item['selected_purchase_unit'] }}</td>
-                                        <td class="px-4 py-3">Rp. {{ number_format($item['sale_price'], 0, ',', '.') }}
+                                        <td class="px-4 py-3">
+                                            @switch($item['selected_purchase_unit'])
+                                                @case('seperempat')
+                                                    1/4 Kg
+                                                @break
+
+                                                @case('setengah')
+                                                    1/2 Kg
+                                                @break
+
+                                                @case('sekilo')
+                                                    1 Kg
+                                                @break
+
+                                                @default
+                                                    {{ $item['selected_purchase_unit'] }}
+                                            @endswitch
+
+                                        </td>
+                                        <td class="px-4 py-3">Rp. {{ $item['sale_price'] }}
                                         </td>
                                         <td class="px-4 py-3">Rp. {{ number_format($item['sub_total'], 0, ',', '.') }}
                                         </td>
@@ -135,13 +153,13 @@
                     <div class="grid md:items-center md:justify-center gap-y-3 md:grid-cols-3">
                         <label for="">Total</label>
                         <div class="md:col-span-2">
-                            <input type="number" wire:model="form.total"
+                            <input type="text" wire:model="form.total"
                                 class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                 disabled>
                         </div>
                         <label for="">Bayar</label>
                         <div class="md:col-span-2">
-                            <input type="number" wire:model.live.debounce.800ms="form.nominal_payment"
+                            <input type="text" wire:model.blur="form.nominal_payment"
                                 class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                             @error('form.nominal_payment')
                                 <label class="block label">
@@ -151,7 +169,7 @@
                         </div>
                         <label for="">Kembalian</label>
                         <div class="md:col-span-2">
-                            <input type="number" wire:model="form.nominal_return"
+                            <input type="text" wire:model="form.nominal_return"
                                 class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                 disabled>
                         </div>

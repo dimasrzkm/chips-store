@@ -54,7 +54,7 @@
                             {{ $item['pivot']['purchase_unit'] }}
                         @endif
                     </td>
-                    <td>Rp. {{ number_format($item['sale_price'], 0, ',', '.') }}</td>
+                    <td>Rp. {{ $item['sale_price'] }}</td>
                     <td>Rp. {{ number_format($item['pivot']['sub_total'], 0, ',', '.') }}</td>
                 </tr>
             @endforeach

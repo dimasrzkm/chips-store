@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -22,6 +23,36 @@ class Selling extends Model
     protected $casts = [
         'selling_date' => 'date',
     ];
+
+    /**
+     * Interact with the stock's price
+     */
+    protected function total(): Attribute
+    {
+        return Attribute::make(
+            set: fn (string $value) => str_replace('.', '', $value),
+        );
+    }
+
+    /**
+     * Interact with the stock's price
+     */
+    protected function nominalPayment(): Attribute
+    {
+        return Attribute::make(
+            set: fn (string $value) => str_replace('.', '', $value),
+        );
+    }
+
+    /**
+     * Interact with the stock's price
+     */
+    protected function nominalReturn(): Attribute
+    {
+        return Attribute::make(
+            set: fn (string $value) => str_replace('.', '', $value),
+        );
+    }
 
     public function products()
     {
