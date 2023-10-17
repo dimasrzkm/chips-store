@@ -13,12 +13,12 @@ class PermissionsForm extends Form
     public $name;
 
     public $guardName = 'web';
-    
+
     #[Url(as: 'search', history: true)]
     public $search = '';
-    
+
     public $showPerPage = 10;
-    
+
     public $modeInput = 'tambah';
 
     public function setPost(Permission $permission)

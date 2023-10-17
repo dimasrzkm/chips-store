@@ -20,12 +20,12 @@ class UserSeeder extends Seeder
             ],
             [
                 'name' => 'Salsa S',
-                'username' => 'salsa.s',
+                'username' => 'salsa_s',
                 'email' => 'salsa@gmail.com',
             ],
             [
                 'name' => 'Salma S',
-                'username' => 'salma.s',
+                'username' => 'salma_s',
                 'email' => 'salma@gmail.com',
             ],
         ];

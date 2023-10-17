@@ -2,10 +2,10 @@
 
 namespace App\Livewire\Users;
 
-use Livewire\Component;
+use App\Livewire\Forms\UserForm;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Title;
-use App\Livewire\Forms\UserForm;
+use Livewire\Component;
 
 class CreateUsers extends Component
 {
