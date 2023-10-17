@@ -56,7 +56,6 @@ class ShowSellings extends Component
 
     public function printReceipt($selling)
     {
-        // dd($selling['products']);
         GenerateReceipt::dispatch($selling);
     }
 

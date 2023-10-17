@@ -21,8 +21,9 @@
         <div>
             <p>No Transaksi : {{ $selling['transaction_code'] }}</p>
             <p style="margin-top: -20px;">
-                Tanggal : {{ Carbon\Carbon::parse( date('Y-m-d', strtotime($selling['selling_date'])) )->format('d/m/Y') }},  
-                {{ Carbon\Carbon::parse(date('Y-m-d H:i:s', strtotime($selling['created_at'])) )->format('H:i:s') }}
+                Tanggal :
+                {{ Carbon\Carbon::parse(date('Y-m-d', strtotime($selling['selling_date'])))->format('d/m/Y') }},
+                {{ Carbon\Carbon::parse(date('Y-m-d H:i:s', strtotime($selling['created_at'])))->format('H:i:s') }}
             </p>
         </div>
     </div>
@@ -72,6 +73,12 @@
             </tr>
         </tbody>
     </table>
+
+    <script>
+        setTimeout(() => {
+            window.print();
+        }, 1000);
+    </script>
 </body>
 
 </html>
