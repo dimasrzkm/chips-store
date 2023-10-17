@@ -23,20 +23,25 @@ class ShowReportStocks extends Component
     public function exportAs($export)
     {
         $this->validate();
-        $stocks = Stock::with('expenses')
-            ->whereBetween('purchase_date', [$this->tanggal_awal, $this->tanggal_akhir])
-            ->get();
+        // $stocks = Stock::with('expenses')
+        //     ->whereBetween('purchase_date', [$this->tanggal_awal, $this->tanggal_akhir])
+        //     ->get();
 
-        $pdf = Pdf::loadView('pdf.stock', [
-            'stocks' => $stocks,
-            'tanggal_awal' => Carbon::parse($this->tanggal_awal)->format('d F Y'),
-            'tanggal_akhir' => Carbon::parse($this->tanggal_akhir)->format('d F Y'),
-        ])->setPaper('a4', 'landscape')->output();
+        // return to_route('laporan.stock', [
+        //     'tanggalAwal' => $this->tanggal_awal,
+        //     'tanggalAkhir' => $this->tanggal_akhir,
+        // ]);
 
-        return response()->streamDownload(
-            fn () => print($pdf),
-            'laporan_bahan_baku.pdf'
-        );
+        // $pdf = Pdf::loadView('pdf.stock', [
+        //     'stocks' => $stocks,
+        //     'tanggal_awal' => Carbon::parse($this->tanggal_awal)->format('d F Y'),
+        //     'tanggal_akhir' => Carbon::parse($this->tanggal_akhir)->format('d F Y'),
+        // ])->setPaper('a4', 'landscape')->output();
+
+        // return response()->streamDownload(
+        //     fn () => print($pdf),
+        //     'laporan_bahan_baku.pdf'
+        // );
     }
 
     public function rules()
