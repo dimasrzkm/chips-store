@@ -61,10 +61,26 @@
                 </div>
                 {{-- menambah w-full untuk satu component agar fit dengan card --}}
                 <div class="flex items-center justify-end mt-3">
-                    <button type="button" wire:click="printPayment()"
-                        class="px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Cetak
-                        Pelunasan
-                    </button>
+                    @if ($consigmentId != '')
+                        {{-- <li><a target="_blank"
+                                href="{{ route('laporan.penjualan', [
+                                    'tanggalAwal' => Crypt::encryptString($tanggal_awal),
+                                    'tanggalAkhir' => Crypt::encryptString($tanggal_akhir),
+                                ]) }}">Pdf</a>
+                        </li> --}}
+                        <a type="button" target="_blank"
+                            href="{{ route('laporan.pelunasan', [
+                                'consigmentId' => Crypt::encryptString($consigmentId),
+                            ]) }}"
+                            class="px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Cetak
+                            Pelunasan
+                        </a>
+                    @else
+                        <button type="button" wire:click="printPayment()"
+                            class="px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Cetak
+                            Pelunasan
+                        </button>
+                    @endif
                     <x-loading />
                 </div>
             </div>

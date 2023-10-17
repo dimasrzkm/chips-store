@@ -19,7 +19,7 @@
             <p>Jl. Pagar Alam No.49, Kedaton, Kec. Kedaton, Kota Bandar Lampung, Lampung 35152</p>
         </div>
         <div>
-            <p>Pelunasan per tanggal : {{ $consigmentDate->format('d F Y') ." s/d ". now()->format('d F Y') }}</p>
+            <p>Pelunasan per tanggal : {{ $consigmentDate->format('d F Y') . ' s/d ' . now()->format('d F Y') }}</p>
         </div>
     </div>
     <table class="table table-sm" style="margin-bottom: 50px;">
@@ -43,8 +43,7 @@
             @foreach ($products as $index => $product)
                 @php
                     $productYangTerjualSelamaPenitipan = $product->sellings->filter(function ($prod) use ($consigmentDate) {
-                        return $prod->selling_date->format('Y-m-d') >= $consigmentDate->format('Y-m-d') 
-                            && $prod->selling_date->format('Y-m-d') <= now()->format('Y-m-d');
+                        return $prod->selling_date->format('Y-m-d') >= $consigmentDate->format('Y-m-d') && $prod->selling_date->format('Y-m-d') <= now()->format('Y-m-d');
                     });
                     $quantityProduct = $productYangTerjualSelamaPenitipan->reduce(function ($acc, $next) {
                         return $acc + $next->pivot->quantity;
@@ -54,14 +53,14 @@
                     <td>{{ $index + 1 }}</td>
                     <td>{{ $product->name }}</td>
                     <td>{{ $product->pivot->total_consigment }}</td>
-                    <td>{{ $quantityProduct ? $quantityProduct : 0; }}</td>
+                    <td>{{ $quantityProduct ? $quantityProduct : 0 }}</td>
                     <td>{{ $jumlahKembali = $product->pivot->total_consigment - $quantityProduct }}</td>
-                    <td>Rp. {{ number_format($product->initial_price, 0, ',', '.') }}</td>
-                    <td>Rp. {{ number_format($product->sale_price, 0, ',', '.') }}</td>
+                    <td>Rp. {{ $product->initial_price }}</td>
+                    <td>Rp. {{ $product->sale_price }}</td>
                     <td>{{ $product->pivot->konsinyor_name }}</td>
                     @php
-                        $totalPenjualanKotor += $quantityProduct * $product->sale_price;
-                        $totalPenjualanBersih += $quantityProduct * $product->initial_price;
+                        $totalPenjualanKotor += $quantityProduct * str_replace('.', '', $product->sale_price);
+                        $totalPenjualanBersih += $quantityProduct * str_replace('.', '', $product->initial_price);
                     @endphp
                 </tr>
             @endforeach
@@ -75,7 +74,7 @@
             </tr>
             <tr>
                 <td colspan="7">Total Dibayarkan</td>
-                <td>Rp. {{ number_format($totalPenjualanKotor - $totalPenjualanBersih, 0, ',', '.') }}</td>
+                <td>Rp. {{ number_format($totalPenjualanKotor - $totalPenjualanBersih, 0, ',', '.') }} </td>
             </tr>
         </tbody>
     </table>
@@ -87,6 +86,11 @@
         <span>{{ $konsinyorName }}</span>
         <span style="margin-left: 180px;">{{ $nameMakingReport }}</span>
     </div>
+    <script>
+        setTimeout(() => {
+            window.print();
+        }, 1000);
+    </script>
 </body>
 
 </html>
