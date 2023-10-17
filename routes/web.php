@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ReportsController;
 use App\Livewire\Consigments\CreateConsigments;
 use App\Livewire\Consigments\ShowConsigments;
 use App\Livewire\Expenses\CreateExpenses;
@@ -119,6 +120,42 @@ Route::middleware(['auth'])->group(function () {
 
 });
 
-Route::get('/receipts/{receipt:name}', function (Receipt $receipt) {
-    return Storage::response('public/receipts/'.$receipt->name);
+Route::prefix('laporan')->group(function () {
+    Route::get('penjualan/{tanggalAwal}/{tanggalAkhir}', [ReportsController::class, 'exportPenjualan'])->name('laporan.penjualan');
+    Route::get('pelunasan/{consigmentId}', [ReportsController::class, 'exportPelunasan'])->name('laporan.pelunasan');
+    Route::get('struk/{selling}', [ReportsController::class, 'exportStruk'])->name('laporan.struk');
+    Route::get('stock/{tanggalAwal}/{tanggalAkhir}', [ReportsController::class, 'exportStock'])->name('laporan.stock');
 });
+
+// Route::get('/receipts/{receipt:name}', function (Receipt $receipt) {
+//     return Storage::response('public/receipts/'.$receipt->name);
+// });
+
+// Route::get('/enter_month_num', function () {
+//     $tests = [];
+
+//     dd(Carbon::now()->format('m'));
+
+//     $count = Illuminate\Support\Carbon::createFromDate(2023, 6, 1)->endOfMonth()->weekOfMonth;
+
+//     $start = Illuminate\Support\Carbon::createFromDate(2023, 6, 1)->startOfDay();
+
+//     $count = ($count == 5) ? $count - 1 : $count;
+
+//     for ($i = 0; $i < $count; $i++) {
+//         if ($i == 3 && $count == $count) {
+//             $tests[] = [
+//                 'start' => $start->format('D, d m Y'),
+//                 'end' => $start->endOfMonth()->format('D, d m Y'),
+//             ];
+//         } else {
+//             $tests[] = [
+//                 'start' => $start->format('D, d m Y'),
+//                 'end' => $start->addDay(6)->format('D, d m Y'),
+//             ];
+//         }
+//         $start->addDay();
+//     }
+
+//     return compact('tests');
+// });
