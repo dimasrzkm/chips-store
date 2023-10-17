@@ -3,7 +3,7 @@
         auth()->user()->roles->pluck('name')->toArray()) ||
         auth()->user()->roles->count() == 0) h-screen @endif w-80 bg-base-200">
     <div
-        class="sticky top-0 z-20 items-center justify-center hidden gap-2 px-4 py-5 shadow-sm bg-base-200 bg-opacity-90 backdrop-blur lg:flex">
+        class="sticky top-0 z-20 items-center justify-center hidden gap-2 px-4 py-5 shadow-sm bg-base-200 bg-opacity-90 backdrop-blur lg:flex dark:shadow-gray-700">
         <a href="{{ route('dashboard') }}" class="text-2xl font-semibold text-center" wire:navigate>Dashboard</a>
     </div>
     {{-- responsive --}}

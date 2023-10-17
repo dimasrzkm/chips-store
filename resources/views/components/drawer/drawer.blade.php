@@ -1,7 +1,7 @@
 <div class="bg-base-100 drawer lg:drawer-open">
     <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
     <div class="drawer-content">
-        <div class="sticky top-0 z-10 shadow-sm navbar bg-base-100 bg-opacity-90 backdrop-blur">
+        <div class="sticky top-0 z-10 shadow-sm navbar bg-base-100 bg-opacity-90 backdrop-blur dark:shadow-gray-700">
             <div class="navbar-start">
                 <div>
                     <label class="btn btn-ghost lg:hidden" for="my-drawer-2">
