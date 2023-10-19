@@ -25,15 +25,19 @@ class updateTotalStock implements ShouldQueue
      */
     public function handle(StockHistory $event): void
     {
-        foreach ($event->allIngridients as $data) {
+        foreach ($event->allIngridients as $index => $data) {
             $stock = Stock::find($data['stock_id']);
-            if (strtolower($stock->name) == 'pisang') {
+            // info($stock);
+            if ($index == 0) {
                 $this->quantityForProduct += $data['quantity'];
             }
+            // if (strtolower($stock->name) == 'pisang') { //bug ketika menginputkan data produk sendiri yang bukan pisang
+            //     $this->quantityForProduct += $data['quantity'];
+            // }
             $stock->remaining_stock = ($event->modeEventStock == 'hapus') ? $stock->remaining_stock + $data['quantity'] : $stock->remaining_stock - $data['quantity'];
             $stock->update(['remaining_stock']);
         }
-
+        info($this->quantityForProduct);
         $product = Product::find($event->productId);
         $resultStock = ($event->modeEventStock == 'hapus') ? $product->stock - $this->quantityForProduct : $product->stock + $this->quantityForProduct;
         $product->update([
