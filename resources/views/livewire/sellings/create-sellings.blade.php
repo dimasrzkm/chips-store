@@ -56,6 +56,11 @@
                             disabled>
                     </div>
                     <div>
+                        <input type="text" wire:model="form.purchase_unit"
+                            class="input w-full border-opacity-80 border-2 border-[#272343] focus:outline-none"
+                            disabled>
+                    </div>
+                    <div>
                         <input type="number" wire:model="form.quantity"
                             class="input w-full border-opacity-80 border-2 border-[#272343] focus:outline-none">
                         @error('form.quantity')
