@@ -35,16 +35,28 @@
                 <span>Peran dan Perizinan</span>
             </li>
             @can('melihat peran')
-                <li><a href="{{ route('roles.index') }}" wire:navigate>Peran</a></li>
+                <li>
+                    <a href="{{ route('roles.index') }}" class="{{ request()->routeIs('roles.index') ? 'active' : '' }}"
+                        wire:navigate>Peran</a>
+                </li>
             @endcan
             @can('melihat izin')
-                <li><a href="{{ route('permissions.index') }}" wire:navigate><span>Izin</span></a></li>
+                <li>
+                    <a href="{{ route('permissions.index') }}"
+                        class="{{ request()->routeIs('permissions.index') ? 'active' : '' }}" wire:navigate>Izin</a>
+                </li>
             @endcan
             @can('melihat perizinan peran')
-                <li><a href="{{ route('assignable.index') }}" wire:navigate>Perizinan Peran</a></li>
+                <li>
+                    <a href="{{ route('assignable.index') }}"
+                        class="{{ request()->routeIs('assignable.index') ? 'active' : '' }}" wire:navigate>Perizinan Peran</a>
+                </li>
             @endcan
             @can('melihat peran pengguna')
-                <li><a href="{{ route('assign.index') }}" wire:navigate>Peran Pengguna</a></li>
+                <li>
+                    <a href="{{ route('assign.index') }}" class="{{ request()->routeIs('assign.index') ? 'active' : '' }}"
+                        wire:navigate>Peran Pengguna</a>
+                </li>
             @endcan
         </ul>
     @endcan
@@ -70,7 +82,10 @@
                 </span>
                 <span>Data Pengguna</span>
             </li>
-            <li><a href="{{ route('users.index') }}" wire:navigate>Pengguna</a></li>
+            <li>
+                <a href="{{ route('users.index') }}" class="{{ request()->routeIs('users.index') ? 'active' : '' }}"
+                    wire:navigate>Pengguna</a>
+            </li>
         </ul>
     @endcan
     {{-- Supplier --}}
@@ -105,10 +120,16 @@
                 <span>Data Supplier</span>
             </li>
             @can('melihat supplier')
-                <li><a href="{{ route('suppliers.index') }}" wire:navigate>Supplier</a></li>
+                <li>
+                    <a href="{{ route('suppliers.index') }}"
+                        class="{{ request()->routeIs('suppliers.index') ? 'active' : '' }}" wire:navigate>Supplier</a>
+                </li>
             @endcan
             @can('melihat bahan baku')
-                <li><a href="{{ route('stocks.index') }}" wire:navigate>Bahan Baku</a></li>
+                <li>
+                    <a href="{{ route('stocks.index') }}" class="{{ request()->routeIs('stocks.index') ? 'active' : '' }}"
+                        wire:navigate>Bahan Baku</a>
+                </li>
             @endcan
         </ul>
     @endcanany
@@ -140,10 +161,17 @@
                 <span>Penitip Barang</span>
             </li>
             @can('melihat konsinyor')
-                <li><a href="{{ route('konsinyors.index') }}" wire:navigate>Konsinyor</a></li>
+                <li>
+                    <a href="{{ route('konsinyors.index') }}"
+                        class="{{ request()->routeIs('konsinyors.index') ? 'active' : '' }}" wire:navigate>Konsinyor</a>
+                </li>
             @endcan
             @can('melihat catatan penitipan')
-                <li><a href="{{ route('consigments.index') }}" wire:navigate>Catatan Penitipan Barang</a></li>
+                <li>
+                    <a href="{{ route('consigments.index') }}"
+                        class="{{ request()->routeIs('consigments.index') ? 'active' : '' }}" wire:navigate>Catatan Penitipan
+                        Barang</a>
+                </li>
             @endcan
         </ul>
     @endcan
@@ -176,10 +204,17 @@
                 <span>Data Produk</span>
             </li>
             @can('melihat produk')
-                <li><a href="{{ route('products.index') }}" wire:navigate>Produk</a></li>
+                <li>
+                    <a href="{{ route('products.index') }}"
+                        class="{{ request()->routeIs('products.index') ? 'active' : '' }}" wire:navigate>Produk</a>
+                </li>
             @endcan
             @can('melihat catatan pengeluaran')
-                <li><a href="{{ route('expenses.index') }}" wire:navigate>Catatan Stock Produk</a></li>
+                <li>
+                    <a href="{{ route('expenses.index') }}"
+                        class="{{ request()->routeIs('expenses.index') ? 'active' : '' }}" wire:navigate>Catatan Stock
+                        Produk</a>
+                </li>
             @endcan
         </ul>
     @endcanany
@@ -212,7 +247,8 @@
                 <span>Data Penjualan</span>
             </li>
             {{-- @can('melihat catatan pengeluaran') --}}
-            <li><a href="{{ route('sellings.index') }}" wire:navigate>Penjualan</a></li>
+            <li><a href="{{ route('sellings.index') }}"
+                    class="{{ request()->routeIs('sellings.index') ? 'active' : '' }}" wire:navigate>Penjualan</a></li>
             {{-- @endcan --}}
         </ul>
     @endcan
@@ -238,16 +274,23 @@
             <span>Transaksi</span>
         </li>
         @can('menambah bahan baku')
-            <li><a href="{{ route('stocks.create') }}" wire:navigate>Pengadaan Bahan Baku</a></li>
+            <li><a href="{{ route('stocks.create') }}" class="{{ request()->routeIs('stocks.create') ? 'active' : '' }}"
+                    wire:navigate>Pengadaan Bahan Baku</a></li>
         @endcan
         @can('menambah catatan pengeluaran')
-            <li><a href="{{ route('expenses.create') }}" wire:navigate>Pengeluaran Bahan Baku</a></li>
+            <li><a href="{{ route('expenses.create') }}"
+                    class="{{ request()->routeIs('expenses.create') ? 'active' : '' }}" wire:navigate>Pengeluaran Bahan
+                    Baku</a></li>
         @endcan
         @can('menambah catatan penitipan')
-            <li><a href="{{ route('consigments.create') }}" wire:navigate>Penitipan Produk</a></li>
+            <li><a href="{{ route('consigments.create') }}"
+                    class="{{ request()->routeIs('consigments.create') ? 'active' : '' }}" wire:navigate>Penitipan
+                    Produk</a></li>
         @endcan
         @can('menambah penjualan')
-            <li><a href="{{ route('sellings.create') }}" wire:navigate>Penjualan Produk</a></li>
+            <li><a href="{{ route('sellings.create') }}"
+                    class="{{ request()->routeIs('sellings.create') ? 'active' : '' }}" wire:navigate>Penjualan Produk</a>
+            </li>
         @endcan
     </ul>
     {{-- Laporan --}}
@@ -274,13 +317,21 @@
             <span>Laporan</span>
         </li>
         @can('cetak laporan penjualan')
-            <li><a href="{{ route('reports.sellings.index') }}" wire:navigate>Penjualan </a></li>
+            <li><a href="{{ route('reports.sellings.index') }}"
+                    class="{{ request()->routeIs('reports.sellings.index') ? 'active' : '' }}" wire:navigate>Penjualan
+                </a></li>
         @endcan
         @can('cetak laporan bahan baku')
-            <li><a href="{{ route('reports.stocks.index') }}" wire:navigate>Stok Bahan Baku</a></li>
+            <li><a href="{{ route('reports.stocks.index') }}"
+                    class="{{ request()->routeIs('reports.stocks.index') ? 'active' : '' }}" wire:navigate>Stok Bahan
+                    Baku</a>
+            </li>
         @endcan
         @can('cetak pelunasan produk')
-            <li><a href="{{ route('reports.consigments.index') }}" wire:navigate>Cetakan Pelunasan Produk Titipan</a></li>
+            <li><a href="{{ route('reports.consigments.index') }}"
+                    class="{{ request()->routeIs('reports.consigments.index') ? 'active' : '' }}" wire:navigate>Cetakan
+                    Pelunasan
+                    Produk Titipan</a></li>
         @endcan
     </ul>
     {{-- Lainnya --}}
@@ -307,7 +358,8 @@
                 </span>
                 <span>Lainnya</span>
             </li>
-            <li><a href="{{ route('units.index') }}" wire:navigate>Satuan</a></li>
+            <li><a href="{{ route('units.index') }}" class="{{ request()->routeIs('units.index') ? 'active' : '' }}"
+                    wire:navigate>Satuan</a></li>
         </ul>
     @endcan
     <div class="sticky bottom-0 flex h-20 pointer-events-none from-base-200 bg-gradient-to-t to-transparent" />
