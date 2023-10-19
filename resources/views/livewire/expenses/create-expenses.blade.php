@@ -64,25 +64,37 @@
                 </label>
                 <div class="grid grid-cols-1 gap-3 md:grid-cols-3">
                     @foreach ($form->selectedStocks as $index => $selectedStock)
-                        <select class="select border-2 border-[#272343] focus:outline-none border-opacity-80"
-                            wire:model="form.selectedStocks.{{ $index }}.stock_id" name="product_id">
-                            <option selected>Pilih Bahan</option>
-                            @foreach ($form->allStocks as $stock)
-                                <option value="{{ $stock->id }}">
-                                    {{ "$stock->name - ($stock->remaining_stock " . $stock->unit->name . ' / ' . $stock->purchase_date->format('d-m-Y') . ')' }}
-                                </option>
-                            @endforeach
-                        </select>
-                        @error('form.supplier_id')
-                            <label class="label">
-                                <span class="text-sm label-text-alt text-rose-600">{{ $message }}</span>
-                            </label>
-                        @enderror
-                        <input type="number" wire:model="form.selectedStocks.{{ $index }}.quantity"
-                            class="input w-full border-opacity-80 border-2 border-[#272343] focus:outline-none">
-                        <p wire:click="removeStock({{ $index }})"
-                            class="inline-flex items-center justify-center cursor-pointer text-rose-400 hover:text-red-500">
-                            Delete</p>
+                        <div>
+                            @if ($index == 0)
+                                <label for="">Bahan Utama</label>
+                            @else
+                                <label for="">Bahan Tambahan</label>
+                            @endif
+                            <select class="select w-full border-2 border-[#272343] focus:outline-none border-opacity-80"
+                                wire:model="form.selectedStocks.{{ $index }}.stock_id" name="product_id">
+                                <option selected>Pilih Bahan</option>
+                                @foreach ($form->allStocks as $stock)
+                                    <option value="{{ $stock->id }}">
+                                        {{ "$stock->name - ($stock->remaining_stock " . $stock->unit->name . ' / ' . $stock->purchase_date->format('d-m-Y') . ')' }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('form.supplier_id')
+                                <label class="label">
+                                    <span class="text-sm label-text-alt text-rose-600">{{ $message }}</span>
+                                </label>
+                            @enderror
+                        </div>
+                        <div>
+                            <label for="">Total dipakai</label>
+                            <input type="number" wire:model="form.selectedStocks.{{ $index }}.quantity"
+                                class="input w-full border-opacity-80 border-2 border-[#272343] focus:outline-none">
+                        </div>
+                        <div class="flex flex-col items-center justify-center">
+                            <p wire:click="removeStock({{ $index }})"
+                                class="inline-flex items-center justify-center cursor-pointer md:mt-5 text-rose-400 hover:text-red-500">
+                                Delete</p>
+                        </div>
                     @endforeach
                 </div>
             </div>
