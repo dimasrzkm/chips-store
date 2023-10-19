@@ -30,8 +30,8 @@
                 <th scope="col">Harga</th>
                 <th scope="col">Tanggal Pengadaan</th>
                 <th scope="col">Tanggal Pengeluaran</th>
-                <th scope="col">Stok</th>
                 <th scope="col">Stok Terpakai</th>
+                <th scope="col">Stok</th>
                 <th scope="col">Total Pembelian</th>
                 <th scope="col">Satuan</th>
                 <th scope="col">Produk</th>
@@ -46,8 +46,8 @@
                     <td>Rp. {{ $stock->price }}</td>
                     <td>{{ $stock->purchase_date->format('d/m/Y') }}</td>
                     <td>-</td>
-                    <td>{{ $stock->initial_stock }}</td>
                     <td>-</td>
+                    <td>{{ $stock->initial_stock }}</td>
                     <td>Rp. {{ $stock->total_price }}</td>
                     <td>{{ $stock->unit->name }}</td>
                     <td>-</td>
@@ -59,8 +59,8 @@
                         <td>-</td>
                         <td>-</td>
                         <td>{{ $expense->expense_date->format('d/m/Y') }}</td>
-                        <td>{{ $stock->initial_stock -= $expense->pivot->total_used }}</td>
                         <td>{{ $expense->pivot->total_used }}</td>
+                        <td>{{ $stock->initial_stock -= $expense->pivot->total_used }}</td>
                         <td>-</td>
                         <td>{{ $stock->unit->name }}</td>
                         <td>{{ $expense->pivot->product_name }}</td>
