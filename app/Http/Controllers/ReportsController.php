@@ -57,7 +57,7 @@ class ReportsController extends Controller
 
         $sortProductByNameAndUnit = [];
         foreach ($sorProductByName as $produkUtama) {
-            $tempya = ['seperempat', 'setengah', 'sekilo'];
+            $tempya = ['seperempat', 'setengah', 'sekilo', 'pcs'];
             foreach ($tempya as $data) {
                 $sortProductByNameAndUnit[] = $produkUtama->filter(function ($product) use ($data) {
                     return $product->purchase_unit == $data;
@@ -80,8 +80,10 @@ class ReportsController extends Controller
                     $margin = $total * $temp->initial_price;
                 } elseif ($temp->purchase_unit == 'setengah') {
                     $margin = $total * ($temp->initial_price * 2);
-                } else {
+                } elseif ($temp->purchase_unit == 'sekilo') {
                     $margin = $total * ($temp->initial_price * 4);
+                } else {
+                    $margin = $total * ($temp->initial_price);
                 }
                 // dd($total, $subTotal,  $margin, $temp);
                 $productsForExport[] = [
