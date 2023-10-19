@@ -41,8 +41,8 @@ class ProfileForm extends Form
             'name' => 'required|min:5',
             'email' => 'sometimes|email|unique:users,email,'.auth()->user()->id,
             'username' => 'required|min:5|unique:users,username,'.auth()->user()->id,
-            'address' => 'regex:/^[a-zA-Z0-9\s]*$/',
-            'telephone_number' => 'required|numeric',
+            'address' => 'required', 'regex:/^[.,a-zA-Z0-9\s]*$/',
+            'telephone_number' => 'required', 'numeric', 'min_digits:12', 'max_digits:13',
         ];
     }
 }
