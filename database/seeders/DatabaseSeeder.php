@@ -21,8 +21,8 @@ class DatabaseSeeder extends Seeder
             AssignPermissionSeeder::class,
             UserSeeder::class,
             AssignRoleSeeder::class,
-            KonsinyorSeeder::class,
             UnitSeeder::class,
+            // KonsinyorSeeder::class,
             // StockSeeder::class,
         ]);
     }
