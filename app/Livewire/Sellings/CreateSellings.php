@@ -64,7 +64,7 @@ class CreateSellings extends Component
             $this->form->product['quantity'] = $this->form->quantity; // simpan pembelian product
 
             // cek apakah unit dari produk yang dipilih adalah kg
-            if ($this->form->purchase_unit == 'kg') {
+            if (strtolower($this->form->purchase_unit) == 'kg') {
                 $this->form->product['selected_purchase_unit'] = $this->form->selected_purchase_unit; // simpan jumlah beli (1/4,1/2,1 kg)
                 // cek apakah unit dari pembelian yang dipiih adalah seperempat, setengah, dan sekilo
                 switch ($this->form->selected_purchase_unit) {
@@ -98,6 +98,7 @@ class CreateSellings extends Component
 
     public function removePurchaseProduct($index)
     {
+        $this->form->total = str_replace('.', '', $this->form->total);
         $this->form->total -= $this->form->selectedProducts[$index]['sub_total'];
         if ($this->form->nominal_payment) {
             $this->form->nominal_return = $this->form->nominal_payment - $this->form->total;
