@@ -96,7 +96,8 @@
                                             class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
                                             <li>
                                                 <a href="{{ route('assign.edit', $user->username) }}" wire:navigate
-                                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sync</a>
+                                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Ubah
+                                                    Peran</a>
                                             </li>
                                             @if ($user->getRoleNames()->count() == 1)
                                                 <li>

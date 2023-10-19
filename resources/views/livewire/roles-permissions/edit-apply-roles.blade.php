@@ -58,7 +58,7 @@
                         @if ($form->modeInput == 'tambah')
                             Izinkan
                         @else
-                            Sync
+                            Ubah
                         @endif
                     </button>
                     <x-loading />
