@@ -105,7 +105,7 @@ class ProductForm extends Form
     public function rules()
     {
         return [
-            'name' => ['required', 'regex:/^[a-zA-Z\s]*$/'],
+            'name' => ['required', 'regex:/^[a-zA-Z0-9\s]*$/'],
             'initial_price' => ['required', 'numeric'],
             'percentage_profit' => ['required', 'numeric'],
             'sale_price' => ['required', 'numeric'],
