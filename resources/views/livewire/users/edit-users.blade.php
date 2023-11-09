@@ -23,30 +23,32 @@
                     @enderror
                 </label>
             </div>
-            <div class="form-control">
-                <label class="label">
-                    <span class="label-text">Email</span>
-                </label>
-                <input type="email" wire:model="form.email" name="email"
-                    class="input w-full border-opacity-80 border-2 border-[#272343] focus:outline-none">
-                <label class="label">
-                    @error('form.email')
-                        <span class="text-sm label-text-alt text-rose-600">{{ $message }}</span>
-                    @enderror
-                </label>
-            </div>
-            <div class="form-control">
-                <label class="label">
-                    <span class="label-text">Username</span>
-                </label>
-                <input type="text" wire:model="form.username"
-                    class="input w-full border-opacity-80 border-2 border-[#272343] focus:outline-none" disabled>
-                <label class="label">
-                    @error('form.username')
-                        <span class="text-sm label-text-alt text-rose-600">{{ $message }}</span>
-                    @enderror
-                </label>
-                <div wire:dirty wire:target="form.name" class="text-xs">Membuat username...</div>
+            <div class="grid gap-3 md:grid-cols-2">
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text">Email</span>
+                    </label>
+                    <input type="email" wire:model="form.email" name="email"
+                        class="input w-full border-opacity-80 border-2 border-[#272343] focus:outline-none">
+                    <label class="label">
+                        @error('form.email')
+                            <span class="text-sm label-text-alt text-rose-600">{{ $message }}</span>
+                        @enderror
+                    </label>
+                </div>
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text">Username</span>
+                    </label>
+                    <input type="text" wire:model="form.username"
+                        class="input w-full border-opacity-80 border-2 border-[#272343] focus:outline-none" disabled>
+                    <label class="label">
+                        @error('form.username')
+                            <span class="text-sm label-text-alt text-rose-600">{{ $message }}</span>
+                        @enderror
+                    </label>
+                    <div wire:dirty wire:target="form.name" class="text-xs">Membuat username...</div>
+                </div>
             </div>
             <div class="form-control">
                 <label class="label">
