@@ -65,7 +65,8 @@ class Admin extends Component
         )->count();
         $colors = [
             '#f6ad55', '#fc8181', '#f97316', '#86efac', '#059669', '#5eead4', '#06b6d4', '#075985',
-            '#ec4899', '#172554', '#15803d', '#94a3b8',
+            '#ec4899', '#172554', '#15803d', '#94a3b8', '#16a34a', '#155e75', '#93c5fd', '#5b21b6',
+            '#831843', '#34d399', '#a3e635', '#854d0e', '#fecaca', '#d9f99d', '#083344', '#1d4ed8'
         ];
         foreach ($this->nameOfProduct as $index => $product) {
             $this->colorsOfProduct[$product] = $colors[$index];
