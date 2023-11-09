@@ -170,7 +170,7 @@
                 <li>
                     <a href="{{ route('consigments.index') }}"
                         class="{{ request()->routeIs('consigments.index') ? 'active' : '' }}" wire:navigate>Catatan Penitipan
-                        Barang</a>
+                        Produk</a>
                 </li>
             @endcan
         </ul>
