@@ -78,58 +78,60 @@
                     </div>
                 </div>
             @endif
-            <div class="form-control">
-                <label class="label">
-                    <span class="label-text">Harga</span>
-                </label>
-                <input type="text" wire:model.blur="form.price" name="price"
-                    class="input w-full border-opacity-80 border-2 border-[#272343] focus:outline-none">
-                <label class="label">
-                    @error('form.price')
-                        <span class="text-sm label-text-alt text-rose-600">{{ $message }}</span>
-                    @enderror
-                </label>
-            </div>
-            <div class="form-control">
-                <label class="label">
-                    <span class="label-text">Jumlah Beli</span>
-                </label>
-                <input type="number" wire:model.blur="form.initial_stock" name="initial_stock"
-                    class="input w-full border-opacity-80 border-2 border-[#272343] focus:outline-none">
-                <label class="label">
-                    @error('form.initial_stock')
-                        <span class="text-sm label-text-alt text-rose-600">{{ $message }}</span>
-                    @enderror
-                </label>
-            </div>
-            <div class="form-control">
-                <label class="label">
-                    <span class="label-text">Total</span>
-                </label>
-                <input type="text" wire:model="form.total_price" name="total_price"
-                    class="input w-full border-opacity-80 border-2 border-[#272343] focus:outline-none" disabled>
-                <label class="label">
-                    @error('form.total_price')
-                        <span class="text-sm label-text-alt text-rose-600">{{ $message }}</span>
-                    @enderror
-                </label>
-            </div>
-            <div class="w-full form-control">
-                <label class="label">
-                    <span class="label-text">Satuan</span>
-                </label>
-                <select class="select border-2 border-[#272343] focus:outline-none border-opacity-80"
-                    wire:model="form.unit_id">
-                    <option selected>Pilih Satuan</option>
-                    @foreach ($units as $unit)
-                        <option value="{{ $unit->id }}">{{ $unit->name }}</option>
-                    @endforeach
-                </select>
-                @error('form.unit_id')
+            <div class="grid gap-3 md:grid-cols-2">
+                <div class="form-control">
                     <label class="label">
-                        <span class="text-sm label-text-alt text-rose-600">{{ $message }}</span>
+                        <span class="label-text">Harga</span>
                     </label>
-                @enderror
+                    <input type="text" wire:model.blur="form.price" name="price"
+                        class="input w-full border-opacity-80 border-2 border-[#272343] focus:outline-none">
+                    <label class="label">
+                        @error('form.price')
+                            <span class="text-sm label-text-alt text-rose-600">{{ $message }}</span>
+                        @enderror
+                    </label>
+                </div>
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text">Jumlah Beli</span>
+                    </label>
+                    <input type="number" wire:model.blur="form.initial_stock" name="initial_stock"
+                        class="input w-full border-opacity-80 border-2 border-[#272343] focus:outline-none">
+                    <label class="label">
+                        @error('form.initial_stock')
+                            <span class="text-sm label-text-alt text-rose-600">{{ $message }}</span>
+                        @enderror
+                    </label>
+                </div>
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text">Total</span>
+                    </label>
+                    <input type="text" wire:model="form.total_price" name="total_price"
+                        class="input w-full border-opacity-80 border-2 border-[#272343] focus:outline-none" disabled>
+                    <label class="label">
+                        @error('form.total_price')
+                            <span class="text-sm label-text-alt text-rose-600">{{ $message }}</span>
+                        @enderror
+                    </label>
+                </div>
+                <div class="w-full form-control">
+                    <label class="label">
+                        <span class="label-text">Satuan</span>
+                    </label>
+                    <select class="select border-2 border-[#272343] focus:outline-none border-opacity-80"
+                        wire:model="form.unit_id">
+                        <option selected>Pilih Satuan</option>
+                        @foreach ($units as $unit)
+                            <option value="{{ $unit->id }}">{{ $unit->name }}</option>
+                        @endforeach
+                    </select>
+                    @error('form.unit_id')
+                        <label class="label">
+                            <span class="text-sm label-text-alt text-rose-600">{{ $message }}</span>
+                        </label>
+                    @enderror
+                </div>
             </div>
             <div class="flex items-center justify-end mt-3">
                 <button type="submit"
