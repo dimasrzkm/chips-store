@@ -4,9 +4,9 @@
     <div class="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
             @if ($form->modeInput !== 'ubah')
-                Tambah Pengguna
+                Tambah Pegawai
             @else
-                Ubah Data Pengguna
+                Ubah Data Pegawai
             @endif
         </h5>
         <form method="post" wire:submit="submit">
