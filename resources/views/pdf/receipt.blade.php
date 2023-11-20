@@ -20,6 +20,7 @@
         </div>
         <div>
             <p>No Transaksi : {{ $selling['transaction_code'] }}</p>
+            <p style="margin-top: -20px;">Kasir : {{ $selling['user']['name'] }}</p>
             <p style="margin-top: -20px;">
                 Tanggal :
                 {{ Carbon\Carbon::parse(date('Y-m-d', strtotime($selling['selling_date'])))->format('d/m/Y') }},
