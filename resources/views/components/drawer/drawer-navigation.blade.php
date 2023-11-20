@@ -80,11 +80,11 @@
                         </g>
                     </svg>
                 </span>
-                <span>Data Pengguna</span>
+                <span>Data Pegawai</span>
             </li>
             <li>
                 <a href="{{ route('users.index') }}" class="{{ request()->routeIs('users.index') ? 'active' : '' }}"
-                    wire:navigate>Pengguna</a>
+                    wire:navigate>Pegawai</a>
             </li>
         </ul>
     @endcan
