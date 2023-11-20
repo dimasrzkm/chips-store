@@ -18,7 +18,7 @@ class ShowReportConsigments extends Component
     public function render()
     {
         return view('livewire.reports.consigments.show-report-consigments', [
-            'consigments' => Consigment::where('is_paid_off', false)->get(),
+            'consigments' => Consigment::with('products')->where('is_paid_off', false)->get(),
         ]);
     }
 

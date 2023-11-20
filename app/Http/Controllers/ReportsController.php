@@ -107,6 +107,16 @@ class ReportsController extends Controller
         ]);
     }
 
+    public function exportStrukPenitipan($consigment)
+    {
+        // $test = json_decode(Crypt::decryptString($consigment), true);
+        // dd($test);
+
+        return view('pdf.consigments', [
+            'consigment' => json_decode(Crypt::decryptString($consigment), true),
+        ]);
+    }
+
     public function exportPelunasan($consigmentId)
     {
         $consigmentId = Crypt::decryptString($consigmentId);

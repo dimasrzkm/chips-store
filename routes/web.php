@@ -124,6 +124,7 @@ Route::prefix('laporan')->group(function () {
     Route::get('penjualan/{tanggalAwal}/{tanggalAkhir}', [ReportsController::class, 'exportPenjualan'])->name('laporan.penjualan');
     Route::get('pelunasan/{consigmentId}', [ReportsController::class, 'exportPelunasan'])->name('laporan.pelunasan');
     Route::get('struk/{selling}', [ReportsController::class, 'exportStruk'])->name('laporan.struk');
+    Route::get('penitipan/{consigment}', [ReportsController::class, 'exportStrukPenitipan'])->name('laporan.penitipan');
     Route::get('stock/{tanggalAwal}/{tanggalAkhir}', [ReportsController::class, 'exportStock'])->name('laporan.stock');
 });
 
