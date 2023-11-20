@@ -31,6 +31,7 @@ class CreateSellings extends Component
 
     public function submit()
     {
+        $this->form->nominal_payment = str_replace('.', '', $this->form->nominal_payment);
         $this->validate();
         $this->form->create();
 
@@ -86,9 +87,14 @@ class CreateSellings extends Component
 
             $this->form->total += $this->form->product['sub_total']; // menghitung sub total produk yang dibeli
             if ($this->form->nominal_payment) {
+                $this->form->nominal_payment = str_replace('.', '', $this->form->nominal_payment); // merubah format teks ke number ex. '10.000' menjadi 10000
                 $this->form->nominal_return = $this->form->nominal_payment - $this->form->total;
             }
             $this->form->total = number_format($this->form->total, 0, ',', '.');
+            if ($this->form->nominal_payment != '') {
+                $this->form->nominal_payment = number_format($this->form->nominal_payment, 0, ',', '.'); // merubah format number ke teks ex. 10000 menjadi '10.000'
+                $this->form->nominal_return = number_format($this->form->nominal_return, 0, ',', '.');
+            }
 
             $this->reset('form.product_id', 'form.product', 'form.sale_price', 'form.stock', 'form.quantity', 'form.selected_purchase_unit');
         } catch (\Exception $e) {
@@ -101,7 +107,16 @@ class CreateSellings extends Component
         $this->form->total = str_replace('.', '', $this->form->total);
         $this->form->total -= $this->form->selectedProducts[$index]['sub_total'];
         if ($this->form->nominal_payment) {
+            $this->form->total = str_replace('.', '', $this->form->total);
+            $this->form->nominal_payment = str_replace('.', '', $this->form->nominal_payment);
+            $this->form->nominal_return = str_replace('.', '', $this->form->nominal_return);
             $this->form->nominal_return = $this->form->nominal_payment - $this->form->total;
+
+            $this->form->total = number_format($this->form->total, 0, ',', '.');
+            $this->form->nominal_payment = number_format($this->form->nominal_payment, 0, ',', '.');
+            $this->form->nominal_return = number_format($this->form->nominal_return, 0, ',', '.');
+        } else {
+            $this->form->total = number_format($this->form->total, 0, ',', '.');
         }
         unset($this->form->selectedProducts[$index]);
         $this->form->selectedProducts = array_values($this->form->selectedProducts);
