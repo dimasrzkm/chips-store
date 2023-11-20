@@ -14,7 +14,8 @@
                         wire:model.live.debounce.450ms="consigmentId" name="consigmentId">
                         <option selected>Pilih Transaksi</option>
                         @foreach ($consigments as $consigment)
-                            <option value="{{ $consigment->id }}">{{ $consigment->transaction_code }}</option>
+                            <option value="{{ $consigment->id }}">{{ $consigment->transaction_code }} -
+                                {{ $consigment->products->first()->pivot->konsinyor_name }}</option>
                         @endforeach
                     </select>
                     @error('consigmentId')
