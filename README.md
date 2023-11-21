@@ -1,3 +1,9 @@
+## Requirements
+
+- [PHP V 8.1](https://www.apachefriends.org/download.html)
+- [Composer](https://getcomposer.org/download/)
+- [Node JS](https://nodejs.org/en/download/current)
+
 ## Instalasi Project
 
 Extract Project and Go to the project directory
